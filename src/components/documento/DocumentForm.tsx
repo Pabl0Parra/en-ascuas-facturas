@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  ScrollView,
   StyleSheet,
   Alert,
-  KeyboardAvoidingView,
   Platform,
   TextInput,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
@@ -88,7 +87,8 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
       newErrors.fechaDocumento = STRINGS.errors.campoRequerido;
     }
 
-    if (!selectedClientId) {
+    // Client is only required for facturas, not for presupuestos
+    if (tipo === 'factura' && !selectedClientId) {
       newErrors.cliente = STRINGS.errors.seleccionaCliente;
     }
 
@@ -113,9 +113,10 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
     setIsLoading(true);
 
     try {
-      const client = getClientById(selectedClientId!);
+      const client = selectedClientId ? getClientById(selectedClientId) : null;
 
-      if (!client) {
+      // For facturas, client is required (already validated)
+      if (tipo === 'factura' && !client) {
         throw new Error('Cliente no encontrado');
       }
 
@@ -124,13 +125,13 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
         tipo,
         numeroDocumento,
         fechaDocumento,
-        clienteId: client.id,
-        clienteNombre: client.nombre,
-        clienteDireccion: client.direccion,
-        clienteCodigoPostal: client.codigoPostal,
-        clienteCiudad: client.ciudad,
-        clienteProvincia: client.provincia,
-        clienteNifCif: client.nifCif,
+        clienteId: client?.id || '',
+        clienteNombre: client?.nombre || '',
+        clienteDireccion: client?.direccion || '',
+        clienteCodigoPostal: client?.codigoPostal || '',
+        clienteCiudad: client?.ciudad || '',
+        clienteProvincia: client?.provincia || '',
+        clienteNifCif: client?.nifCif || '',
         lineas: lineas.filter(
           (l) => l.descripcion.trim() && l.cantidad > 0 && l.precioUnitario > 0,
         ),
@@ -148,7 +149,7 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
       const fileName = generatePDFFileName(
         tipo,
         numeroDocumento,
-        client.nombre,
+        client?.nombre || 'Sin_Cliente',
       );
       const finalPath = await savePDF(tempUri, fileName);
 
@@ -157,8 +158,8 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
         tipo,
         numeroDocumento,
         fechaDocumento,
-        clienteNombre: client.nombre,
-        clienteNifCif: client.nifCif,
+        clienteNombre: client?.nombre || 'Sin Cliente',
+        clienteNifCif: client?.nifCif || '-',
         total,
         pdfFileName: finalPath,
       });
@@ -192,96 +193,94 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
       : STRINGS.navigation.nuevoPresupuesto;
 
   return (
-    <KeyboardAvoidingView
+    <KeyboardAwareScrollView
       style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      contentContainerStyle={styles.content}
+      enableOnAndroid={true}
+      extraScrollHeight={20}
+      showsVerticalScrollIndicator={false}
+      keyboardShouldPersistTaps="handled"
     >
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.content}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-      >
-        <Text style={styles.title}>{docTitle}</Text>
+      <Text style={styles.title}>{docTitle}</Text>
 
-        {/* Document Info */}
-        <View style={styles.row}>
-          <View style={styles.halfInput}>
-            <Input
-              label={STRINGS.document.numeroDocumento}
-              value={numeroDocumento}
-              onChangeText={setNumeroDocumento}
-              placeholder="F240001"
-              error={errors.numeroDocumento}
-            />
-          </View>
-          <View style={styles.halfInput}>
-            <Input
-              label={STRINGS.document.fechaDocumento}
-              value={fechaDocumento}
-              onChangeText={setFechaDocumento}
-              placeholder="dd-mm-yyyy"
-              error={errors.fechaDocumento}
-            />
-          </View>
-        </View>
-
-        {/* Client Section */}
-        <ClientSection
-          selectedClientId={selectedClientId}
-          onClientSelect={setSelectedClient}
-          onNewClientPress={handleNewClient}
-          error={errors.cliente}
-        />
-
-        {/* Line Items */}
-        <LineItemsList
-          lineas={lineas}
-          onUpdateLinea={updateLinea}
-          onRemoveLinea={removeLinea}
-          onAddLinea={addLinea}
-          error={errors.lineas}
-        />
-
-        {/* IVA Toggle */}
-        <IVAToggle tipoIVA={tipoIVA} onChangeTipoIVA={setTipoIVA} />
-
-        {/* Totals */}
-        <TotalsSummary
-          baseImponible={baseImponible}
-          tipoIVA={tipoIVA}
-          importeIVA={importeIVA}
-          total={total}
-        />
-
-        {/* Comments Section */}
-        <View style={styles.commentsSection}>
-          <Text style={styles.sectionTitle}>OBSERVACIONES</Text>
-          <TextInput
-            value={comentarios}
-            onChangeText={setComentarios}
-            placeholder="Condiciones de pago, notas adicionales, etc..."
-            placeholderTextColor={COLORS.textMuted}
-            multiline
-            numberOfLines={4}
-            style={styles.commentsInput}
-            textAlignVertical="top"
+      {/* Document Info */}
+      <View style={styles.row}>
+        <View style={styles.halfInput}>
+          <Input
+            label={STRINGS.document.numeroDocumento}
+            value={numeroDocumento}
+            onChangeText={setNumeroDocumento}
+            placeholder="F240001"
+            error={errors.numeroDocumento}
           />
         </View>
+        <View style={styles.halfInput}>
+          <Input
+            label={STRINGS.document.fechaDocumento}
+            value={fechaDocumento}
+            onChangeText={setFechaDocumento}
+            placeholder="dd-mm-yyyy"
+            error={errors.fechaDocumento}
+          />
+        </View>
+      </View>
 
-        {/* Generate Button */}
-        <Button
-          variant="primary"
-          size="lg"
-          fullWidth
-          onPress={handleGeneratePDF}
-          loading={isLoading}
-          disabled={isLoading}
-        >
-          {STRINGS.actions.generarPDF}
-        </Button>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      {/* Client Section */}
+      <ClientSection
+        selectedClientId={selectedClientId}
+        onClientSelect={setSelectedClient}
+        onNewClientPress={handleNewClient}
+        error={errors.cliente}
+        isOptional={tipo === 'presupuesto'}
+      />
+
+      {/* Line Items */}
+      <LineItemsList
+        lineas={lineas}
+        onUpdateLinea={updateLinea}
+        onRemoveLinea={removeLinea}
+        onAddLinea={addLinea}
+        error={errors.lineas}
+      />
+
+      {/* IVA Toggle */}
+      <IVAToggle tipoIVA={tipoIVA} onChangeTipoIVA={setTipoIVA} />
+
+      {/* Totals */}
+      <TotalsSummary
+        baseImponible={baseImponible}
+        tipoIVA={tipoIVA}
+        importeIVA={importeIVA}
+        total={total}
+      />
+
+      {/* Comments Section */}
+      <View style={styles.commentsSection}>
+        <Text style={styles.sectionTitle}>OBSERVACIONES</Text>
+        <TextInput
+          value={comentarios}
+          onChangeText={setComentarios}
+          placeholder="Condiciones de pago, notas adicionales, etc..."
+          placeholderTextColor={COLORS.textMuted}
+          multiline
+          numberOfLines={4}
+          style={styles.commentsInput}
+          textAlignVertical="top"
+        />
+      </View>
+
+      {/* Generate Button */}
+      <Button
+        variant="primary"
+        size="lg"
+        fullWidth
+        onPress={handleGeneratePDF}
+        loading={isLoading}
+        disabled={isLoading}
+      >
+        {STRINGS.actions.generarPDF}
+      </Button>
+    </KeyboardAwareScrollView>
   );
 };
 

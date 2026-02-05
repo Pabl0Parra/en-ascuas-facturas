@@ -276,7 +276,6 @@ export const generateInvoiceHTML = (data: DocumentData): string => {
           <img src="data:image/png;base64,${LOGO_BASE64}" class="logo-img" />
           <div>
             <div class="company-name">EN ASCUAS</div>
-            <div class="company-tagline">Metal Fusión</div>
           </div>
         </div>
         <div class="doc-type">
@@ -299,9 +298,8 @@ export const generateInvoiceHTML = (data: DocumentData): string => {
           <div class="datos-title">Datos Cliente</div>
           <div class="datos-row name">${data.clienteNombre}</div>
           <div class="datos-row">${data.clienteDireccion}</div>
-          <div class="datos-row">${data.clienteCodigoPostal} ${
-    data.clienteCiudad
-  }</div>
+          <div class="datos-row">${data.clienteCodigoPostal} ${data.clienteCiudad
+    }</div>
           <div class="datos-row">${data.clienteProvincia}</div>
           <div class="datos-row">NIF/CIF: ${data.clienteNifCif}</div>
         </div>
@@ -310,8 +308,8 @@ export const generateInvoiceHTML = (data: DocumentData): string => {
       <!-- Info documento -->
       <div class="doc-info">
         <span><strong>Fecha:</strong> ${formatDateForPDF(
-          data.fechaDocumento,
-        )}</span>
+      data.fechaDocumento,
+    )}</span>
       </div>
       
       <!-- Tabla de líneas -->
@@ -330,20 +328,18 @@ export const generateInvoiceHTML = (data: DocumentData): string => {
       </table>
       
       <!-- Nota IVA si aplica -->
-      ${
-        data.tipoIVA === 0
-          ? '<div class="iva-note">Operación sujeta a inversión del sujeto pasivo - IVA 0%</div>'
-          : ''
-      }
+      ${data.tipoIVA === 0
+      ? '<div class="iva-note">Operación sujeta a inversión del sujeto pasivo - IVA 0%</div>'
+      : ''
+    }
       
       <!-- Footer: Pago y totales -->
       <div class="footer">
         <div class="payment-info">
           <div class="payment-title">Forma de Pago</div>
           <div class="payment-detail">${COMPANY.metodoPago}</div>
-          <div class="payment-detail"><strong>IBAN:</strong> ${
-            COMPANY.iban
-          }</div>
+          <div class="payment-detail"><strong>IBAN:</strong> ${COMPANY.iban
+    }</div>
         </div>
         <div class="totals">
           <div class="total-row">
@@ -362,25 +358,23 @@ export const generateInvoiceHTML = (data: DocumentData): string => {
       </div>
       
       <!-- Observaciones (después del total) -->
-      ${
-        data.comentarios
-          ? `
+      ${data.comentarios
+      ? `
         <div class="comments-section">
           <div class="comments-title">Observaciones</div>
           <div class="comments-text">${data.comentarios.replace(
-            /\n/g,
-            '<br>',
-          )}</div>
+        /\n/g,
+        '<br>',
+      )}</div>
         </div>
       `
-          : ''
-      }
+      : ''
+    }
       
       <!-- Footer legal -->
       <div class="legal-footer">
-        ${COMPANY.nombre} · ${COMPANY.direccion} · ${COMPANY.codigoPostal} ${
-    COMPANY.ciudad
-  } · NIF: ${COMPANY.nif}
+        ${COMPANY.nombre} · ${COMPANY.direccion} · ${COMPANY.codigoPostal} ${COMPANY.ciudad
+    } · NIF: ${COMPANY.nif}
       </div>
     </body>
     </html>

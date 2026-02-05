@@ -13,6 +13,7 @@ interface ClientSectionProps {
   onClientSelect: (clientId: string) => void;
   onNewClientPress: () => void;
   error?: string;
+  isOptional?: boolean;
 }
 
 export const ClientSection: React.FC<ClientSectionProps> = ({
@@ -20,23 +21,27 @@ export const ClientSection: React.FC<ClientSectionProps> = ({
   onClientSelect,
   onNewClientPress,
   error,
+  isOptional = false,
 }) => {
   const clients = useClientStore((state) => state.clients);
   const getClientById = useClientStore((state) => state.getClientById);
-  
+
   const clientOptions = clients.map((client) => ({
     label: `${client.nombre} - ${client.nifCif}`,
     value: client.id,
   }));
-  
+
   const selectedClient: Client | undefined = selectedClientId
     ? getClientById(selectedClientId)
     : undefined;
-  
+
   return (
     <View style={styles.container}>
-      <Text style={styles.sectionTitle}>{STRINGS.document.datosFacturacion}</Text>
-      
+      <Text style={styles.sectionTitle}>
+        {STRINGS.document.datosFacturacion}
+        {isOptional && ' (Opcional)'}
+      </Text>
+
       <View style={styles.selectContainer}>
         <Select
           label={STRINGS.actions.seleccionarCliente}
@@ -47,7 +52,7 @@ export const ClientSection: React.FC<ClientSectionProps> = ({
           error={error}
           searchable
         />
-        
+
         <Button
           variant="outline"
           size="sm"
@@ -57,7 +62,7 @@ export const ClientSection: React.FC<ClientSectionProps> = ({
           {STRINGS.actions.nuevoCliente}
         </Button>
       </View>
-      
+
       {selectedClient && (
         <Card padding="md" style={styles.clientDetails}>
           <View style={styles.detailRow}>

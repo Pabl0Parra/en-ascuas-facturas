@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import {
   View,
-  ScrollView,
   StyleSheet,
   Alert,
-  KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
@@ -133,20 +132,19 @@ export const ClientForm: React.FC<ClientFormProps> = ({
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-    >
+    <View style={styles.container}>
       <Header
         title={isEditing ? 'Editar Cliente' : STRINGS.actions.nuevoCliente}
         showBack
       />
 
-      <ScrollView
+      <KeyboardAwareScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        enableOnAndroid={true}
+        extraScrollHeight={20}
       >
         <Input
           label={STRINGS.client.nombre}
@@ -232,8 +230,8 @@ export const ClientForm: React.FC<ClientFormProps> = ({
         >
           {STRINGS.actions.guardar}
         </Button>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
+    </View>
   );
 };
 

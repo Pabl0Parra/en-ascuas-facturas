@@ -7,6 +7,7 @@ import {
   Text,
   Alert,
 } from 'react-native';
+import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context'; // Changed import
 import { Header } from '../../src/components/ui/Header';
 import { DocumentCard } from '../../src/components/historial/DocumentCard';
@@ -24,6 +25,7 @@ import type { DocumentMetadata } from '../../src/types/document';
 type FilterType = 'todos' | 'factura' | 'presupuesto';
 
 export default function HistorialScreen() {
+  const router = useRouter();
   const [filter, setFilter] = useState<FilterType>('todos');
 
   const documents = useDocumentStore((state) => state.documents);
@@ -54,7 +56,13 @@ export default function HistorialScreen() {
         return;
       }
 
-      await sharePDF(doc.pdfFileName);
+      router.push({
+        pathname: '/documento/pdf-viewer',
+        params: {
+          filePath: doc.pdfFileName,
+          title: `${doc.tipo === 'factura' ? 'Factura' : 'Presupuesto'} ${doc.numeroDocumento}`,
+        },
+      });
     } catch (error) {
       console.error('Error opening document:', error);
       Alert.alert('Error', 'No se pudo abrir el documento');
@@ -64,8 +72,7 @@ export default function HistorialScreen() {
   const handleDeleteDocument = (doc: DocumentMetadata) => {
     Alert.alert(
       'Eliminar Documento',
-      `¿Estás seguro de que quieres eliminar ${
-        doc.tipo === 'factura' ? 'la factura' : 'el presupuesto'
+      `¿Estás seguro de que quieres eliminar ${doc.tipo === 'factura' ? 'la factura' : 'el presupuesto'
       } ${doc.numeroDocumento}?`,
       [
         { text: 'Cancelar', style: 'cancel' },

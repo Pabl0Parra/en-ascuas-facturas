@@ -79,7 +79,7 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
-    if (!numeroDocumento.trim()) {
+    if (tipo === 'factura' && !numeroDocumento.trim()) {
       newErrors.numeroDocumento = STRINGS.errors.campoRequerido;
     }
 

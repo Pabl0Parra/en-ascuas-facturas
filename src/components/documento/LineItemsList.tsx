@@ -17,6 +17,7 @@ interface LineItemsListProps {
   onRemoveLinea: (id: string) => void;
   onAddLinea: () => void;
   error?: string;
+  lineItemErrors?: Record<string, { descripcion?: boolean; precio?: boolean; cantidad?: boolean }>;
 }
 
 export const LineItemsList: React.FC<LineItemsListProps> = ({
@@ -25,6 +26,7 @@ export const LineItemsList: React.FC<LineItemsListProps> = ({
   onRemoveLinea,
   onAddLinea,
   error,
+  lineItemErrors,
 }) => {
   return (
     <View style={styles.container}>
@@ -37,6 +39,7 @@ export const LineItemsList: React.FC<LineItemsListProps> = ({
           onUpdate={(data) => onUpdateLinea(linea.id, data)}
           onRemove={() => onRemoveLinea(linea.id)}
           canRemove={lineas.length > 1}
+          errors={lineItemErrors?.[linea.id]}
         />
       ))}
 

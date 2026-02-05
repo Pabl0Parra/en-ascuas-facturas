@@ -17,6 +17,7 @@ interface LineItemRowProps {
   onUpdate: (data: Partial<Omit<LineItem, 'id' | 'importe'>>) => void;
   onRemove: () => void;
   canRemove: boolean;
+  errors?: { descripcion?: boolean; precio?: boolean; cantidad?: boolean };
 }
 
 export const LineItemRow: React.FC<LineItemRowProps> = ({
@@ -24,6 +25,7 @@ export const LineItemRow: React.FC<LineItemRowProps> = ({
   onUpdate,
   onRemove,
   canRemove,
+  errors,
 }) => {
   // Local state to allow typing decimals
   const [cantidadText, setCantidadText] = useState(
@@ -92,7 +94,10 @@ export const LineItemRow: React.FC<LineItemRowProps> = ({
             placeholderTextColor={COLORS.textMuted}
             multiline
             numberOfLines={2}
-            style={styles.descripcionInput}
+            style={[
+              styles.descripcionInput,
+              errors?.descripcion && { borderColor: COLORS.error },
+            ]}
           />
         </View>
 
@@ -115,7 +120,10 @@ export const LineItemRow: React.FC<LineItemRowProps> = ({
             keyboardType="decimal-pad"
             placeholder="0"
             placeholderTextColor={COLORS.textMuted}
-            style={styles.numberInput}
+            style={[
+              styles.numberInput,
+              errors?.cantidad && { borderColor: COLORS.error },
+            ]}
           />
         </View>
 
@@ -127,7 +135,10 @@ export const LineItemRow: React.FC<LineItemRowProps> = ({
             keyboardType="decimal-pad"
             placeholder="0,00"
             placeholderTextColor={COLORS.textMuted}
-            style={styles.numberInput}
+            style={[
+              styles.numberInput,
+              errors?.precio && { borderColor: COLORS.error },
+            ]}
           />
         </View>
 

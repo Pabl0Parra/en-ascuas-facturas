@@ -28,7 +28,7 @@ import {
   BORDER_RADIUS,
 } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
-import type { DocumentData, DocumentType } from '../../types/document';
+import type { DocumentData, DocumentType, LineItem } from '../../types/document';
 
 interface DocumentFormProps {
   tipo: DocumentType;
@@ -39,12 +39,15 @@ interface FormErrors {
   fechaDocumento?: string;
   cliente?: string;
   lineas?: string;
+  lineItemErrors?: Record<string, { descripcion?: boolean; precio?: boolean; cantidad?: boolean }>;
 }
 
 export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
+
+  // ... (store hooks remain same)
 
   // Form store
   const {
@@ -78,6 +81,8 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
+    const newLineItemErrors: Record<string, { descripcion?: boolean; precio?: boolean; cantidad?: boolean }> = {};
+    let hasLineItemErrors = false;
 
     if (tipo === 'factura' && !numeroDocumento.trim()) {
       newErrors.numeroDocumento = STRINGS.errors.campoRequerido;
@@ -92,12 +97,36 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
       newErrors.cliente = STRINGS.errors.seleccionaCliente;
     }
 
-    const validLineas = lineas.filter(
-      (l) => l.descripcion.trim() && l.cantidad > 0 && l.precioUnitario > 0,
-    );
-
-    if (validLineas.length === 0) {
+    if (lineas.length === 0) {
       newErrors.lineas = STRINGS.errors.añadeLinea;
+    } else {
+      lineas.forEach((linea) => {
+        const itemErrors: { descripcion?: boolean; precio?: boolean; cantidad?: boolean } = {};
+
+        if (!linea.descripcion.trim()) {
+          itemErrors.descripcion = true;
+          hasLineItemErrors = true;
+        }
+
+        if (linea.cantidad <= 0) {
+          itemErrors.cantidad = true;
+          hasLineItemErrors = true;
+        }
+
+        if (linea.precioUnitario <= 0) {
+          itemErrors.precio = true;
+          hasLineItemErrors = true;
+        }
+
+        if (Object.keys(itemErrors).length > 0) {
+          newLineItemErrors[linea.id] = itemErrors;
+        }
+      });
+    }
+
+    if (hasLineItemErrors) {
+      newErrors.lineItemErrors = newLineItemErrors;
+      newErrors.lineas = 'Por favor, completa los campos requeridos en las líneas';
     }
 
     setErrors(newErrors);
@@ -192,6 +221,49 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
       ? STRINGS.navigation.nuevaFactura
       : STRINGS.navigation.nuevoPresupuesto;
 
+  const handleUpdateLinea = (
+    id: string,
+    data: Partial<Omit<LineItem, 'id' | 'importe'>>,
+  ) => {
+    updateLinea(id, data);
+
+    // Dynamic validation clearing
+    if (errors.lineItemErrors?.[id]) {
+      setErrors((prev) => {
+        if (!prev.lineItemErrors?.[id]) return prev;
+
+        const newLineItemErrors = { ...prev.lineItemErrors };
+        const currentItemErrors = { ...newLineItemErrors[id] };
+
+        // Clear specific errors based on what's being updated
+        if ('descripcion' in data && data.descripcion?.trim()) {
+          delete currentItemErrors.descripcion;
+        }
+        if ('cantidad' in data && (data.cantidad ?? 0) > 0) {
+          delete currentItemErrors.cantidad;
+        }
+        if ('precioUnitario' in data && (data.precioUnitario ?? 0) > 0) {
+          delete currentItemErrors.precio;
+        }
+
+        // Update or remove error object for this item
+        if (Object.keys(currentItemErrors).length === 0) {
+          delete newLineItemErrors[id];
+        } else {
+          newLineItemErrors[id] = currentItemErrors;
+        }
+
+        const hasRemainingErrors = Object.keys(newLineItemErrors).length > 0;
+
+        return {
+          ...prev,
+          lineas: hasRemainingErrors ? prev.lineas : undefined,
+          lineItemErrors: hasRemainingErrors ? newLineItemErrors : undefined,
+        };
+      });
+    }
+  };
+
   return (
     <KeyboardAwareScrollView
       style={styles.container}
@@ -237,10 +309,11 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
       {/* Line Items */}
       <LineItemsList
         lineas={lineas}
-        onUpdateLinea={updateLinea}
+        onUpdateLinea={handleUpdateLinea}
         onRemoveLinea={removeLinea}
         onAddLinea={addLinea}
         error={errors.lineas}
+        lineItemErrors={errors.lineItemErrors}
       />
 
       {/* IVA Toggle */}

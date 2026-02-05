@@ -54,6 +54,13 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="pdf-viewer"
+        options={{
+          href: null,
+          headerShown: false,
+        }}
+      />
     </Tabs>
   );
 }

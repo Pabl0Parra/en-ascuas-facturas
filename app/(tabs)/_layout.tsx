@@ -1,7 +1,6 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import type { ComponentProps } from 'react';
 import { COLORS, FONT_SIZE } from '../../src/constants/theme';
 import { STRINGS } from '../../src/constants/strings';
 

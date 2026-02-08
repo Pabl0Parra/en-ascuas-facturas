@@ -213,11 +213,6 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
     router.push('/cliente/nuevo');
   };
 
-  const docTitle =
-    tipo === 'factura'
-      ? STRINGS.navigation.nuevaFactura
-      : STRINGS.navigation.nuevoPresupuesto;
-
   const handleUpdateLinea = (
     id: string,
     data: Partial<Omit<LineItem, 'id' | 'importe'>>,

@@ -69,8 +69,8 @@ export const generatePDFFileName = (
   const tipoLabel = tipo === 'factura' ? 'FACTURA' : 'PRESUPUESTO';
   const cleanNombre = clienteNombre
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-zA-Z0-9]/g, '_')
+    .replaceAll(/[\u0300-\u036f]/g, '')
+    .replaceAll(/[^a-zA-Z0-9]/g, '_')
     .substring(0, 20);
 
   // Use timestamp if no document number provided

@@ -442,6 +442,7 @@ npx prettier --write .     # Format code
 InvoiceForge was built in 4 major phases over 14 weeks:
 
 ### Phase 1: Core Genericization (Weeks 1-7)
+
 - ✅ Business profile & onboarding
 - ✅ Tax system abstraction
 - ✅ Multi-language (i18n)
@@ -450,12 +451,14 @@ InvoiceForge was built in 4 major phases over 14 weeks:
 - ✅ Migration service
 
 ### Phase 2: Power Features (Weeks 8-10)
+
 - ✅ Document templates
 - ✅ Recurring invoices
 - ✅ Template picker UI
 - ✅ Recurring rules management
 
 ### Phase 3: UX & Quality of Life (Weeks 11-13)
+
 - ✅ Settings screen
 - ✅ Data export/import
 - ✅ Enhanced client management
@@ -463,6 +466,7 @@ InvoiceForge was built in 4 major phases over 14 weeks:
 - ✅ Document status tracking
 
 ### Phase 4: App Store Readiness (Week 14)
+
 - ✅ Complete app rebranding
 - ✅ Privacy policy
 - ✅ About screen
@@ -472,7 +476,7 @@ InvoiceForge was built in 4 major phases over 14 weeks:
 
 **Total:** 227 passing tests, 15,000+ lines of code, 100+ components
 
-See [CLAUDE.md](./CLAUDE.md) for the full implementation plan and [PHASE_*.md](./docs/) files for detailed phase summaries.
+See [CLAUDE.md](./CLAUDE.md) for the full implementation plan and [PHASE\_\*.md](./docs/) files for detailed phase summaries.
 
 ---
 
@@ -490,6 +494,7 @@ npm run test:coverage
 ```
 
 **Test Coverage:**
+
 - ✅ All stores (Zustand)
 - ✅ All services (PDF, migration, dashboard, recurring)
 - ✅ All utilities (calculations, formatters, validators)
@@ -521,7 +526,7 @@ Copyright © 2026 InvoiceForge
 **Pabl0Parra**
 
 - GitHub: [@Pabl0Parra](https://github.com/Pabl0Parra)
-- Original Project: En Ascuas (private business tool)
+- Original Project: Bilio (private business tool)
 - InvoiceForge: Generic public release
 
 ---
@@ -765,7 +770,7 @@ Copyright © 2026 InvoiceForge
 **Pabl0Parra**
 
 - GitHub: [@Pabl0Parra](https://github.com/Pabl0Parra)
-- Proyecto Original: En Ascuas (herramienta empresarial privada)
+- Proyecto Original: Bilio (herramienta empresarial privada)
 - InvoiceForge: Lanzamiento público genérico
 
 ---

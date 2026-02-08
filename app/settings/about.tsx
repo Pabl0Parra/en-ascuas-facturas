@@ -58,7 +58,7 @@ export default function AboutScreen() {
             style={styles.logo}
             resizeMode="contain"
           />
-          <Text style={styles.appName}>En Ascuas</Text>
+          <Text style={styles.appName}> Bilio</Text>
           <Text style={styles.tagline}>Invoicing & Quotes</Text>
         </View>
 
@@ -159,8 +159,7 @@ export default function AboutScreen() {
 
         {/* Credits */}
         <Text style={styles.credits}>
-          Made with ❤️ using React Native + Expo{'\n'}
-          Powered by Claude Sonnet 4.5
+          Made by Pabl0Parra with ❤️ using React Native + Expo{'\n'}
         </Text>
       </ScrollView>
     </SafeAreaView>

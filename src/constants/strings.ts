@@ -1,7 +1,7 @@
 export const STRINGS = {
   app: {
-    name: 'En Ascuas',
-    tagline: 'Facturación y presupuestos',
+    name: '',
+    tagline: '',
   },
 
   navigation: {

@@ -37,7 +37,7 @@ export class MigrationService {
       paymentMethod: COMPANY.metodoPago,
       paymentDetails: COMPANY.iban,
       logoUri: null, // Will use embedded logo initially
-      primaryColor: '#FF4500', // Original En Ascuas brand color
+      primaryColor: '#FF4500', // Original Bilio brand color
       currency: 'EUR',
       locale: 'es-ES',
       defaultTaxRate: 21, // Spanish standard IVA

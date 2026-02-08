@@ -23,7 +23,7 @@ import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/t
 import type { PdfTemplateId } from '../../src/types/pdfTemplate';
 
 const COLOR_PRESETS = [
-  '#FF4500', // En Ascuas Orange
+  '#FF4500', // Bilio Orange
   '#E25822', // Ember
   '#2563EB', // Blue
   '#10B981', // Green
@@ -69,7 +69,7 @@ export default function BrandingScreen() {
       }
 
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        mediaTypes: ImagePicker.MediaType.Images,
         allowsEditing: true,
         aspect: [1, 1],
         quality: 0.8,

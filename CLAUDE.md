@@ -1,8 +1,8 @@
-# En Ascuas → InvoiceApp: Genericization & Feature Roadmap
+# Bilio → InvoiceApp: Genericization & Feature Roadmap
 
 ## Executive Summary
 
-Transform "En Ascuas" from a single-business invoicing tool into a **generic, public-facing mobile app** distributed via App Store and Google Play. The app remains **offline-first with no backend**, leveraging on-device storage for all data. Priority features: **multi-language/multi-currency support** and **recurring invoices with templates**.
+Transform "Bilio" from a single-business invoicing tool into a **generic, public-facing mobile app** distributed via App Store and Google Play. The app remains **offline-first with no backend**, leveraging on-device storage for all data. Priority features: **multi-language/multi-currency support** and **recurring invoices with templates**.
 
 ---
 
@@ -309,7 +309,7 @@ type DocumentStatus =
 
 ### 4.1 App Identity & Branding
 
-- New app name (drop "En Ascuas" — it's business-specific). Suggestions: **"InvoiceForge"**, **"BillCraft"**, **"QuickBill Pro"**, **"Factura"**
+- New app name (drop "Bilio" — it's business-specific). Suggestions: **"InvoiceForge"**, **"BillCraft"**, **"QuickBill Pro"**, **"Factura"**
 - App icon and splash screen designed for the new brand
 - App Store screenshots showing the onboarding flow, PDF generation, and multi-language support
 - Privacy policy (no data collection — strong selling point)
@@ -452,7 +452,7 @@ src/
 
 ---
 
-## Migration Path for Existing "En Ascuas" Users
+## Migration Path for Existing "Bilio" Users
 
 Since the original app is already deployed for one business:
 

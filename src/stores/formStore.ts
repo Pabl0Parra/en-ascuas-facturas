@@ -1,6 +1,7 @@
+// src/stores/formStore.ts
 import { create } from 'zustand';
 import type { DocumentType, IVARate, LineItem } from '../types/document';
-import { generateId } from '../utils/idGenerator';
+import { generateTempId } from '../utils/idGenerator';
 import {
   calculateLineImporte,
   calculateBaseImponible,
@@ -53,7 +54,7 @@ interface FormStore {
 }
 
 const createEmptyLinea = (): LineItem => ({
-  id: generateId(),
+  id: generateTempId(),
   descripcion: '',
   cantidad: 1,
   precioUnitario: 0,

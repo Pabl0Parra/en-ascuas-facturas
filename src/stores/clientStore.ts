@@ -1,8 +1,9 @@
+// src/stores/clientStore.ts
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { Client, ClientFormData } from '../types/client';
-import { generateId } from '../utils/idGenerator';
+import { generateSecureId } from '../utils/idGenerator';
 
 interface ClientStore {
   clients: Client[];
@@ -24,7 +25,7 @@ export const useClientStore = create<ClientStore>()(
         const now = new Date().toISOString();
         const newClient: Client = {
           ...clientData,
-          id: generateId(),
+          id: generateSecureId(),
           createdAt: now,
           updatedAt: now,
         };

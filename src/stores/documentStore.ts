@@ -1,8 +1,9 @@
+// src/stores/documentStore.ts
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { DocumentMetadata, DocumentType } from '../types/document';
-import { generateId } from '../utils/idGenerator';
+import { generateSecureId } from '../utils/idGenerator';
 
 interface DocumentStore {
   documents: DocumentMetadata[];
@@ -23,7 +24,7 @@ export const useDocumentStore = create<DocumentStore>()(
       addDocument: (metadata: Omit<DocumentMetadata, 'id' | 'createdAt'>): DocumentMetadata => {
         const newDocument: DocumentMetadata = {
           ...metadata,
-          id: generateId(),
+          id: generateSecureId(),
           createdAt: new Date().toISOString(),
         };
         

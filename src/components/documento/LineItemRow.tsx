@@ -29,38 +29,38 @@ export const LineItemRow: React.FC<LineItemRowProps> = ({
 }) => {
   // Local state to allow typing decimals
   const [cantidadText, setCantidadText] = useState(
-    item.cantidad > 0 ? item.cantidad.toString().replace('.', ',') : '',
+    item.cantidad > 0 ? item.cantidad.toString().replaceAll('.', ',') : '',
   );
   const [precioText, setPrecioText] = useState(
     item.precioUnitario > 0
-      ? item.precioUnitario.toString().replace('.', ',')
+      ? item.precioUnitario.toString().replaceAll('.', ',')
       : '',
   );
 
   // Sync local state when item changes externally (e.g., reset form)
   useEffect(() => {
     setCantidadText(
-      item.cantidad > 0 ? item.cantidad.toString().replace('.', ',') : '',
+      item.cantidad > 0 ? item.cantidad.toString().replaceAll('.', ',') : '',
     );
   }, [item.id]);
 
   useEffect(() => {
     setPrecioText(
       item.precioUnitario > 0
-        ? item.precioUnitario.toString().replace('.', ',')
+        ? item.precioUnitario.toString().replaceAll('.', ',')
         : '',
     );
   }, [item.id]);
 
   const handleCantidadChange = (text: string) => {
     // Allow only numbers, comma, and dot
-    const cleaned = text.replace(/[^0-9.,]/g, '');
+    const cleaned = text.replaceAll(/[^0-9.,]/g, '');
     setCantidadText(cleaned);
 
     // Parse and update parent
-    const normalized = cleaned.replace(',', '.');
-    const num = parseFloat(normalized);
-    if (!isNaN(num)) {
+    const normalized = cleaned.replaceAll(',', '.');
+    const num = Number.parseFloat(normalized);
+    if (!Number.isNaN(num)) {
       onUpdate({ cantidad: num });
     } else if (cleaned === '') {
       onUpdate({ cantidad: 0 });
@@ -69,13 +69,13 @@ export const LineItemRow: React.FC<LineItemRowProps> = ({
 
   const handlePrecioChange = (text: string) => {
     // Allow only numbers, comma, and dot
-    const cleaned = text.replace(/[^0-9.,]/g, '');
+    const cleaned = text.replaceAll(/[^0-9.,]/g, '');
     setPrecioText(cleaned);
 
     // Parse and update parent
-    const normalized = cleaned.replace(',', '.');
-    const num = parseFloat(normalized);
-    if (!isNaN(num)) {
+    const normalized = cleaned.replaceAll(',', '.');
+    const num = Number.parseFloat(normalized);
+    if (!Number.isNaN(num)) {
       onUpdate({ precioUnitario: num });
     } else if (cleaned === '') {
       onUpdate({ precioUnitario: 0 });

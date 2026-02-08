@@ -12,7 +12,7 @@ const formatCurrency = (amount: number): string => {
 
 const formatDateForPDF = (dateString: string): string => {
   if (/^\d{2}-\d{2}-\d{4}$/.test(dateString)) {
-    return dateString.replace(/-/g, '/');
+    return dateString.replaceAll('-', '/');
   }
 
   try {
@@ -365,8 +365,8 @@ export const generateInvoiceHTML = (data: DocumentData): string => {
       ? `
         <div class="comments-section">
           <div class="comments-title">Observaciones</div>
-          <div class="comments-text">${data.comentarios.replace(
-        /\n/g,
+          <div class="comments-text">${data.comentarios.replaceAll(
+        '\n',
         '<br>',
       )}</div>
         </div>

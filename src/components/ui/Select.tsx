@@ -7,7 +7,6 @@ import {
   FlatList,
   TextInput,
   StyleSheet,
-  Dimensions,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -17,8 +16,6 @@ import {
   BORDER_RADIUS,
   FONT_SIZE,
 } from '../../constants/theme';
-
-const {} = Dimensions.get('window');
 
 interface SelectOption {
   label: string;

@@ -6,7 +6,6 @@ type PaddingSize = 'none' | 'sm' | 'md' | 'lg';
 
 interface CardProps {
   children: React.ReactNode;
-  onPress?: () => void;
   style?: ViewStyle;
   padding?: PaddingSize;
 }

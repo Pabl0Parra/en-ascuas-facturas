@@ -1,8 +1,22 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import type { ComponentProps } from 'react';
 import { COLORS, FONT_SIZE } from '../../src/constants/theme';
 import { STRINGS } from '../../src/constants/strings';
+
+// Extract icon components to prevent re-renders
+const HomeIcon = ({ color, size }: { color: string; size: number }) => (
+  <Ionicons name="home" size={size} color={color} />
+);
+
+const ClientsIcon = ({ color, size }: { color: string; size: number }) => (
+  <Ionicons name="people" size={size} color={color} />
+);
+
+const HistoryIcon = ({ color, size }: { color: string; size: number }) => (
+  <Ionicons name="document-text" size={size} color={color} />
+);
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
@@ -18,8 +32,8 @@ export default function TabLayout() {
           borderTopColor: COLORS.divider,
           borderTopWidth: 1,
           paddingTop: 4,
-          paddingBottom: insets.bottom > 0 ? insets.bottom : 8, // Respect safe area
-          height: 60 + (insets.bottom > 0 ? insets.bottom : 0), // Adjust height
+          paddingBottom: Math.max(insets.bottom, 8),
+          height: 60 + Math.max(insets.bottom, 0),
         },
         tabBarLabelStyle: {
           fontSize: FONT_SIZE.xs,
@@ -31,27 +45,21 @@ export default function TabLayout() {
         name="index"
         options={{
           title: STRINGS.navigation.home,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
-          ),
+          tabBarIcon: HomeIcon,
         }}
       />
       <Tabs.Screen
         name="clientes"
         options={{
           title: STRINGS.navigation.clientes,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="people" size={size} color={color} />
-          ),
+          tabBarIcon: ClientsIcon,
         }}
       />
       <Tabs.Screen
         name="historial"
         options={{
           title: STRINGS.navigation.historial,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="document-text" size={size} color={color} />
-          ),
+          tabBarIcon: HistoryIcon,
         }}
       />
       <Tabs.Screen

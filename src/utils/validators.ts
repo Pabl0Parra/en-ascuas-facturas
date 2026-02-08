@@ -1,14 +1,14 @@
 export const isValidNIF = (nif: string): boolean => {
   // Regex básico para NIF/CIF español
-  const nifRegex = /^[0-9]{8}[A-Z]$/i;
-  const cifRegex = /^[A-Z][0-9]{7}[A-Z0-9]$/i;
-  const nieRegex = /^[XYZ][0-9]{7}[A-Z]$/i;
+  const nifRegex = /^\d{8}[A-Z]$/i;
+  const cifRegex = /^[A-Z]\d{7}[A-Z0-9]$/i;
+  const nieRegex = /^[XYZ]\d{7}[A-Z]$/i;
 
   return nifRegex.test(nif) || cifRegex.test(nif) || nieRegex.test(nif);
 };
 
 export const isValidPostalCode = (cp: string): boolean => {
-  return /^[0-9]{5}$/.test(cp);
+  return /^\d{5}$/.test(cp);
 };
 
 export const isValidEmail = (email: string): boolean => {
@@ -49,6 +49,6 @@ export const isPositiveNumber = (value: number): boolean => {
 export const isValidPhoneNumber = (phone: string): boolean => {
   // Spanish phone numbers (fixed or mobile)
   // Remove spaces first to avoid any potential issues
-  const cleaned = phone.replace(/\s/g, '');
-  return /^[679][0-9]{8}$/.test(cleaned);
+  const cleaned = phone.replaceAll(/\s/g, '');
+  return /^[679]\d{8}$/.test(cleaned);
 };

@@ -1,0 +1,307 @@
+{
+  "app": {
+    "name": "InvoiceForge",
+    "tagline": "Facturación Profesional Simplificada"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "clientes": "Clientes",
+    "historial": "Historial",
+    "nuevaFactura": "Nueva Factura",
+    "nuevoPresupuesto": "Nuevo Presupuesto"
+  },
+  "document": {
+    "factura": "FACTURA",
+    "presupuesto": "PRESUPUESTO",
+    "numeroDocumento": "Nº Documento",
+    "fechaDocumento": "Fecha",
+    "datosEmpresa": "DATOS",
+    "datosFacturacion": "DATOS DE FACTURACIÓN"
+  },
+  "form": {
+    "descripcion": "Descripción",
+    "cantidad": "Cantidad",
+    "precio": "Precio",
+    "importe": "Importe",
+    "añadirLinea": "Añadir línea",
+    "eliminar": "Eliminar"
+  },
+  "iva": {
+    "label": "IVA",
+    "inversionSujetoPasivo": "Inversión del sujeto pasivo",
+    "inversionNota": "INVERSIÓN SUJETO PASIVO IVA 0%",
+    "normal": "IVA 21%"
+  },
+  "totals": {
+    "base": "BASE",
+    "iva": "IVA",
+    "tax": "IMPUESTO",
+    "total": "TOTAL"
+  },
+  "payment": {
+    "metodoPago": "MÉTODO DE PAGO",
+    "transferencia": "TRANSFERENCIA"
+  },
+  "actions": {
+    "guardar": "Guardar",
+    "generarPDF": "Generar PDF",
+    "compartir": "Compartir",
+    "cancelar": "Cancelar",
+    "editar": "Editar",
+    "eliminar": "Eliminar",
+    "nuevoCliente": "Nuevo Cliente",
+    "seleccionarCliente": "Seleccionar cliente",
+    "continuar": "Continuar",
+    "anterior": "Anterior",
+    "empezar": "Empezar",
+    "completar": "Completar"
+  },
+  "client": {
+    "nombre": "Nombre / Razón Social",
+    "direccion": "Dirección",
+    "codigoPostal": "Código Postal",
+    "ciudad": "Ciudad",
+    "provincia": "Provincia",
+    "nifCif": "NIF / CIF",
+    "email": "Email (opcional)",
+    "telefono": "Teléfono (opcional)"
+  },
+  "empty": {
+    "clientes": "No hay clientes guardados",
+    "historial": "No hay documentos",
+    "lineas": "Añade al menos una línea"
+  },
+  "errors": {
+    "campoRequerido": "Este campo es requerido",
+    "seleccionaCliente": "Selecciona un cliente",
+    "añadeLinea": "Añade al menos una línea",
+    "cantidadInvalida": "Cantidad debe ser mayor a 0",
+    "precioInvalido": "Precio debe ser mayor a 0"
+  },
+  "success": {
+    "clienteGuardado": "Cliente guardado",
+    "documentoGenerado": "Documento generado correctamente",
+    "pdfGuardado": "PDF guardado"
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "¡Bienvenido!",
+      "subtitle": "Configura tu negocio en minutos",
+      "selectLanguage": "Selecciona tu idioma",
+      "benefits": {
+        "title": "Lo que obtendrás:",
+        "benefit1": "Facturas profesionales en PDF",
+        "benefit2": "Gestión de clientes",
+        "benefit3": "Presupuestos personalizados",
+        "benefit4": "Completamente offline"
+      },
+      "getStarted": "Comenzar"
+    },
+    "businessInfo": {
+      "title": "Información del Negocio",
+      "subtitle": "Cuéntanos sobre tu empresa",
+      "companyName": "Nombre de la empresa",
+      "address": "Dirección",
+      "city": "Ciudad",
+      "region": "Región / Provincia",
+      "postalCode": "Código Postal",
+      "country": "País",
+      "taxIdLabel": "Etiqueta del ID fiscal",
+      "taxId": "ID fiscal"
+    },
+    "branding": {
+      "title": "Imagen de Marca",
+      "subtitle": "Personaliza tus documentos",
+      "uploadLogo": "Subir Logo",
+      "chooseLogo": "Elegir Logo",
+      "removeLogo": "Quitar Logo",
+      "primaryColor": "Color Principal",
+      "colorPresets": "Colores predefinidos"
+    },
+    "financial": {
+      "title": "Configuración Financiera",
+      "subtitle": "Impuestos y pagos",
+      "currency": "Moneda",
+      "taxName": "Nombre del Impuesto",
+      "defaultTaxRate": "Tasa de Impuesto Predeterminada (%)",
+      "paymentMethod": "Método de Pago",
+      "paymentDetails": "Detalles de Pago",
+      "example": "Ejemplo de factura:"
+    },
+    "numbering": {
+      "title": "Numeración de Documentos",
+      "subtitle": "Configura tus secuencias",
+      "invoicePrefix": "Prefijo de Factura",
+      "invoiceStartNumber": "Número Inicial de Factura",
+      "quotePrefix": "Prefijo de Presupuesto",
+      "quoteStartNumber": "Número Inicial de Presupuesto",
+      "preview": "Vista previa:"
+    },
+    "review": {
+      "title": "Revisar y Confirmar",
+      "subtitle": "Todo listo para empezar",
+      "businessInfo": "Información del Negocio",
+      "branding": "Imagen de Marca",
+      "financial": "Configuración Financiera",
+      "numbering": "Numeración",
+      "edit": "Editar",
+      "getStarted": "Comenzar"
+    }
+  },
+  "whatsNew": {
+    "title": "¡Bienvenido a la Nueva Versión!",
+    "subtitle": "Tu aplicación ha sido actualizada con nuevas funciones",
+    "features": {
+      "multiLanguage": "Soporte multiidioma",
+      "multiCurrency": "Múltiples monedas",
+      "templates": "Plantillas de documentos",
+      "customization": "Personalización mejorada"
+    },
+    "dataPreserved": "Todos tus datos han sido preservados y migrados automáticamente.",
+    "gotIt": "Entendido"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "sections": {
+      "businessProfile": "Perfil Empresarial",
+      "branding": "Marca",
+      "taxConfiguration": "Configuración Fiscal",
+      "languageRegion": "Idioma y Región",
+      "dataManagement": "Gestión de Datos",
+      "about": "Acerca de"
+    },
+    "businessProfile": {
+      "title": "Perfil Empresarial",
+      "companyName": "Nombre de Empresa",
+      "address": "Dirección",
+      "city": "Ciudad",
+      "region": "Región / Provincia",
+      "postalCode": "Código Postal",
+      "country": "País",
+      "taxIdLabel": "Etiqueta de ID Fiscal",
+      "taxId": "ID Fiscal",
+      "paymentMethod": "Método de Pago",
+      "paymentDetails": "Detalles de Pago",
+      "save": "Guardar Cambios",
+      "saved": "Perfil actualizado correctamente"
+    },
+    "branding": {
+      "title": "Marca",
+      "logo": "Logo",
+      "uploadLogo": "Subir Logo",
+      "changeLogo": "Cambiar Logo",
+      "removeLogo": "Eliminar Logo",
+      "primaryColor": "Color Principal",
+      "pdfTemplate": "Plantilla PDF",
+      "classic": "Clásica",
+      "modern": "Moderna",
+      "minimal": "Minimalista",
+      "preview": "Vista Previa"
+    },
+    "taxConfiguration": {
+      "title": "Configuración Fiscal",
+      "taxName": "Nombre del Impuesto",
+      "defaultRate": "Tasa Predeterminada (%)",
+      "presets": "Preajustes Fiscales",
+      "addPreset": "Añadir Preajuste",
+      "presetName": "Nombre del Preajuste",
+      "rate": "Tasa (%)",
+      "deletePreset": "Eliminar Preajuste",
+      "confirmDelete": "¿Eliminar este preajuste fiscal?"
+    },
+    "languageRegion": {
+      "title": "Idioma y Región",
+      "appLanguage": "Idioma de la Aplicación",
+      "currency": "Moneda",
+      "dateFormat": "Formato de Fecha",
+      "numberFormat": "Formato de Números",
+      "locale": "Configuración Regional"
+    },
+    "dataManagement": {
+      "title": "Gestión de Datos",
+      "exportData": "Exportar Todos los Datos",
+      "exportDescription": "Descarga una copia de seguridad de todos tus datos (clientes, documentos, plantillas, reglas recurrentes) como archivo JSON",
+      "importData": "Importar Datos",
+      "importDescription": "Restaurar datos desde un archivo de respaldo",
+      "clearAllData": "Borrar Todos los Datos",
+      "clearDescription": "Eliminar permanentemente todos los datos de esta aplicación",
+      "confirmClear": "¿Estás seguro de que quieres eliminar todos los datos? Esta acción no se puede deshacer.",
+      "exportSuccess": "Datos exportados correctamente",
+      "importSuccess": "Datos importados correctamente",
+      "clearSuccess": "Todos los datos han sido eliminados"
+    },
+    "about": {
+      "title": "Acerca de",
+      "version": "Versión",
+      "buildNumber": "Compilación",
+      "support": "Soporte",
+      "licenses": "Licencias de Código Abierto",
+      "privacy": "Política de Privacidad"
+    }
+  },
+  "privacy": {
+    "title": "Política de Privacidad",
+    "lastUpdated": "Última Actualización",
+    "dataCollection": "Recopilación de Datos",
+    "dataCollectionText": "InvoiceForge está diseñado con tu privacidad en mente. NO recopilamos, transmitimos ni almacenamos ninguno de tus datos personales o empresariales en servidores externos.",
+    "offlineFirst": "Arquitectura Offline-First",
+    "offlineFirstText": "Todos los datos que creas (perfiles empresariales, clientes, facturas, presupuestos) se almacenan exclusivamente en tu dispositivo usando almacenamiento local seguro. Tus datos nunca salen de tu dispositivo a menos que elijas explícitamente exportarlos o compartirlos.",
+    "dataStorage": "Almacenamiento de Datos",
+    "dataStorageText": "Utilizamos AsyncStorage (almacenamiento en el dispositivo) para persistir tu información empresarial, registros de clientes y documentos. Estos datos se almacenan en formato cifrado en tu dispositivo y solo son accesibles por la aplicación InvoiceForge.",
+    "permissions": "Permisos de la Aplicación",
+    "permissionsIntro": "InvoiceForge solicita los siguientes permisos:",
+    "cameraPermission": "Para subir el logo de tu empresa o imágenes de clientes",
+    "filePermission": "Para guardar y compartir facturas y presupuestos en PDF",
+    "permissionsNote": "Estos permisos solo se usan para sus propósitos declarados y nunca para recopilación de datos.",
+    "dataSharing": "Compartir Datos",
+    "dataSharingText": "No compartimos, vendemos ni transmitimos tus datos a terceros. Cuando compartes una factura o exportas tus datos, tú controlas exactamente qué se comparte y con quién.",
+    "analytics": "Analíticas y Rastreo",
+    "analyticsText": "InvoiceForge NO usa ningún servicio de analíticas, rastreo o telemetría. No tenemos forma de monitorear tu uso ni acceder a tus datos.",
+    "security": "Seguridad",
+    "securityText": "La seguridad de tus datos se ve mejorada por nuestro enfoque offline-first. Como los datos nunca salen de tu dispositivo (excepto cuando los exportas explícitamente), no hay riesgo de brechas de datos o acceso no autorizado al servidor.",
+    "dataRetention": "Retención y Eliminación de Datos",
+    "dataRetentionText": "Tienes control completo sobre tus datos. Puedes exportar todos tus datos en cualquier momento desde la pantalla de Ajustes. Para eliminar todos los datos, simplemente desinstala la aplicación o usa la opción \"Borrar Todos los Datos\" en Ajustes.",
+    "children": "Privacidad de Menores",
+    "childrenText": "InvoiceForge está destinado para uso empresarial por adultos. No recopilamos intencionadamente datos de menores de 13 años.",
+    "changes": "Cambios en la Política de Privacidad",
+    "changesText": "Podemos actualizar esta política de privacidad de vez en cuando. Cualquier cambio se reflejará en la aplicación con una fecha de \"Última Actualización\" actualizada.",
+    "contact": "Contacto",
+    "contactText": "Si tienes preguntas sobre esta política de privacidad, por favor contáctanos a través de la lista de la tienda de aplicaciones.",
+    "summary": "En Resumen: InvoiceForge es 100% privado. Tus datos nunca salen de tu dispositivo. Sin cuentas, sin servidores, sin rastreo."
+  },
+  "about": {
+    "version": "Versión",
+    "tagline": "Facturación profesional simplificada",
+    "privacyPolicy": "Política de Privacidad",
+    "support": "Contactar Soporte",
+    "rate": "Calificar InvoiceForge",
+    "rights": "Todos los derechos reservados.",
+    "featuresTitle": "Características Principales",
+    "feature1": "100% Privado - Los datos nunca salen de tu dispositivo",
+    "feature2": "Offline-First - No se requiere internet",
+    "feature3": "Multiidioma - Inglés, Español, y más",
+    "feature4": "Multidivisa - Soporte para EUR, USD, GBP, y más",
+    "feature5": "Facturas Recurrentes - Automatiza la facturación regular",
+    "feature6": "Marca Personalizada - Añade tu logo y colores"
+  },
+  "dashboard": {
+    "welcomeBack": "¡Bienvenido de nuevo!",
+    "yourBusiness": "Tu Negocio",
+    "thisMonth": "Este Mes",
+    "allTime": "Todo el Tiempo",
+    "invoices": "Facturas",
+    "revenue": "Ingresos",
+    "quotes": "Presupuestos",
+    "totalInvoices": "Total de Facturas",
+    "totalQuotes": "Total de Presupuestos",
+    "quickActions": "Acciones Rápidas",
+    "newInvoice": "Nueva Factura",
+    "newQuote": "Nuevo Presupuesto",
+    "clients": "Clientes",
+    "history": "Historial",
+    "recentDocuments": "Documentos Recientes",
+    "viewAll": "Ver Todos",
+    "noDocumentsYet": "No hay documentos todavía",
+    "createFirstDocument": "Crea tu primera factura o presupuesto"
+  }
+}

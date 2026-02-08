@@ -1,77 +1,157 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@expo/vector-icons';
+import { StatCard } from '../../src/components/dashboard/StatCard';
+import { RecentDocuments } from '../../src/components/dashboard/RecentDocuments';
+import { RecurringAlert } from '../../src/components/dashboard/RecurringAlert';
+import { OverdueAlert } from '../../src/components/dashboard/OverdueAlert';
+import { calculateDashboardStats } from '../../src/services/dashboardService';
+import { formatCurrencyByCode } from '../../src/utils/currencyFormatter';
+import { useBusinessProfileStore } from '../../src/stores/businessProfileStore';
 import {
   COLORS,
   SPACING,
   FONT_SIZE,
-  SHADOWS,
   BORDER_RADIUS,
 } from '../../src/constants/theme';
-import { STRINGS } from '../../src/constants/strings';
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
+  const businessProfile = useBusinessProfileStore((state) => state.profile);
+  const currency = businessProfile?.currency || 'EUR';
 
-  const handleNewDocument = (tipo: 'factura' | 'presupuesto') => {
-    router.push(`/documento/nuevo?tipo=${tipo}`);
-  };
+  // Calculate dashboard statistics
+  const stats = useMemo(() => calculateDashboardStats(), []);
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <View style={styles.content}>
-        {/* Logo Section */}
-        <View style={styles.logoSection}>
-          <Image
-            source={require('../../assets/images/en-ascuas-logo.png')}
-            style={styles.logo}
-            resizeMode="contain"
-          />
-          <Text style={styles.appName}>{STRINGS.app.name.toUpperCase()}</Text>
-          <Text style={styles.tagline}>{STRINGS.app.tagline}</Text>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.greeting}>{t('dashboard.welcomeBack')}</Text>
+          <Text style={styles.subtitle}>
+            {businessProfile?.companyName || t('dashboard.yourBusiness')}
+          </Text>
         </View>
 
-        {/* Action Buttons */}
-        <View style={styles.buttonsSection}>
+        {/* Hero Actions - Primary CTA Buttons */}
+        <View style={styles.heroActions}>
           <TouchableOpacity
-            style={styles.actionButton}
-            onPress={() => handleNewDocument('factura')}
+            style={[styles.heroButton, styles.invoiceButton]}
+            onPress={() => router.push('/documento/nuevo?tipo=factura')}
             activeOpacity={0.8}
           >
-            <View style={styles.iconWrapper}>
-              <Ionicons
-                name="document-text"
-                size={32}
-                color={COLORS.textInverse}
-              />
+            <View style={styles.heroButtonContent}>
+              <Ionicons name="document-text" size={32} color={COLORS.textInverse} />
+              <Text style={styles.heroButtonTitle}>{t('dashboard.newInvoice')}</Text>
             </View>
-            <Text style={styles.buttonText}>
-              {STRINGS.navigation.nuevaFactura}
-            </Text>
-            <Ionicons
-              name="chevron-forward"
-              size={24}
-              color={COLORS.textInverse}
+            <Ionicons name="arrow-forward" size={24} color={COLORS.textInverse} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.heroButton, styles.quoteButton]}
+            onPress={() => router.push('/documento/nuevo?tipo=presupuesto')}
+            activeOpacity={0.8}
+          >
+            <View style={styles.heroButtonContent}>
+              <Ionicons name="document-outline" size={32} color={COLORS.textInverse} />
+              <Text style={styles.heroButtonTitle}>{t('dashboard.newQuote')}</Text>
+            </View>
+            <Ionicons name="arrow-forward" size={24} color={COLORS.textInverse} />
+          </TouchableOpacity>
+        </View>
+
+        {/* Recurring Alert */}
+        {stats.pendingRecurringInvoices > 0 && (
+          <RecurringAlert count={stats.pendingRecurringInvoices} />
+        )}
+
+        {/* Overdue Alert */}
+        {stats.overdueInvoices > 0 && (
+          <OverdueAlert count={stats.overdueInvoices} />
+        )}
+
+        {/* Quick Stats - This Month */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{t('dashboard.thisMonth')}</Text>
+          <View style={styles.statsGrid}>
+            <StatCard
+              title={t('dashboard.invoices')}
+              value={stats.invoicesThisMonth}
+              icon="document-text"
+              color={COLORS.primary}
             />
-          </TouchableOpacity>
+            <StatCard
+              title={t('dashboard.revenue')}
+              value={formatCurrencyByCode(stats.revenueThisMonth, currency)}
+              icon="trending-up"
+              color="#10B981"
+            />
+            <StatCard
+              title={t('dashboard.quotes')}
+              value={stats.quotesThisMonth}
+              icon="document-outline"
+              color="#8B5CF6"
+            />
+          </View>
+        </View>
 
+        {/* Secondary Quick Actions */}
+        <View style={styles.secondaryActions}>
           <TouchableOpacity
-            style={[styles.actionButton, styles.secondaryButton]}
-            onPress={() => handleNewDocument('presupuesto')}
-            activeOpacity={0.8}
+            style={styles.secondaryButton}
+            onPress={() => router.push('/(tabs)/clientes')}
+            activeOpacity={0.7}
           >
-            <View style={[styles.iconWrapper, styles.secondaryIconWrapper]}>
-              <Ionicons name="clipboard" size={32} color={COLORS.primary} />
-            </View>
-            <Text style={[styles.buttonText, styles.secondaryButtonText]}>
-              {STRINGS.navigation.nuevoPresupuesto}
-            </Text>
-            <Ionicons name="chevron-forward" size={24} color={COLORS.primary} />
+            <Ionicons name="people" size={20} color={COLORS.primary} />
+            <Text style={styles.secondaryButtonText}>{t('dashboard.clients')}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            onPress={() => router.push('/(tabs)/historial')}
+            activeOpacity={0.7}
+          >
+            <Ionicons name="time" size={20} color={COLORS.primary} />
+            <Text style={styles.secondaryButtonText}>{t('dashboard.history')}</Text>
           </TouchableOpacity>
         </View>
-      </View>
+
+        {/* Recent Documents */}
+        <View style={styles.section}>
+          <RecentDocuments
+            documents={stats.recentDocuments}
+            onViewAll={() => router.push('/(tabs)/historial')}
+          />
+        </View>
+
+        {/* All-Time Stats */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>{t('dashboard.allTime')}</Text>
+          <View style={styles.statsGrid}>
+            <StatCard
+              title={t('dashboard.totalInvoices')}
+              value={stats.totalInvoices}
+              subtitle={formatCurrencyByCode(stats.totalRevenue, currency)}
+              icon="receipt"
+              color="#F59E0B"
+            />
+            <StatCard
+              title={t('dashboard.totalQuotes')}
+              value={stats.totalQuotes}
+              icon="newspaper"
+              color="#6B7280"
+            />
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -81,69 +161,91 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  content: {
+  scrollView: {
     flex: 1,
-    padding: SPACING.lg,
-    justifyContent: 'center',
   },
-  logoSection: {
-    alignItems: 'center',
-    marginBottom: SPACING.xxl,
+  content: {
+    padding: SPACING.md,
   },
-  logo: {
-    width: 150,
-    height: 150,
-    marginBottom: SPACING.md,
+  header: {
+    marginBottom: SPACING.lg,
   },
-  appName: {
-    fontSize: FONT_SIZE.xxxl,
-    fontWeight: '900',
-    color: COLORS.black,
-    letterSpacing: 4,
+  greeting: {
+    fontSize: FONT_SIZE.xxl,
+    fontWeight: '700',
+    color: COLORS.textPrimary,
     marginBottom: SPACING.xs,
   },
-  tagline: {
-    fontSize: FONT_SIZE.lg,
-    fontWeight: '300',
-    color: COLORS.ember,
-    letterSpacing: 2,
-    textTransform: 'uppercase',
+  subtitle: {
+    fontSize: FONT_SIZE.md,
+    color: COLORS.textSecondary,
   },
-  buttonsSection: {
+  heroActions: {
     gap: SPACING.md,
+    marginBottom: SPACING.lg,
   },
-  actionButton: {
+  heroButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.primary,
-    borderRadius: BORDER_RADIUS.lg,
+    justifyContent: 'space-between',
     padding: SPACING.lg,
-    ...SHADOWS.md,
+    borderRadius: BORDER_RADIUS.lg,
+    minHeight: 80,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
-  secondaryButton: {
-    backgroundColor: COLORS.background,
-    borderWidth: 2,
-    borderColor: COLORS.primary,
+  invoiceButton: {
+    backgroundColor: COLORS.primary,
   },
-  iconWrapper: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+  quoteButton: {
+    backgroundColor: '#10B981',
+  },
+  heroButtonContent: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: SPACING.md,
+    gap: SPACING.md,
   },
-  secondaryIconWrapper: {
-    backgroundColor: COLORS.primary + '15',
-  },
-  buttonText: {
-    flex: 1,
+  heroButtonTitle: {
     fontSize: FONT_SIZE.xl,
-    fontWeight: '600',
+    fontWeight: '700',
     color: COLORS.textInverse,
   },
+  secondaryActions: {
+    flexDirection: 'row',
+    gap: SPACING.sm,
+    marginBottom: SPACING.lg,
+  },
+  secondaryButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: SPACING.xs,
+    padding: SPACING.md,
+    backgroundColor: COLORS.surface,
+    borderRadius: BORDER_RADIUS.md,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
   secondaryButtonText: {
+    fontSize: FONT_SIZE.md,
+    fontWeight: '600',
     color: COLORS.primary,
+  },
+  section: {
+    marginBottom: SPACING.md,
+  },
+  sectionTitle: {
+    fontSize: FONT_SIZE.lg,
+    fontWeight: '700',
+    color: COLORS.textPrimary,
+    marginBottom: SPACING.sm,
+    paddingHorizontal: SPACING.xs,
+  },
+  statsGrid: {
+    gap: SPACING.sm,
   },
 });

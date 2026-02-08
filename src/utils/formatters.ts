@@ -1,3 +1,9 @@
+import { formatCurrencyByCode, formatCurrencyIntl } from './currencyFormatter';
+
+/**
+ * @deprecated Use formatCurrencyByCode or formatCurrencyIntl instead
+ * Legacy function - kept for backward compatibility
+ */
 export const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('es-ES', {
     style: 'decimal',
@@ -6,8 +12,28 @@ export const formatCurrency = (amount: number): string => {
   }).format(amount);
 };
 
+/**
+ * @deprecated Use formatCurrencyByCode('EUR') or formatCurrencyIntl instead
+ * Legacy function - kept for backward compatibility
+ */
 export const formatCurrencyWithSymbol = (amount: number): string => {
   return `${formatCurrency(amount)} €`;
+};
+
+/**
+ * Format currency with dynamic currency code and locale
+ *
+ * @param amount - Amount to format
+ * @param currencyCode - ISO 4217 currency code (default: 'EUR')
+ * @param locale - BCP 47 locale code (default: 'es-ES')
+ * @returns Formatted currency string
+ */
+export const formatCurrencyDynamic = (
+  amount: number,
+  currencyCode: string = 'EUR',
+  locale: string = 'es-ES'
+): string => {
+  return formatCurrencyIntl(amount, currencyCode, locale);
 };
 
 export const formatDate = (dateString: string): string => {

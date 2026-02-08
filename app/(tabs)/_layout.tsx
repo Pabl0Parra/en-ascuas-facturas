@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 import { COLORS, FONT_SIZE } from '../../src/constants/theme';
 import { STRINGS } from '../../src/constants/strings';
 
@@ -17,8 +18,13 @@ const HistoryIcon = ({ color, size }: { color: string; size: number }) => (
   <Ionicons name="document-text" size={size} color={color} />
 );
 
+const SettingsIcon = ({ color, size }: { color: string; size: number }) => (
+  <Ionicons name="settings" size={size} color={color} />
+);
+
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
 
   return (
     <Tabs
@@ -59,6 +65,13 @@ export default function TabLayout() {
         options={{
           title: STRINGS.navigation.historial,
           tabBarIcon: HistoryIcon,
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: t('navigation.settings'),
+          tabBarIcon: SettingsIcon,
         }}
       />
       <Tabs.Screen

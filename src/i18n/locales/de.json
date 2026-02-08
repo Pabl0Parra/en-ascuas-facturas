@@ -1,0 +1,262 @@
+{
+  "app": {
+    "name": "En Ascuas",
+    "tagline": "Rechnungen und Angebote"
+  },
+  "navigation": {
+    "home": "Start",
+    "clientes": "Kunden",
+    "historial": "Verlauf",
+    "nuevaFactura": "Neue Rechnung",
+    "nuevoPresupuesto": "Neues Angebot"
+  },
+  "document": {
+    "factura": "RECHNUNG",
+    "presupuesto": "ANGEBOT",
+    "numeroDocumento": "Dokumentnr.",
+    "fechaDocumento": "Datum",
+    "datosEmpresa": "DATEN",
+    "datosFacturacion": "RECHNUNGSDATEN"
+  },
+  "form": {
+    "descripcion": "Beschreibung",
+    "cantidad": "Menge",
+    "precio": "Preis",
+    "importe": "Betrag",
+    "añadirLinea": "Zeile hinzufügen",
+    "eliminar": "Löschen"
+  },
+  "iva": {
+    "label": "MwSt",
+    "inversionSujetoPasivo": "Reverse Charge",
+    "inversionNota": "REVERSE CHARGE MWST 0%",
+    "normal": "MwSt 19%"
+  },
+  "totals": {
+    "base": "ZWISCHENSUMME",
+    "iva": "MwSt",
+    "tax": "STEUER",
+    "total": "GESAMT"
+  },
+  "payment": {
+    "metodoPago": "ZAHLUNGSART",
+    "transferencia": "BANKÜBERWEISUNG"
+  },
+  "actions": {
+    "guardar": "Speichern",
+    "generarPDF": "PDF generieren",
+    "compartir": "Teilen",
+    "cancelar": "Abbrechen",
+    "editar": "Bearbeiten",
+    "eliminar": "Löschen",
+    "nuevoCliente": "Neuer Kunde",
+    "seleccionarCliente": "Kunde auswählen",
+    "continuar": "Weiter",
+    "anterior": "Zurück",
+    "empezar": "Beginnen",
+    "completar": "Abschließen"
+  },
+  "client": {
+    "nombre": "Name / Firmenname",
+    "direccion": "Adresse",
+    "codigoPostal": "Postleitzahl",
+    "ciudad": "Stadt",
+    "provincia": "Bundesland / Kanton",
+    "nifCif": "Steuernummer / USt-IdNr.",
+    "email": "E-Mail (optional)",
+    "telefono": "Telefon (optional)"
+  },
+  "empty": {
+    "clientes": "Keine gespeicherten Kunden",
+    "historial": "Keine Dokumente",
+    "lineas": "Mindestens eine Zeile hinzufügen"
+  },
+  "errors": {
+    "campoRequerido": "Dieses Feld ist erforderlich",
+    "seleccionaCliente": "Wählen Sie einen Kunden aus",
+    "añadeLinea": "Mindestens eine Zeile hinzufügen",
+    "cantidadInvalida": "Menge muss größer als 0 sein",
+    "precioInvalido": "Preis muss größer als 0 sein"
+  },
+  "success": {
+    "clienteGuardado": "Kunde gespeichert",
+    "documentoGenerado": "Dokument erfolgreich erstellt",
+    "pdfGuardado": "PDF gespeichert"
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Willkommen!",
+      "subtitle": "Richten Sie Ihr Unternehmen in wenigen Minuten ein",
+      "selectLanguage": "Wählen Sie Ihre Sprache",
+      "benefits": {
+        "title": "Was Sie bekommen:",
+        "benefit1": "Professionelle PDF-Rechnungen",
+        "benefit2": "Kundenverwaltung",
+        "benefit3": "Individuelle Angebote",
+        "benefit4": "Vollständig offline"
+      },
+      "getStarted": "Beginnen"
+    },
+    "businessInfo": {
+      "title": "Unternehmensinformationen",
+      "subtitle": "Erzählen Sie uns von Ihrem Unternehmen",
+      "companyName": "Firmenname",
+      "address": "Adresse",
+      "city": "Stadt",
+      "region": "Bundesland / Kanton",
+      "postalCode": "Postleitzahl",
+      "country": "Land",
+      "taxIdLabel": "Steuernummer-Bezeichnung",
+      "taxId": "Steuernummer"
+    },
+    "branding": {
+      "title": "Markenbildung",
+      "subtitle": "Passen Sie Ihre Dokumente an",
+      "uploadLogo": "Logo hochladen",
+      "chooseLogo": "Logo auswählen",
+      "removeLogo": "Logo entfernen",
+      "primaryColor": "Primärfarbe",
+      "colorPresets": "Farbvoreinstellungen"
+    },
+    "financial": {
+      "title": "Finanzielle Einrichtung",
+      "subtitle": "Steuern und Zahlungen",
+      "currency": "Währung",
+      "taxName": "Steuername",
+      "defaultTaxRate": "Standard-Steuersatz (%)",
+      "paymentMethod": "Zahlungsart",
+      "paymentDetails": "Zahlungsdetails",
+      "example": "Rechnungsbeispiel:"
+    },
+    "numbering": {
+      "title": "Dokumentnummerierung",
+      "subtitle": "Richten Sie Ihre Sequenzen ein",
+      "invoicePrefix": "Rechnungspräfix",
+      "invoiceStartNumber": "Rechnungs-Startnummer",
+      "quotePrefix": "Angebotspräfix",
+      "quoteStartNumber": "Angebots-Startnummer",
+      "preview": "Vorschau:"
+    },
+    "review": {
+      "title": "Überprüfen und Bestätigen",
+      "subtitle": "Alles bereit zum Loslegen",
+      "businessInfo": "Unternehmensinformationen",
+      "branding": "Markenbildung",
+      "financial": "Finanzielle Einrichtung",
+      "numbering": "Nummerierung",
+      "edit": "Bearbeiten",
+      "getStarted": "Beginnen"
+    }
+  },
+  "whatsNew": {
+    "title": "Willkommen zur neuen Version!",
+    "subtitle": "Ihre App wurde mit neuen Funktionen aktualisiert",
+    "features": {
+      "multiLanguage": "Mehrsprachiger Support",
+      "multiCurrency": "Mehrere Währungen",
+      "templates": "Dokumentvorlagen",
+      "customization": "Verbesserte Anpassung"
+    },
+    "dataPreserved": "Alle Ihre Daten wurden automatisch gesichert und migriert.",
+    "gotIt": "Verstanden"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "sections": {
+      "businessProfile": "Unternehmensprofil",
+      "branding": "Branding",
+      "taxConfiguration": "Steuerkonfiguration",
+      "languageRegion": "Sprache & Region",
+      "dataManagement": "Datenverwaltung",
+      "about": "Über"
+    },
+    "businessProfile": {
+      "title": "Unternehmensprofil",
+      "companyName": "Firmenname",
+      "address": "Adresse",
+      "city": "Stadt",
+      "region": "Region / Bundesland",
+      "postalCode": "Postleitzahl",
+      "country": "Land",
+      "taxIdLabel": "Steuer-ID-Bezeichnung",
+      "taxId": "Steuer-ID",
+      "paymentMethod": "Zahlungsmethode",
+      "paymentDetails": "Zahlungsdetails",
+      "save": "Änderungen Speichern",
+      "saved": "Profil erfolgreich aktualisiert"
+    },
+    "branding": {
+      "title": "Branding",
+      "logo": "Logo",
+      "uploadLogo": "Logo Hochladen",
+      "changeLogo": "Logo Ändern",
+      "removeLogo": "Logo Entfernen",
+      "primaryColor": "Hauptfarbe",
+      "pdfTemplate": "PDF-Vorlage",
+      "classic": "Klassisch",
+      "modern": "Modern",
+      "minimal": "Minimalistisch",
+      "preview": "Vorschau"
+    },
+    "taxConfiguration": {
+      "title": "Steuerkonfiguration",
+      "taxName": "Steuername",
+      "defaultRate": "Standardsatz (%)",
+      "presets": "Steuervoreinstellungen",
+      "addPreset": "Voreinstellung Hinzufügen",
+      "presetName": "Voreinstellungsname",
+      "rate": "Satz (%)",
+      "deletePreset": "Voreinstellung Löschen",
+      "confirmDelete": "Diese Steuervoreinstellung löschen?"
+    },
+    "languageRegion": {
+      "title": "Sprache & Region",
+      "appLanguage": "App-Sprache",
+      "currency": "Währung",
+      "dateFormat": "Datumsformat",
+      "numberFormat": "Zahlenformat",
+      "locale": "Gebietsschema"
+    },
+    "dataManagement": {
+      "title": "Datenverwaltung",
+      "exportData": "Alle Daten Exportieren",
+      "exportDescription": "Laden Sie eine Sicherung aller Ihrer Daten (Kunden, Dokumente, Vorlagen, wiederkehrende Regeln) als JSON-Datei herunter",
+      "importData": "Daten Importieren",
+      "importDescription": "Daten aus einer Sicherungsdatei wiederherstellen",
+      "clearAllData": "Alle Daten Löschen",
+      "clearDescription": "Alle Daten aus dieser App dauerhaft löschen",
+      "confirmClear": "Sind Sie sicher, dass Sie alle Daten löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+      "exportSuccess": "Daten erfolgreich exportiert",
+      "importSuccess": "Daten erfolgreich importiert",
+      "clearSuccess": "Alle Daten wurden gelöscht"
+    },
+    "about": {
+      "title": "Über",
+      "version": "Version",
+      "buildNumber": "Build",
+      "support": "Support",
+      "licenses": "Open-Source-Lizenzen",
+      "privacy": "Datenschutzerklärung"
+    }
+  },
+  "dashboard": {
+    "welcomeBack": "Willkommen zurück!",
+    "yourBusiness": "Ihr Geschäft",
+    "thisMonth": "Diesen Monat",
+    "allTime": "Alle Zeit",
+    "invoices": "Rechnungen",
+    "revenue": "Umsatz",
+    "quotes": "Angebote",
+    "totalInvoices": "Gesamtrechnungen",
+    "totalQuotes": "Gesamtangebote",
+    "quickActions": "Schnellaktionen",
+    "newInvoice": "Neue Rechnung",
+    "newQuote": "Neues Angebot",
+    "clients": "Kunden",
+    "history": "Verlauf",
+    "recentDocuments": "Aktuelle Dokumente",
+    "viewAll": "Alle Anzeigen",
+    "noDocumentsYet": "Noch keine Dokumente",
+    "createFirstDocument": "Erstellen Sie Ihre erste Rechnung oder Ihr erstes Angebot"
+  }
+}

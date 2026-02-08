@@ -5,6 +5,8 @@ import {
   StyleSheet,
   Alert,
   TextInput,
+  Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
@@ -184,6 +186,7 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
         tipo,
         numeroDocumento,
         fechaDocumento,
+        clienteId: client?.id || '',
         clienteNombre: client?.nombre || 'Sin Cliente',
         clienteNifCif: client?.nifCif || '-',
         total,
@@ -257,95 +260,100 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
   };
 
   return (
-    <KeyboardAwareScrollView
+    <KeyboardAvoidingView
       style={styles.container}
-      contentContainerStyle={styles.content}
-      enableOnAndroid={true}
-      extraScrollHeight={100}
-      showsVerticalScrollIndicator={false}
-      keyboardShouldPersistTaps="handled"
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
     >
-
-
-      {/* Document Info */}
-      <View style={styles.row}>
-        <View style={styles.halfInput}>
-          <Input
-            label={STRINGS.document.numeroDocumento}
-            value={numeroDocumento}
-            onChangeText={setNumeroDocumento}
-            placeholder="F240001"
-            error={errors.numeroDocumento}
-          />
-        </View>
-        <View style={styles.halfInput}>
-          <Input
-            label={STRINGS.document.fechaDocumento}
-            value={fechaDocumento}
-            onChangeText={setFechaDocumento}
-            placeholder="dd-mm-yyyy"
-            error={errors.fechaDocumento}
-          />
-        </View>
-      </View>
-
-      {/* Client Section */}
-      <ClientSection
-        selectedClientId={selectedClientId}
-        onClientSelect={setSelectedClient}
-        onNewClientPress={handleNewClient}
-        error={errors.cliente}
-        isOptional={tipo === 'presupuesto'}
-      />
-
-      {/* Line Items */}
-      <LineItemsList
-        lineas={lineas}
-        onUpdateLinea={handleUpdateLinea}
-        onRemoveLinea={removeLinea}
-        onAddLinea={addLinea}
-        error={errors.lineas}
-        lineItemErrors={errors.lineItemErrors}
-      />
-
-      {/* IVA Toggle */}
-      <IVAToggle tipoIVA={tipoIVA} onChangeTipoIVA={setTipoIVA} />
-
-      {/* Totals */}
-      <TotalsSummary
-        baseImponible={baseImponible}
-        tipoIVA={tipoIVA}
-        importeIVA={importeIVA}
-        total={total}
-      />
-
-      {/* Comments Section */}
-      <View style={styles.commentsSection}>
-        <Text style={styles.sectionTitle}>OBSERVACIONES</Text>
-        <TextInput
-          value={comentarios}
-          onChangeText={setComentarios}
-          placeholder="Condiciones de pago, notas adicionales, etc..."
-          placeholderTextColor={COLORS.textMuted}
-          multiline
-          numberOfLines={4}
-          style={styles.commentsInput}
-          textAlignVertical="top"
-        />
-      </View>
-
-      {/* Generate Button */}
-      <Button
-        variant="primary"
-        size="lg"
-        fullWidth
-        onPress={handleGeneratePDF}
-        loading={isLoading}
-        disabled={isLoading}
+      <KeyboardAwareScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.content}
+        enableOnAndroid={true}
+        extraScrollHeight={150}
+        enableAutomaticScroll={true}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
-        {STRINGS.actions.generarPDF}
-      </Button>
-    </KeyboardAwareScrollView>
+        {/* Document Info */}
+        <View style={styles.row}>
+          <View style={styles.halfInput}>
+            <Input
+              label={STRINGS.document.numeroDocumento}
+              value={numeroDocumento}
+              onChangeText={setNumeroDocumento}
+              placeholder="F240001"
+              error={errors.numeroDocumento}
+            />
+          </View>
+          <View style={styles.halfInput}>
+            <Input
+              label={STRINGS.document.fechaDocumento}
+              value={fechaDocumento}
+              onChangeText={setFechaDocumento}
+              placeholder="dd-mm-yyyy"
+              error={errors.fechaDocumento}
+            />
+          </View>
+        </View>
+
+        {/* Client Section */}
+        <ClientSection
+          selectedClientId={selectedClientId}
+          onClientSelect={setSelectedClient}
+          onNewClientPress={handleNewClient}
+          error={errors.cliente}
+          isOptional={tipo === 'presupuesto'}
+        />
+
+        {/* Line Items */}
+        <LineItemsList
+          lineas={lineas}
+          onUpdateLinea={handleUpdateLinea}
+          onRemoveLinea={removeLinea}
+          onAddLinea={addLinea}
+          error={errors.lineas}
+          lineItemErrors={errors.lineItemErrors}
+        />
+
+        {/* IVA Toggle */}
+        <IVAToggle tipoIVA={tipoIVA} onChangeTipoIVA={setTipoIVA} />
+
+        {/* Totals */}
+        <TotalsSummary
+          baseImponible={baseImponible}
+          tipoIVA={tipoIVA}
+          importeIVA={importeIVA}
+          total={total}
+        />
+
+        {/* Comments Section */}
+        <View style={styles.commentsSection}>
+          <Text style={styles.sectionTitle}>OBSERVACIONES</Text>
+          <TextInput
+            value={comentarios}
+            onChangeText={setComentarios}
+            placeholder="Condiciones de pago, notas adicionales, etc..."
+            placeholderTextColor={COLORS.textMuted}
+            multiline
+            numberOfLines={4}
+            style={styles.commentsInput}
+            textAlignVertical="top"
+          />
+        </View>
+
+        {/* Generate Button */}
+        <Button
+          variant="primary"
+          size="lg"
+          fullWidth
+          onPress={handleGeneratePDF}
+          loading={isLoading}
+          disabled={isLoading}
+        >
+          {STRINGS.actions.generarPDF}
+        </Button>
+      </KeyboardAwareScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -359,7 +367,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: SPACING.md,
-    paddingBottom: 100,
+    paddingBottom: Platform.OS === 'ios' ? 180 : 150,
   },
   title: {
     fontSize: FONT_SIZE.xxl,

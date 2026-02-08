@@ -1,0 +1,262 @@
+{
+  "app": {
+    "name": "En Ascuas",
+    "tagline": "Faturação e orçamentos"
+  },
+  "navigation": {
+    "home": "Início",
+    "clientes": "Clientes",
+    "historial": "Histórico",
+    "nuevaFactura": "Nova fatura",
+    "nuevoPresupuesto": "Novo orçamento"
+  },
+  "document": {
+    "factura": "FATURA",
+    "presupuesto": "ORÇAMENTO",
+    "numeroDocumento": "N.º do documento",
+    "fechaDocumento": "Data",
+    "datosEmpresa": "DADOS",
+    "datosFacturacion": "DADOS DE FATURAÇÃO"
+  },
+  "form": {
+    "descripcion": "Descrição",
+    "cantidad": "Quantidade",
+    "precio": "Preço",
+    "importe": "Montante",
+    "añadirLinea": "Adicionar linha",
+    "eliminar": "Eliminar"
+  },
+  "iva": {
+    "label": "IVA",
+    "inversionSujetoPasivo": "Inversão do sujeito passivo",
+    "inversionNota": "INVERSÃO DO SUJEITO PASSIVO IVA 0%",
+    "normal": "IVA 23%"
+  },
+  "totals": {
+    "base": "SUBTOTAL",
+    "iva": "IVA",
+    "tax": "IMPOSTO",
+    "total": "TOTAL"
+  },
+  "payment": {
+    "metodoPago": "MÉTODO DE PAGAMENTO",
+    "transferencia": "TRANSFERÊNCIA BANCÁRIA"
+  },
+  "actions": {
+    "guardar": "Guardar",
+    "generarPDF": "Gerar PDF",
+    "compartir": "Partilhar",
+    "cancelar": "Cancelar",
+    "editar": "Editar",
+    "eliminar": "Eliminar",
+    "nuevoCliente": "Novo cliente",
+    "seleccionarCliente": "Selecionar cliente",
+    "continuar": "Continuar",
+    "anterior": "Voltar",
+    "empezar": "Começar",
+    "completar": "Concluir"
+  },
+  "client": {
+    "nombre": "Nome / Denominação social",
+    "direccion": "Morada",
+    "codigoPostal": "Código postal",
+    "ciudad": "Cidade",
+    "provincia": "Região / Distrito",
+    "nifCif": "NIF / NIPC",
+    "email": "Email (opcional)",
+    "telefono": "Telefone (opcional)"
+  },
+  "empty": {
+    "clientes": "Não há clientes guardados",
+    "historial": "Não há documentos",
+    "lineas": "Adicione pelo menos uma linha"
+  },
+  "errors": {
+    "campoRequerido": "Este campo é obrigatório",
+    "seleccionaCliente": "Selecione um cliente",
+    "añadeLinea": "Adicione pelo menos uma linha",
+    "cantidadInvalida": "A quantidade deve ser maior que 0",
+    "precioInvalido": "O preço deve ser maior que 0"
+  },
+  "success": {
+    "clienteGuardado": "Cliente guardado",
+    "documentoGenerado": "Documento gerado com sucesso",
+    "pdfGuardado": "PDF guardado"
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Bem-vindo!",
+      "subtitle": "Configure o seu negócio em minutos",
+      "selectLanguage": "Selecione o seu idioma",
+      "benefits": {
+        "title": "O que irá obter:",
+        "benefit1": "Faturas profissionais em PDF",
+        "benefit2": "Gestão de clientes",
+        "benefit3": "Orçamentos personalizados",
+        "benefit4": "Completamente offline"
+      },
+      "getStarted": "Começar"
+    },
+    "businessInfo": {
+      "title": "Informações da empresa",
+      "subtitle": "Fale-nos sobre a sua empresa",
+      "companyName": "Nome da empresa",
+      "address": "Morada",
+      "city": "Cidade",
+      "region": "Região / Distrito",
+      "postalCode": "Código postal",
+      "country": "País",
+      "taxIdLabel": "Rótulo do ID fiscal",
+      "taxId": "ID fiscal"
+    },
+    "branding": {
+      "title": "Imagem de marca",
+      "subtitle": "Personalize os seus documentos",
+      "uploadLogo": "Carregar logótipo",
+      "chooseLogo": "Escolher logótipo",
+      "removeLogo": "Remover logótipo",
+      "primaryColor": "Cor principal",
+      "colorPresets": "Cores predefinidas"
+    },
+    "financial": {
+      "title": "Configuração financeira",
+      "subtitle": "Impostos e pagamentos",
+      "currency": "Moeda",
+      "taxName": "Nome do imposto",
+      "defaultTaxRate": "Taxa de imposto predefinida (%)",
+      "paymentMethod": "Método de pagamento",
+      "paymentDetails": "Detalhes de pagamento",
+      "example": "Exemplo de fatura:"
+    },
+    "numbering": {
+      "title": "Numeração de documentos",
+      "subtitle": "Configure as suas sequências",
+      "invoicePrefix": "Prefixo de fatura",
+      "invoiceStartNumber": "Número inicial de fatura",
+      "quotePrefix": "Prefixo de orçamento",
+      "quoteStartNumber": "Número inicial de orçamento",
+      "preview": "Pré-visualização:"
+    },
+    "review": {
+      "title": "Rever e confirmar",
+      "subtitle": "Tudo pronto para começar",
+      "businessInfo": "Informações da empresa",
+      "branding": "Imagem de marca",
+      "financial": "Configuração financeira",
+      "numbering": "Numeração",
+      "edit": "Editar",
+      "getStarted": "Começar"
+    }
+  },
+  "whatsNew": {
+    "title": "Bem-vindo à nova versão!",
+    "subtitle": "A sua aplicação foi atualizada com novas funcionalidades",
+    "features": {
+      "multiLanguage": "Suporte multilingue",
+      "multiCurrency": "Múltiplas moedas",
+      "templates": "Modelos de documentos",
+      "customization": "Personalização melhorada"
+    },
+    "dataPreserved": "Todos os seus dados foram preservados e migrados automaticamente.",
+    "gotIt": "Compreendi"
+  },
+  "settings": {
+    "title": "Definições",
+    "sections": {
+      "businessProfile": "Perfil Empresarial",
+      "branding": "Marca",
+      "taxConfiguration": "Configuração Fiscal",
+      "languageRegion": "Idioma e Região",
+      "dataManagement": "Gestão de Dados",
+      "about": "Sobre"
+    },
+    "businessProfile": {
+      "title": "Perfil Empresarial",
+      "companyName": "Nome da Empresa",
+      "address": "Endereço",
+      "city": "Cidade",
+      "region": "Região / Distrito",
+      "postalCode": "Código Postal",
+      "country": "País",
+      "taxIdLabel": "Etiqueta de ID Fiscal",
+      "taxId": "ID Fiscal",
+      "paymentMethod": "Método de Pagamento",
+      "paymentDetails": "Detalhes de Pagamento",
+      "save": "Guardar Alterações",
+      "saved": "Perfil atualizado com sucesso"
+    },
+    "branding": {
+      "title": "Marca",
+      "logo": "Logotipo",
+      "uploadLogo": "Carregar Logotipo",
+      "changeLogo": "Alterar Logotipo",
+      "removeLogo": "Remover Logotipo",
+      "primaryColor": "Cor Principal",
+      "pdfTemplate": "Modelo PDF",
+      "classic": "Clássico",
+      "modern": "Moderno",
+      "minimal": "Minimalista",
+      "preview": "Pré-visualizar Modelo"
+    },
+    "taxConfiguration": {
+      "title": "Configuração Fiscal",
+      "taxName": "Nome do Imposto",
+      "defaultRate": "Taxa Predefinida (%)",
+      "presets": "Pré-definições Fiscais",
+      "addPreset": "Adicionar Pré-definição",
+      "presetName": "Nome da Pré-definição",
+      "rate": "Taxa (%)",
+      "deletePreset": "Eliminar Pré-definição",
+      "confirmDelete": "Eliminar esta pré-definição fiscal?"
+    },
+    "languageRegion": {
+      "title": "Idioma e Região",
+      "appLanguage": "Idioma da Aplicação",
+      "currency": "Moeda",
+      "dateFormat": "Formato de Data",
+      "numberFormat": "Formato de Números",
+      "locale": "Configuração Regional"
+    },
+    "dataManagement": {
+      "title": "Gestão de Dados",
+      "exportData": "Exportar Todos os Dados",
+      "exportDescription": "Descarregue uma cópia de segurança de todos os seus dados (clientes, documentos, modelos, regras recorrentes) como ficheiro JSON",
+      "importData": "Importar Dados",
+      "importDescription": "Restaurar dados a partir de um ficheiro de cópia de segurança",
+      "clearAllData": "Limpar Todos os Dados",
+      "clearDescription": "Eliminar permanentemente todos os dados desta aplicação",
+      "confirmClear": "Tem a certeza de que pretende eliminar todos os dados? Esta ação não pode ser revertida.",
+      "exportSuccess": "Dados exportados com sucesso",
+      "importSuccess": "Dados importados com sucesso",
+      "clearSuccess": "Todos os dados foram limpos"
+    },
+    "about": {
+      "title": "Sobre",
+      "version": "Versão",
+      "buildNumber": "Build",
+      "support": "Suporte",
+      "licenses": "Licenças Open Source",
+      "privacy": "Política de Privacidade"
+    }
+  },
+  "dashboard": {
+    "welcomeBack": "Bem-vindo de volta!",
+    "yourBusiness": "Seu Negócio",
+    "thisMonth": "Este Mês",
+    "allTime": "Todo o Tempo",
+    "invoices": "Faturas",
+    "revenue": "Receita",
+    "quotes": "Orçamentos",
+    "totalInvoices": "Total de Faturas",
+    "totalQuotes": "Total de Orçamentos",
+    "quickActions": "Ações Rápidas",
+    "newInvoice": "Nova Fatura",
+    "newQuote": "Novo Orçamento",
+    "clients": "Clientes",
+    "history": "Histórico",
+    "recentDocuments": "Documentos Recentes",
+    "viewAll": "Ver Todos",
+    "noDocumentsYet": "Ainda não há documentos",
+    "createFirstDocument": "Crie sua primeira fatura ou orçamento"
+  }
+}

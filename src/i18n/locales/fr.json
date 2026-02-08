@@ -1,0 +1,262 @@
+{
+  "app": {
+    "name": "En Ascuas",
+    "tagline": "Facturation et devis"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "clientes": "Clients",
+    "historial": "Historique",
+    "nuevaFactura": "Nouvelle facture",
+    "nuevoPresupuesto": "Nouveau devis"
+  },
+  "document": {
+    "factura": "FACTURE",
+    "presupuesto": "DEVIS",
+    "numeroDocumento": "N° de document",
+    "fechaDocumento": "Date",
+    "datosEmpresa": "INFORMATIONS",
+    "datosFacturacion": "INFORMATIONS DE FACTURATION"
+  },
+  "form": {
+    "descripcion": "Description",
+    "cantidad": "Quantité",
+    "precio": "Prix",
+    "importe": "Montant",
+    "añadirLinea": "Ajouter une ligne",
+    "eliminar": "Supprimer"
+  },
+  "iva": {
+    "label": "TVA",
+    "inversionSujetoPasivo": "Autoliquidation",
+    "inversionNota": "AUTOLIQUIDATION TVA 0%",
+    "normal": "TVA 20%"
+  },
+  "totals": {
+    "base": "SOUS-TOTAL",
+    "iva": "TVA",
+    "tax": "TAXE",
+    "total": "TOTAL"
+  },
+  "payment": {
+    "metodoPago": "MODE DE PAIEMENT",
+    "transferencia": "VIREMENT BANCAIRE"
+  },
+  "actions": {
+    "guardar": "Enregistrer",
+    "generarPDF": "Générer PDF",
+    "compartir": "Partager",
+    "cancelar": "Annuler",
+    "editar": "Modifier",
+    "eliminar": "Supprimer",
+    "nuevoCliente": "Nouveau client",
+    "seleccionarCliente": "Sélectionner un client",
+    "continuar": "Continuer",
+    "anterior": "Retour",
+    "empezar": "Commencer",
+    "completar": "Terminer"
+  },
+  "client": {
+    "nombre": "Nom / Raison sociale",
+    "direccion": "Adresse",
+    "codigoPostal": "Code postal",
+    "ciudad": "Ville",
+    "provincia": "Région / Département",
+    "nifCif": "N° de TVA / SIRET",
+    "email": "Email (optionnel)",
+    "telefono": "Téléphone (optionnel)"
+  },
+  "empty": {
+    "clientes": "Aucun client enregistré",
+    "historial": "Aucun document",
+    "lineas": "Ajoutez au moins une ligne"
+  },
+  "errors": {
+    "campoRequerido": "Ce champ est obligatoire",
+    "seleccionaCliente": "Sélectionnez un client",
+    "añadeLinea": "Ajoutez au moins une ligne",
+    "cantidadInvalida": "La quantité doit être supérieure à 0",
+    "precioInvalido": "Le prix doit être supérieur à 0"
+  },
+  "success": {
+    "clienteGuardado": "Client enregistré",
+    "documentoGenerado": "Document généré avec succès",
+    "pdfGuardado": "PDF enregistré"
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Bienvenue !",
+      "subtitle": "Configurez votre entreprise en quelques minutes",
+      "selectLanguage": "Sélectionnez votre langue",
+      "benefits": {
+        "title": "Ce que vous obtiendrez :",
+        "benefit1": "Factures professionnelles en PDF",
+        "benefit2": "Gestion des clients",
+        "benefit3": "Devis personnalisés",
+        "benefit4": "Entièrement hors ligne"
+      },
+      "getStarted": "Commencer"
+    },
+    "businessInfo": {
+      "title": "Informations sur l'entreprise",
+      "subtitle": "Parlez-nous de votre entreprise",
+      "companyName": "Nom de l'entreprise",
+      "address": "Adresse",
+      "city": "Ville",
+      "region": "Région / Département",
+      "postalCode": "Code postal",
+      "country": "Pays",
+      "taxIdLabel": "Libellé de l'identifiant fiscal",
+      "taxId": "Identifiant fiscal"
+    },
+    "branding": {
+      "title": "Image de marque",
+      "subtitle": "Personnalisez vos documents",
+      "uploadLogo": "Télécharger un logo",
+      "chooseLogo": "Choisir un logo",
+      "removeLogo": "Supprimer le logo",
+      "primaryColor": "Couleur principale",
+      "colorPresets": "Couleurs prédéfinies"
+    },
+    "financial": {
+      "title": "Configuration financière",
+      "subtitle": "Taxes et paiements",
+      "currency": "Devise",
+      "taxName": "Nom de la taxe",
+      "defaultTaxRate": "Taux de taxe par défaut (%)",
+      "paymentMethod": "Mode de paiement",
+      "paymentDetails": "Détails de paiement",
+      "example": "Exemple de facture :"
+    },
+    "numbering": {
+      "title": "Numérotation des documents",
+      "subtitle": "Configurez vos séquences",
+      "invoicePrefix": "Préfixe de facture",
+      "invoiceStartNumber": "Numéro de départ de facture",
+      "quotePrefix": "Préfixe de devis",
+      "quoteStartNumber": "Numéro de départ de devis",
+      "preview": "Aperçu :"
+    },
+    "review": {
+      "title": "Réviser et confirmer",
+      "subtitle": "Tout est prêt pour commencer",
+      "businessInfo": "Informations sur l'entreprise",
+      "branding": "Image de marque",
+      "financial": "Configuration financière",
+      "numbering": "Numérotation",
+      "edit": "Modifier",
+      "getStarted": "Commencer"
+    }
+  },
+  "whatsNew": {
+    "title": "Bienvenue dans la nouvelle version !",
+    "subtitle": "Votre application a été mise à jour avec de nouvelles fonctionnalités",
+    "features": {
+      "multiLanguage": "Support multilingue",
+      "multiCurrency": "Plusieurs devises",
+      "templates": "Modèles de documents",
+      "customization": "Personnalisation améliorée"
+    },
+    "dataPreserved": "Toutes vos données ont été préservées et migrées automatiquement.",
+    "gotIt": "Compris"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "sections": {
+      "businessProfile": "Profil d'Entreprise",
+      "branding": "Image de Marque",
+      "taxConfiguration": "Configuration Fiscale",
+      "languageRegion": "Langue et Région",
+      "dataManagement": "Gestion des Données",
+      "about": "À Propos"
+    },
+    "businessProfile": {
+      "title": "Profil d'Entreprise",
+      "companyName": "Nom de l'Entreprise",
+      "address": "Adresse",
+      "city": "Ville",
+      "region": "Région / Département",
+      "postalCode": "Code Postal",
+      "country": "Pays",
+      "taxIdLabel": "Libellé de l'ID Fiscal",
+      "taxId": "ID Fiscal",
+      "paymentMethod": "Méthode de Paiement",
+      "paymentDetails": "Détails de Paiement",
+      "save": "Enregistrer les Modifications",
+      "saved": "Profil mis à jour avec succès"
+    },
+    "branding": {
+      "title": "Image de Marque",
+      "logo": "Logo",
+      "uploadLogo": "Télécharger le Logo",
+      "changeLogo": "Changer le Logo",
+      "removeLogo": "Supprimer le Logo",
+      "primaryColor": "Couleur Principale",
+      "pdfTemplate": "Modèle PDF",
+      "classic": "Classique",
+      "modern": "Moderne",
+      "minimal": "Minimaliste",
+      "preview": "Aperçu du Modèle"
+    },
+    "taxConfiguration": {
+      "title": "Configuration Fiscale",
+      "taxName": "Nom de la Taxe",
+      "defaultRate": "Taux par Défaut (%)",
+      "presets": "Préréglages Fiscaux",
+      "addPreset": "Ajouter un Préréglage",
+      "presetName": "Nom du Préréglage",
+      "rate": "Taux (%)",
+      "deletePreset": "Supprimer le Préréglage",
+      "confirmDelete": "Supprimer ce préréglage fiscal ?"
+    },
+    "languageRegion": {
+      "title": "Langue et Région",
+      "appLanguage": "Langue de l'Application",
+      "currency": "Devise",
+      "dateFormat": "Format de Date",
+      "numberFormat": "Format des Nombres",
+      "locale": "Paramètres Régionaux"
+    },
+    "dataManagement": {
+      "title": "Gestion des Données",
+      "exportData": "Exporter Toutes les Données",
+      "exportDescription": "Téléchargez une sauvegarde de toutes vos données (clients, documents, modèles, règles récurrentes) en tant que fichier JSON",
+      "importData": "Importer des Données",
+      "importDescription": "Restaurer les données à partir d'un fichier de sauvegarde",
+      "clearAllData": "Effacer Toutes les Données",
+      "clearDescription": "Supprimer définitivement toutes les données de cette application",
+      "confirmClear": "Êtes-vous sûr de vouloir supprimer toutes les données ? Cette action est irréversible.",
+      "exportSuccess": "Données exportées avec succès",
+      "importSuccess": "Données importées avec succès",
+      "clearSuccess": "Toutes les données ont été effacées"
+    },
+    "about": {
+      "title": "À Propos",
+      "version": "Version",
+      "buildNumber": "Build",
+      "support": "Support",
+      "licenses": "Licences Open Source",
+      "privacy": "Politique de Confidentialité"
+    }
+  },
+  "dashboard": {
+    "welcomeBack": "Bienvenue!",
+    "yourBusiness": "Votre Entreprise",
+    "thisMonth": "Ce Mois-ci",
+    "allTime": "Tout le Temps",
+    "invoices": "Factures",
+    "revenue": "Revenu",
+    "quotes": "Devis",
+    "totalInvoices": "Total des Factures",
+    "totalQuotes": "Total des Devis",
+    "quickActions": "Actions Rapides",
+    "newInvoice": "Nouvelle Facture",
+    "newQuote": "Nouveau Devis",
+    "clients": "Clients",
+    "history": "Historique",
+    "recentDocuments": "Documents Récents",
+    "viewAll": "Voir Tout",
+    "noDocumentsYet": "Pas encore de documents",
+    "createFirstDocument": "Créez votre première facture ou devis"
+  }
+}

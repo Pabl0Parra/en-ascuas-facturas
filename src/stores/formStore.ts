@@ -5,6 +5,7 @@ import { generateTempId } from '../utils/idGenerator';
 import {
   calculateLineImporte,
   calculateBaseImponible,
+  calculateTax,
   calculateIVA,
   calculateTotal,
   roundToTwoDecimals,
@@ -18,7 +19,19 @@ interface FormStore {
   fechaDocumento: string;
   selectedClientId: string | null;
   lineas: LineItem[];
-  tipoIVA: IVARate;
+
+  // Flexible tax system (replaces tipoIVA)
+  taxRate: number; // 0-100 (percentage)
+  taxName: string; // "IVA", "VAT", "GST", etc.
+  reverseCharge: boolean; // For ISP / Reverse Charge
+
+  // Currency and locale for formatting
+  currency: string; // ISO 4217
+  locale: string; // BCP 47
+
+  // Legacy field - kept for backward compatibility
+  tipoIVA?: IVARate;
+
   comentarios: string;
 
   // Actions
@@ -36,12 +49,20 @@ interface FormStore {
   ) => void;
   removeLinea: (id: string) => void;
 
-  // IVA
+  // Tax management
+  setTaxRate: (rate: number) => void;
+  setTaxName: (name: string) => void;
+  setReverseCharge: (enabled: boolean) => void;
+  setCurrency: (currency: string) => void;
+  setLocale: (locale: string) => void;
+
+  // Legacy - kept for backward compatibility
   setTipoIVA: (tipo: IVARate) => void;
 
   // Calculated getters
   getBaseImponible: () => number;
-  getImporteIVA: () => number;
+  getImporteIVA: () => number; // Legacy name, returns tax amount
+  getImporteTax: () => number; // New name for tax amount
   getTotal: () => number;
 
   // Reset
@@ -67,7 +88,17 @@ const initialState = {
   fechaDocumento: getTodayISO(),
   selectedClientId: null,
   lineas: [createEmptyLinea()],
+
+  // Flexible tax system
+  taxRate: 21, // Default to 21% (Spanish IVA standard)
+  taxName: 'IVA',
+  reverseCharge: false,
+  currency: 'EUR',
+  locale: 'es-ES',
+
+  // Legacy field
   tipoIVA: 21 as IVARate,
+
   comentarios: '',
 };
 
@@ -92,6 +123,32 @@ export const useFormStore = create<FormStore>((set, get) => ({
 
   setComentarios: (comentarios: string): void => {
     set({ comentarios });
+  },
+
+  // Tax management actions
+  setTaxRate: (rate: number): void => {
+    set({ taxRate: rate });
+  },
+
+  setTaxName: (name: string): void => {
+    set({ taxName: name });
+  },
+
+  setReverseCharge: (enabled: boolean): void => {
+    set({ reverseCharge: enabled });
+  },
+
+  setCurrency: (currency: string): void => {
+    set({ currency });
+  },
+
+  setLocale: (locale: string): void => {
+    set({ locale });
+  },
+
+  // Legacy action - converts to new taxRate
+  setTipoIVA: (tipo: IVARate): void => {
+    set({ tipoIVA: tipo, taxRate: tipo });
   },
 
   addLinea: (): void => {
@@ -126,23 +183,27 @@ export const useFormStore = create<FormStore>((set, get) => ({
     }));
   },
 
-  setTipoIVA: (tipo: IVARate): void => {
-    set({ tipoIVA: tipo });
-  },
-
+  // Calculation methods
   getBaseImponible: (): number => {
     return roundToTwoDecimals(calculateBaseImponible(get().lineas));
   },
 
   getImporteIVA: (): number => {
+    // Legacy method - uses new taxRate internally
     const base = get().getBaseImponible();
-    return roundToTwoDecimals(calculateIVA(base, get().tipoIVA));
+    return roundToTwoDecimals(calculateTax(base, get().taxRate));
+  },
+
+  getImporteTax: (): number => {
+    // New method name - same implementation
+    const base = get().getBaseImponible();
+    return roundToTwoDecimals(calculateTax(base, get().taxRate));
   },
 
   getTotal: (): number => {
     const base = get().getBaseImponible();
-    const iva = get().getImporteIVA();
-    return roundToTwoDecimals(calculateTotal(base, iva));
+    const tax = get().getImporteTax();
+    return roundToTwoDecimals(calculateTotal(base, tax));
   },
 
   resetForm: (): void => {

@@ -1,0 +1,308 @@
+{
+  "app": {
+    "name": "InvoiceForge",
+    "tagline": "Professional Invoicing Made Simple"
+  },
+  "navigation": {
+    "home": "Home",
+    "clientes": "Clients",
+    "historial": "History",
+    "settings": "Settings",
+    "nuevaFactura": "New Invoice",
+    "nuevoPresupuesto": "New Quote"
+  },
+  "document": {
+    "factura": "INVOICE",
+    "presupuesto": "QUOTE",
+    "numeroDocumento": "Document No.",
+    "fechaDocumento": "Date",
+    "datosEmpresa": "COMPANY INFO",
+    "datosFacturacion": "BILLING INFORMATION"
+  },
+  "form": {
+    "descripcion": "Description",
+    "cantidad": "Quantity",
+    "precio": "Price",
+    "importe": "Amount",
+    "añadirLinea": "Add line",
+    "eliminar": "Delete"
+  },
+  "iva": {
+    "label": "TAX",
+    "inversionSujetoPasivo": "Reverse charge",
+    "inversionNota": "REVERSE CHARGE TAX 0%",
+    "normal": "TAX 21%"
+  },
+  "totals": {
+    "base": "SUBTOTAL",
+    "iva": "TAX",
+    "tax": "TAX",
+    "total": "TOTAL"
+  },
+  "payment": {
+    "metodoPago": "PAYMENT METHOD",
+    "transferencia": "BANK TRANSFER"
+  },
+  "actions": {
+    "guardar": "Save",
+    "generarPDF": "Generate PDF",
+    "compartir": "Share",
+    "cancelar": "Cancel",
+    "editar": "Edit",
+    "eliminar": "Delete",
+    "nuevoCliente": "New Client",
+    "seleccionarCliente": "Select client",
+    "continuar": "Continue",
+    "anterior": "Back",
+    "empezar": "Get Started",
+    "completar": "Complete"
+  },
+  "client": {
+    "nombre": "Name / Company Name",
+    "direccion": "Address",
+    "codigoPostal": "Postal Code",
+    "ciudad": "City",
+    "provincia": "State / Province",
+    "nifCif": "Tax ID / VAT Number",
+    "email": "Email (optional)",
+    "telefono": "Phone (optional)"
+  },
+  "empty": {
+    "clientes": "No clients saved",
+    "historial": "No documents",
+    "lineas": "Add at least one line"
+  },
+  "errors": {
+    "campoRequerido": "This field is required",
+    "seleccionaCliente": "Select a client",
+    "añadeLinea": "Add at least one line",
+    "cantidadInvalida": "Quantity must be greater than 0",
+    "precioInvalido": "Price must be greater than 0"
+  },
+  "success": {
+    "clienteGuardado": "Client saved",
+    "documentoGenerado": "Document generated successfully",
+    "pdfGuardado": "PDF saved"
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Welcome!",
+      "subtitle": "Set up your business in minutes",
+      "selectLanguage": "Select your language",
+      "benefits": {
+        "title": "What you'll get:",
+        "benefit1": "Professional PDF invoices",
+        "benefit2": "Client management",
+        "benefit3": "Custom quotes",
+        "benefit4": "Completely offline"
+      },
+      "getStarted": "Get Started"
+    },
+    "businessInfo": {
+      "title": "Business Information",
+      "subtitle": "Tell us about your company",
+      "companyName": "Company name",
+      "address": "Address",
+      "city": "City",
+      "region": "Region / State",
+      "postalCode": "Postal Code",
+      "country": "Country",
+      "taxIdLabel": "Tax ID label",
+      "taxId": "Tax ID"
+    },
+    "branding": {
+      "title": "Branding",
+      "subtitle": "Customize your documents",
+      "uploadLogo": "Upload Logo",
+      "chooseLogo": "Choose Logo",
+      "removeLogo": "Remove Logo",
+      "primaryColor": "Primary Color",
+      "colorPresets": "Color presets"
+    },
+    "financial": {
+      "title": "Financial Setup",
+      "subtitle": "Taxes and payments",
+      "currency": "Currency",
+      "taxName": "Tax Name",
+      "defaultTaxRate": "Default Tax Rate (%)",
+      "paymentMethod": "Payment Method",
+      "paymentDetails": "Payment Details",
+      "example": "Invoice example:"
+    },
+    "numbering": {
+      "title": "Document Numbering",
+      "subtitle": "Set up your sequences",
+      "invoicePrefix": "Invoice Prefix",
+      "invoiceStartNumber": "Invoice Start Number",
+      "quotePrefix": "Quote Prefix",
+      "quoteStartNumber": "Quote Start Number",
+      "preview": "Preview:"
+    },
+    "review": {
+      "title": "Review and Confirm",
+      "subtitle": "All set to get started",
+      "businessInfo": "Business Information",
+      "branding": "Branding",
+      "financial": "Financial Setup",
+      "numbering": "Numbering",
+      "edit": "Edit",
+      "getStarted": "Get Started"
+    }
+  },
+  "whatsNew": {
+    "title": "Welcome to the New Version!",
+    "subtitle": "Your app has been updated with new features",
+    "features": {
+      "multiLanguage": "Multi-language support",
+      "multiCurrency": "Multiple currencies",
+      "templates": "Document templates",
+      "customization": "Enhanced customization"
+    },
+    "dataPreserved": "All your data has been preserved and migrated automatically.",
+    "gotIt": "Got It"
+  },
+  "settings": {
+    "title": "Settings",
+    "sections": {
+      "businessProfile": "Business Profile",
+      "branding": "Branding",
+      "taxConfiguration": "Tax Configuration",
+      "languageRegion": "Language & Region",
+      "dataManagement": "Data Management",
+      "about": "About"
+    },
+    "businessProfile": {
+      "title": "Business Profile",
+      "companyName": "Company Name",
+      "address": "Address",
+      "city": "City",
+      "region": "Region / State",
+      "postalCode": "Postal Code",
+      "country": "Country",
+      "taxIdLabel": "Tax ID Label",
+      "taxId": "Tax ID",
+      "paymentMethod": "Payment Method",
+      "paymentDetails": "Payment Details",
+      "save": "Save Changes",
+      "saved": "Profile updated successfully"
+    },
+    "branding": {
+      "title": "Branding",
+      "logo": "Logo",
+      "uploadLogo": "Upload Logo",
+      "changeLogo": "Change Logo",
+      "removeLogo": "Remove Logo",
+      "primaryColor": "Primary Color",
+      "pdfTemplate": "PDF Template",
+      "classic": "Classic",
+      "modern": "Modern",
+      "minimal": "Minimal",
+      "preview": "Preview Template"
+    },
+    "taxConfiguration": {
+      "title": "Tax Configuration",
+      "taxName": "Tax Name",
+      "defaultRate": "Default Rate (%)",
+      "presets": "Tax Presets",
+      "addPreset": "Add Tax Preset",
+      "presetName": "Preset Name",
+      "rate": "Rate (%)",
+      "deletePreset": "Delete Preset",
+      "confirmDelete": "Delete this tax preset?"
+    },
+    "languageRegion": {
+      "title": "Language & Region",
+      "appLanguage": "App Language",
+      "currency": "Currency",
+      "dateFormat": "Date Format",
+      "numberFormat": "Number Format",
+      "locale": "Locale"
+    },
+    "dataManagement": {
+      "title": "Data Management",
+      "exportData": "Export All Data",
+      "exportDescription": "Download a backup of all your data (clients, documents, templates, recurring rules) as a JSON file",
+      "importData": "Import Data",
+      "importDescription": "Restore data from a backup file",
+      "clearAllData": "Clear All Data",
+      "clearDescription": "Permanently delete all data from this app",
+      "confirmClear": "Are you sure you want to delete all data? This cannot be undone.",
+      "exportSuccess": "Data exported successfully",
+      "importSuccess": "Data imported successfully",
+      "clearSuccess": "All data cleared"
+    },
+    "about": {
+      "title": "About",
+      "version": "Version",
+      "buildNumber": "Build",
+      "support": "Support",
+      "licenses": "Open Source Licenses",
+      "privacy": "Privacy Policy"
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated",
+    "dataCollection": "Data Collection",
+    "dataCollectionText": "InvoiceForge is designed with your privacy in mind. We do NOT collect, transmit, or store any of your personal or business data on external servers.",
+    "offlineFirst": "Offline-First Architecture",
+    "offlineFirstText": "All data you create (business profiles, clients, invoices, quotes) is stored exclusively on your device using secure local storage. Your data never leaves your device unless you explicitly choose to export or share it.",
+    "dataStorage": "Data Storage",
+    "dataStorageText": "We use AsyncStorage (on-device storage) to persist your business information, client records, and documents. This data is stored in encrypted format on your device and is only accessible by the InvoiceForge app.",
+    "permissions": "App Permissions",
+    "permissionsIntro": "InvoiceForge requests the following permissions:",
+    "cameraPermission": "To upload your business logo or client images",
+    "filePermission": "To save and share PDF invoices and quotes",
+    "permissionsNote": "These permissions are only used for their stated purposes and never for data collection.",
+    "dataSharing": "Data Sharing",
+    "dataSharingText": "We do not share, sell, or transmit your data to any third parties. When you share an invoice or export your data, you control exactly what is shared and with whom.",
+    "analytics": "Analytics & Tracking",
+    "analyticsText": "InvoiceForge does NOT use any analytics, tracking, or telemetry services. We have no way to monitor your usage or access your data.",
+    "security": "Security",
+    "securityText": "Your data security is enhanced by our offline-first approach. Since data never leaves your device (except when you explicitly export it), there is no risk of data breaches or unauthorized server access.",
+    "dataRetention": "Data Retention & Deletion",
+    "dataRetentionText": "You have complete control over your data. You can export all your data at any time from the Settings screen. To delete all data, simply uninstall the app or use the \"Clear All Data\" option in Settings.",
+    "children": "Children's Privacy",
+    "childrenText": "InvoiceForge is intended for business use by adults. We do not knowingly collect data from children under 13.",
+    "changes": "Changes to Privacy Policy",
+    "changesText": "We may update this privacy policy from time to time. Any changes will be reflected in the app with an updated \"Last Updated\" date.",
+    "contact": "Contact",
+    "contactText": "If you have questions about this privacy policy, please contact us through the app store listing.",
+    "summary": "Bottom Line: InvoiceForge is 100% private. Your data never leaves your device. No accounts, no servers, no tracking."
+  },
+  "about": {
+    "version": "Version",
+    "tagline": "Professional invoicing made simple",
+    "privacyPolicy": "Privacy Policy",
+    "support": "Contact Support",
+    "rate": "Rate InvoiceForge",
+    "rights": "All rights reserved.",
+    "featuresTitle": "Key Features",
+    "feature1": "100% Private - Data never leaves your device",
+    "feature2": "Offline-First - No internet required",
+    "feature3": "Multi-Language - English, Spanish, & more",
+    "feature4": "Multi-Currency - Support for EUR, USD, GBP, & more",
+    "feature5": "Recurring Invoices - Automate regular billing",
+    "feature6": "Custom Branding - Add your logo and colors"
+  },
+  "dashboard": {
+    "welcomeBack": "Welcome back!",
+    "yourBusiness": "Your Business",
+    "thisMonth": "This Month",
+    "allTime": "All Time",
+    "invoices": "Invoices",
+    "revenue": "Revenue",
+    "quotes": "Quotes",
+    "totalInvoices": "Total Invoices",
+    "totalQuotes": "Total Quotes",
+    "quickActions": "Quick Actions",
+    "newInvoice": "New Invoice",
+    "newQuote": "New Quote",
+    "clients": "Clients",
+    "history": "History",
+    "recentDocuments": "Recent Documents",
+    "viewAll": "View All",
+    "noDocumentsYet": "No documents yet",
+    "createFirstDocument": "Create your first invoice or quote"
+  }
+}

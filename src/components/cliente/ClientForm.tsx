@@ -3,6 +3,8 @@ import {
   View,
   StyleSheet,
   Alert,
+  Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
@@ -137,14 +139,20 @@ export const ClientForm: React.FC<ClientFormProps> = ({
         showBack
       />
 
-      <KeyboardAwareScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.content}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-        enableOnAndroid={true}
-        extraScrollHeight={20}
+      <KeyboardAvoidingView
+        style={styles.keyboardView}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
       >
+        <KeyboardAwareScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.content}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          enableOnAndroid={true}
+          enableAutomaticScroll={true}
+          extraScrollHeight={150}
+        >
         <Input
           label={STRINGS.client.nombre}
           value={formData.nombre}
@@ -218,18 +226,19 @@ export const ClientForm: React.FC<ClientFormProps> = ({
           keyboardType="phone-pad"
         />
 
-        <Button
-          variant="primary"
-          size="lg"
-          fullWidth
-          onPress={handleSubmit}
-          loading={isLoading}
-          disabled={isLoading}
-          style={styles.submitButton}
-        >
-          {STRINGS.actions.guardar}
-        </Button>
-      </KeyboardAwareScrollView>
+          <Button
+            variant="primary"
+            size="lg"
+            fullWidth
+            onPress={handleSubmit}
+            loading={isLoading}
+            disabled={isLoading}
+            style={styles.submitButton}
+          >
+            {STRINGS.actions.guardar}
+          </Button>
+        </KeyboardAwareScrollView>
+      </KeyboardAvoidingView>
     </View>
   );
 };
@@ -239,12 +248,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
+  keyboardView: {
+    flex: 1,
+  },
   scrollView: {
     flex: 1,
   },
   content: {
     padding: SPACING.md,
-    paddingBottom: SPACING.xxl,
+    paddingBottom: Platform.OS === 'ios' ? 180 : 150,
   },
   row: {
     flexDirection: 'row',

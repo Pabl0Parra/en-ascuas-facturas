@@ -5,6 +5,7 @@
 **Professional mobile application for generating invoices and quotes**  
 **Aplicación móvil profesional para la generación de facturas y presupuestos**
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Pabl0Parra_en-ascuas-facturas&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Pabl0Parra_en-ascuas-facturas)
 [![React Native](https://img.shields.io/badge/React%20Native-0.81.5-61DAFB?style=flat&logo=react)](https://reactnative.dev/)
 [![Expo](https://img.shields.io/badge/Expo-~54.0-000020?style=flat&logo=expo)](https://expo.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org/)

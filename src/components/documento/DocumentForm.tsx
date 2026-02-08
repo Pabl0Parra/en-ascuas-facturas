@@ -273,7 +273,7 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps="handled"
     >
-      <Text style={styles.title}>{docTitle}</Text>
+
 
       {/* Document Info */}
       <View style={styles.row}>

@@ -64,7 +64,7 @@ export const generateInvoiceHTML = (data: DocumentData): string => {
         .header-top {
           display: flex;
           justify-content: space-between;
-          align-items: flex-start;
+          align-items: center;
           margin-bottom: 25px;
           padding-bottom: 15px;
           border-bottom: 2px solid #FF4500;
@@ -280,7 +280,10 @@ export const generateInvoiceHTML = (data: DocumentData): string => {
         </div>
         <div class="doc-type">
           <div class="doc-type-label">${docLabel}</div>
-          <div class="doc-number">Nº ${data.numeroDocumento}</div>
+          ${data.numeroDocumento
+      ? `<div class="doc-number">Nº ${data.numeroDocumento}</div>`
+      : ''
+    }
         </div>
       </div>
       

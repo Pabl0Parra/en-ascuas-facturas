@@ -37,7 +37,9 @@ export default function HistorialScreen() {
 
   const handleDocumentPress = async (doc: DocumentMetadata) => {
     try {
+      console.log('[Historial] Opening document:', doc.numeroDocumento, 'Path:', doc.pdfFileName);
       const exists = await doesPDFExist(doc.pdfFileName);
+      console.log('[Historial] File exists:', exists);
 
       if (!exists) {
         Alert.alert(
@@ -55,8 +57,9 @@ export default function HistorialScreen() {
         return;
       }
 
+      console.log('[Historial] Navigating to PDF viewer with path:', doc.pdfFileName);
       router.push({
-        pathname: '/documento/pdf-viewer',
+        pathname: '/(tabs)/pdf-viewer',
         params: {
           filePath: doc.pdfFileName,
           title: `${doc.tipo === 'factura' ? 'Factura' : 'Presupuesto'} ${doc.numeroDocumento}`,

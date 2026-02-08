@@ -175,7 +175,10 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
         numeroDocumento,
         client?.nombre || 'Sin_Cliente',
       );
+      console.log('[DocumentForm] Generated fileName:', fileName);
+
       const finalPath = await savePDF(tempUri, fileName);
+      console.log('[DocumentForm] Final path to be saved:', finalPath);
 
       addDocument({
         tipo,

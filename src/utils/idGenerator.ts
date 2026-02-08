@@ -11,7 +11,7 @@ export const generateSecureId = (): string => {
   if (typeof crypto !== 'undefined' && crypto.randomUUID) {
     return crypto.randomUUID();
   }
-  
+
   // Fallback for React Native and older environments
   return generateSecureIdFallback();
 };
@@ -22,7 +22,7 @@ export const generateSecureId = (): string => {
  */
 const generateSecureIdFallback = (): string => {
   const timestamp = Date.now().toString(36);
-  
+
   // Try to use crypto.getRandomValues if available
   if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
     const randomBytes = new Uint8Array(16);
@@ -31,15 +31,15 @@ const generateSecureIdFallback = (): string => {
       .map(b => b.toString(36).padStart(2, '0'))
       .join('')
       .substring(0, 16);
-    
+
     return `${timestamp}-${randomPart}`;
   }
-  
+
   // Last resort: enhanced Math.random with multiple entropy sources
   const random1 = Math.random().toString(36).substring(2, 10);
   const random2 = Math.random().toString(36).substring(2, 10);
   const random3 = Math.random().toString(36).substring(2, 10);
-  
+
   return `${timestamp}-${random1}-${random2}-${random3}`;
 };
 
@@ -72,6 +72,9 @@ export const generatePDFFileName = (
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-zA-Z0-9]/g, '_')
     .substring(0, 20);
-  
-  return `${tipoLabel}_${numero}_${cleanNombre}`;
+
+  // Use timestamp if no document number provided
+  const numeroOrTimestamp = numero.trim() || Date.now().toString();
+
+  return `${tipoLabel}_${numeroOrTimestamp}_${cleanNombre}`;
 };

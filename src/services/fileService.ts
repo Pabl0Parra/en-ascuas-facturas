@@ -27,8 +27,8 @@ export const savePDF = async (
   tempUri: string,
   fileName: string,
 ): Promise<string> => {
-  console.log('savePDF - tempUri:', tempUri);
-  console.log('savePDF - fileName:', fileName);
+  console.log('[FileService] savePDF - tempUri:', tempUri);
+  console.log('[FileService] savePDF - fileName:', fileName);
 
   try {
     // Verify temp file exists
@@ -41,7 +41,7 @@ export const savePDF = async (
     const pdfDir = await ensurePDFDirectory();
     const finalPath = `${pdfDir}${fileName}.pdf`;
 
-    console.log('savePDF - finalPath:', finalPath);
+    console.log('[FileService] savePDF - finalPath:', finalPath);
 
     // Check if file already exists (overwrite)
     const existingFile = await FileSystem.getInfoAsync(finalPath);
@@ -61,7 +61,7 @@ export const savePDF = async (
       throw new Error('Error al guardar el archivo');
     }
 
-    console.log('savePDF - SUCCESS, saved to:', finalPath);
+    console.log('[FileService] savePDF - SUCCESS, saved to:', finalPath);
     return finalPath;
   } catch (error) {
     console.error('savePDF - ERROR:', error);
@@ -110,7 +110,9 @@ export const deletePDF = async (filePath: string): Promise<void> => {
 
 export const doesPDFExist = async (filePath: string): Promise<boolean> => {
   try {
+    console.log('[FileService] doesPDFExist - checking path:', filePath);
     const fileInfo = await FileSystem.getInfoAsync(filePath);
+    console.log('[FileService] doesPDFExist - exists:', fileInfo.exists);
     return fileInfo.exists;
   } catch {
     return false;

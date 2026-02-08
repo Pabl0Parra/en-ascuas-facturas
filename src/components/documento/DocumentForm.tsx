@@ -269,7 +269,7 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
       style={styles.container}
       contentContainerStyle={styles.content}
       enableOnAndroid={true}
-      extraScrollHeight={20}
+      extraScrollHeight={100}
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps="handled"
     >
@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: SPACING.md,
-    paddingBottom: SPACING.xxl,
+    paddingBottom: 100,
   },
   title: {
     fontSize: FONT_SIZE.xxl,

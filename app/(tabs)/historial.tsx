@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   View,
   FlatList,
@@ -8,13 +8,12 @@ import {
   Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context'; // Changed import
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '../../src/components/ui/Header';
 import { DocumentCard } from '../../src/components/historial/DocumentCard';
 import { EmptyState } from '../../src/components/ui/EmptyState';
 import { useDocumentStore } from '../../src/stores/documentStore';
 import {
-  sharePDF,
   deletePDF,
   doesPDFExist,
 } from '../../src/services/fileService';

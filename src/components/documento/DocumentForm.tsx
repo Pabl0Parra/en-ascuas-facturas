@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   Alert,
-  Platform,
   TextInput,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -46,8 +45,6 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
-
-  // ... (store hooks remain same)
 
   // Form store
   const {
@@ -171,10 +168,8 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
         comentarios,
       };
 
-      // Generate PDF
       const tempUri = await createPDF(documentData);
 
-      // Generate filename and save permanently
       const fileName = generatePDFFileName(
         tipo,
         numeroDocumento,
@@ -182,7 +177,6 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
       );
       const finalPath = await savePDF(tempUri, fileName);
 
-      // Save metadata with full path
       addDocument({
         tipo,
         numeroDocumento,

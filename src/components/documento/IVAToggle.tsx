@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Toggle } from '../ui/Toggle';
 import { Card } from '../ui/Card';
-import { COLORS, SPACING, FONT_SIZE } from '../../constants/theme';
+import { COLORS, SPACING } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
 import type { IVARate } from '../../types/document';
 
@@ -16,11 +16,11 @@ export const IVAToggle: React.FC<IVAToggleProps> = ({
   onChangeTipoIVA,
 }) => {
   const isInversionSujetoPasivo = tipoIVA === 0;
-  
+
   const handleToggle = (value: boolean) => {
     onChangeTipoIVA(value ? 0 : 21);
   };
-  
+
   return (
     <Card padding="md" style={styles.container}>
       <Toggle

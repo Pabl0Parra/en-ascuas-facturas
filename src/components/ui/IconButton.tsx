@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS, SPACING, BORDER_RADIUS } from '../../constants/theme';
+import { COLORS, BORDER_RADIUS } from '../../constants/theme';
 
 type IconButtonSize = 'sm' | 'md' | 'lg';
 type IconButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
@@ -38,7 +38,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
 }) => {
   const { button: buttonSize, icon: iconSize } = sizeMap[size];
   const { bg, color } = variantStyles[variant];
-  
+
   return (
     <TouchableOpacity
       onPress={onPress}

@@ -69,7 +69,8 @@
   "empty": {
     "clientes": "Keine gespeicherten Kunden",
     "historial": "Keine Dokumente",
-    "lineas": "Mindestens eine Zeile hinzufügen"
+    "lineas": "Mindestens eine Zeile hinzufügen",
+    "historialDescription": "Erstellen Sie Ihre erste Rechnung oder Ihr erstes Angebot, um es hier zu sehen"
   },
   "errors": {
     "campoRequerido": "Dieses Feld ist erforderlich",
@@ -81,7 +82,24 @@
   "success": {
     "clienteGuardado": "Kunde gespeichert",
     "documentoGenerado": "Dokument erfolgreich erstellt",
-    "pdfGuardado": "PDF gespeichert"
+    "pdfGuardado": "PDF gespeichert",
+    "guardado": "Erfolgreich gespeichert"
+  },
+  "historial": {
+    "filters": {
+      "todos": "Alle",
+      "facturas": "Rechnungen",
+      "presupuestos": "Angebote"
+    },
+    "documentNotFound": "Dokument nicht gefunden",
+    "documentNotFoundDescription": "Die PDF-Datei ist nicht verfügbar. Möchten Sie sie aus dem Verlauf entfernen?",
+    "deleteDocument": "Dokument löschen",
+    "deleteDocumentConfirm": "Sind Sie sicher, dass Sie {{type}} {{number}} löschen möchten?",
+    "invoice": "die Rechnung",
+    "quote": "das Angebot",
+    "Invoice": "Rechnung",
+    "Quote": "Angebot",
+    "errorOpeningDocument": "Dokument konnte nicht geöffnet werden"
   },
   "onboarding": {
     "welcome": {

@@ -69,7 +69,8 @@
   "empty": {
     "clientes": "Não há clientes guardados",
     "historial": "Não há documentos",
-    "lineas": "Adicione pelo menos uma linha"
+    "lineas": "Adicione pelo menos uma linha",
+    "historialDescription": "Crie sua primeira fatura ou orçamento para vê-lo aqui"
   },
   "errors": {
     "campoRequerido": "Este campo é obrigatório",
@@ -81,7 +82,24 @@
   "success": {
     "clienteGuardado": "Cliente guardado",
     "documentoGenerado": "Documento gerado com sucesso",
-    "pdfGuardado": "PDF guardado"
+    "pdfGuardado": "PDF guardado",
+    "guardado": "Guardado com sucesso"
+  },
+  "historial": {
+    "filters": {
+      "todos": "Todos",
+      "facturas": "Faturas",
+      "presupuestos": "Orçamentos"
+    },
+    "documentNotFound": "Documento não encontrado",
+    "documentNotFoundDescription": "O arquivo PDF não está disponível. Deseja removê-lo do histórico?",
+    "deleteDocument": "Eliminar Documento",
+    "deleteDocumentConfirm": "Tem certeza de que deseja eliminar {{type}} {{number}}?",
+    "invoice": "a fatura",
+    "quote": "o orçamento",
+    "Invoice": "Fatura",
+    "Quote": "Orçamento",
+    "errorOpeningDocument": "Não foi possível abrir o documento"
   },
   "onboarding": {
     "welcome": {

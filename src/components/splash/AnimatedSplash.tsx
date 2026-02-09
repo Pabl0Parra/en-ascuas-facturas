@@ -58,7 +58,7 @@ export const AnimatedSplash: React.FC<AnimatedSplashProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.black,
+    backgroundColor: '#FFFFFF',
   },
   backgroundImage: {
     position: 'absolute',

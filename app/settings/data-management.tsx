@@ -223,15 +223,10 @@ export default function DataManagementScreen() {
             </Text>
           </View>
 
-          <Text style={styles.actionDescription}>
-            {t('settings.dataManagement.exportDescription')}
-          </Text>
-
           <Button
             onPress={handleExportData}
             variant="primary"
             disabled={isExporting}
-            icon={isExporting ? undefined : 'download-outline'}
           >
             {isExporting ? 'Exporting...' : t('settings.dataManagement.exportData')}
           </Button>
@@ -254,15 +249,10 @@ export default function DataManagementScreen() {
             </Text>
           </View>
 
-          <Text style={styles.actionDescription}>
-            {t('settings.dataManagement.importDescription')}
-          </Text>
-
           <Button
             onPress={handleImportData}
             variant="outline"
             disabled={isImporting}
-            icon="cloud-upload-outline"
           >
             {isImporting ? 'Importing...' : t('settings.dataManagement.importData')}
           </Button>
@@ -285,16 +275,11 @@ export default function DataManagementScreen() {
             </Text>
           </View>
 
-          <Text style={styles.actionDescription}>
-            {t('settings.dataManagement.clearDescription')}
-          </Text>
-
           <Button
             onPress={handleClearAllData}
             variant="outline"
             disabled={isClearing}
             style={styles.dangerButton}
-            icon="trash-outline"
           >
             {isClearing ? 'Clearing...' : t('settings.dataManagement.clearAllData')}
           </Button>

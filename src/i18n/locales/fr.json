@@ -69,7 +69,8 @@
   "empty": {
     "clientes": "Aucun client enregistré",
     "historial": "Aucun document",
-    "lineas": "Ajoutez au moins une ligne"
+    "lineas": "Ajoutez au moins une ligne",
+    "historialDescription": "Créez votre première facture ou devis pour la voir ici"
   },
   "errors": {
     "campoRequerido": "Ce champ est obligatoire",
@@ -81,7 +82,24 @@
   "success": {
     "clienteGuardado": "Client enregistré",
     "documentoGenerado": "Document généré avec succès",
-    "pdfGuardado": "PDF enregistré"
+    "pdfGuardado": "PDF enregistré",
+    "guardado": "Enregistré avec succès"
+  },
+  "historial": {
+    "filters": {
+      "todos": "Tous",
+      "facturas": "Factures",
+      "presupuestos": "Devis"
+    },
+    "documentNotFound": "Document introuvable",
+    "documentNotFoundDescription": "Le fichier PDF n'est pas disponible. Voulez-vous le supprimer de l'historique?",
+    "deleteDocument": "Supprimer le document",
+    "deleteDocumentConfirm": "Êtes-vous sûr de vouloir supprimer {{type}} {{number}}?",
+    "invoice": "la facture",
+    "quote": "le devis",
+    "Invoice": "Facture",
+    "Quote": "Devis",
+    "errorOpeningDocument": "Impossible d'ouvrir le document"
   },
   "onboarding": {
     "welcome": {

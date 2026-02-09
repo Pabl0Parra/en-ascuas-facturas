@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 import { Header } from '../../src/components/ui/Header';
 import { DocumentCard } from '../../src/components/historial/DocumentCard';
 import { EmptyState } from '../../src/components/ui/EmptyState';
@@ -18,13 +19,13 @@ import {
   doesPDFExist,
 } from '../../src/services/fileService';
 import { COLORS, SPACING, BORDER_RADIUS } from '../../src/constants/theme';
-import { STRINGS } from '../../src/constants/strings';
 import type { DocumentMetadata } from '../../src/types/document';
 
 type FilterType = 'todos' | 'factura' | 'presupuesto';
 
 export default function HistorialScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [filter, setFilter] = useState<FilterType>('todos');
 
   const documents = useDocumentStore((state) => state.documents);
@@ -43,12 +44,12 @@ export default function HistorialScreen() {
 
       if (!exists) {
         Alert.alert(
-          'Documento no encontrado',
-          'El archivo PDF no está disponible. ¿Deseas eliminarlo del historial?',
+          t('historial.documentNotFound'),
+          t('historial.documentNotFoundDescription'),
           [
-            { text: 'Cancelar', style: 'cancel' },
+            { text: t('actions.cancelar'), style: 'cancel' },
             {
-              text: 'Eliminar',
+              text: t('actions.eliminar'),
               style: 'destructive',
               onPress: () => deleteDocument(doc.id),
             },
@@ -62,24 +63,24 @@ export default function HistorialScreen() {
         pathname: '/(tabs)/pdf-viewer',
         params: {
           filePath: doc.pdfFileName,
-          title: `${doc.tipo === 'factura' ? 'Factura' : 'Presupuesto'} ${doc.numeroDocumento}`,
+          title: `${doc.tipo === 'factura' ? t('historial.Invoice') : t('historial.Quote')} ${doc.numeroDocumento}`,
         },
       });
     } catch (error) {
       console.error('Error opening document:', error);
-      Alert.alert('Error', 'No se pudo abrir el documento');
+      Alert.alert('Error', t('historial.errorOpeningDocument'));
     }
   };
 
   const handleDeleteDocument = (doc: DocumentMetadata) => {
+    const type = doc.tipo === 'factura' ? t('historial.invoice') : t('historial.quote');
     Alert.alert(
-      'Eliminar Documento',
-      `¿Estás seguro de que quieres eliminar ${doc.tipo === 'factura' ? 'la factura' : 'el presupuesto'
-      } ${doc.numeroDocumento}?`,
+      t('historial.deleteDocument'),
+      t('historial.deleteDocumentConfirm', { type, number: doc.numeroDocumento }),
       [
-        { text: 'Cancelar', style: 'cancel' },
+        { text: t('actions.cancelar'), style: 'cancel' },
         {
-          text: 'Eliminar',
+          text: t('actions.eliminar'),
           style: 'destructive',
           onPress: async () => {
             try {
@@ -96,14 +97,14 @@ export default function HistorialScreen() {
   };
 
   const filters: { key: FilterType; label: string }[] = [
-    { key: 'todos', label: 'Todos' },
-    { key: 'factura', label: 'Facturas' },
-    { key: 'presupuesto', label: 'Presupuestos' },
+    { key: 'todos', label: t('historial.filters.todos') },
+    { key: 'factura', label: t('historial.filters.facturas') },
+    { key: 'presupuesto', label: t('historial.filters.presupuestos') },
   ];
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <Header title={STRINGS.navigation.historial} />
+      <Header title={t('navigation.historial')} />
 
       {/* Filter Tabs */}
       <View style={styles.filterContainer}>
@@ -144,8 +145,8 @@ export default function HistorialScreen() {
         ListEmptyComponent={
           <EmptyState
             icon="document-text-outline"
-            title={STRINGS.empty.historial}
-            description="Crea tu primera factura o presupuesto para verlo aquí"
+            title={t('empty.historial')}
+            description={t('empty.historialDescription')}
           />
         }
       />

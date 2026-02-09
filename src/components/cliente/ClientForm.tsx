@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import {
   View,
+  Text,
   StyleSheet,
   Alert,
   Platform,
   KeyboardAvoidingView,
+  TouchableOpacity,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
@@ -12,7 +14,7 @@ import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
 import { Header } from '../ui/Header';
 import { useClientStore } from '../../stores/clientStore';
-import { COLORS, SPACING } from '../../constants/theme';
+import { COLORS, SPACING, FONT_SIZE } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
 import {
   isNotEmpty,
@@ -20,7 +22,16 @@ import {
   isValidEmail,
   isValidNIF,
 } from '../../utils/validators';
-import type { Client, ClientFormData } from '../../types/client';
+import type { Client, ClientFormData, ClientTag } from '../../types/client';
+
+const TAG_LABELS: Record<ClientTag, { label: string; color: string }> = {
+  regular: { label: 'Regular', color: COLORS.primary },
+  vip: { label: 'VIP', color: '#8B5CF6' },
+  new: { label: 'Nuevo', color: '#10B981' },
+  inactive: { label: 'Inactivo', color: '#6B7280' },
+  international: { label: 'Internacional', color: '#3B82F6' },
+  domestic: { label: 'Nacional', color: '#F59E0B' },
+};
 
 interface ClientFormProps {
   client?: Client;
@@ -54,6 +65,7 @@ export const ClientForm: React.FC<ClientFormProps> = ({
     nifCif: client?.nifCif || '',
     email: client?.email || '',
     telefono: client?.telefono || '',
+    tags: client?.tags || [],
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -68,6 +80,16 @@ export const ClientForm: React.FC<ClientFormProps> = ({
     if (errors[field as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
+  };
+
+  const toggleTag = (tag: ClientTag) => {
+    setFormData((prev) => {
+      const currentTags = prev.tags || [];
+      const newTags = currentTags.includes(tag)
+        ? currentTags.filter((t) => t !== tag)
+        : [...currentTags, tag];
+      return { ...prev, tags: newTags };
+    });
   };
 
   const validateForm = (): boolean => {
@@ -226,6 +248,41 @@ export const ClientForm: React.FC<ClientFormProps> = ({
           keyboardType="phone-pad"
         />
 
+        {/* Tags Section */}
+        <View style={styles.tagsSection}>
+          <Text style={styles.tagsLabel}>Etiquetas</Text>
+          <Text style={styles.tagsSubtitle}>
+            Selecciona las etiquetas que mejor describan a este cliente
+          </Text>
+          <View style={styles.tagsContainer}>
+            {(Object.entries(TAG_LABELS) as Array<[ClientTag, typeof TAG_LABELS[ClientTag]]>).map(
+              ([tag, { label, color }]) => {
+                const isSelected = formData.tags?.includes(tag) || false;
+                return (
+                  <TouchableOpacity
+                    key={tag}
+                    style={[
+                      styles.tagChip,
+                      isSelected && { backgroundColor: color },
+                    ]}
+                    onPress={() => toggleTag(tag)}
+                    activeOpacity={0.7}
+                  >
+                    <Text
+                      style={[
+                        styles.tagChipText,
+                        isSelected && styles.tagChipTextSelected,
+                      ]}
+                    >
+                      {label}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              }
+            )}
+          </View>
+        </View>
+
           <Button
             variant="primary"
             size="lg"
@@ -270,5 +327,40 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     marginTop: SPACING.lg,
+  },
+  tagsSection: {
+    marginTop: SPACING.md,
+  },
+  tagsLabel: {
+    fontSize: FONT_SIZE.md,
+    fontWeight: '600',
+    color: COLORS.textPrimary,
+    marginBottom: SPACING.xs,
+  },
+  tagsSubtitle: {
+    fontSize: FONT_SIZE.sm,
+    color: COLORS.textSecondary,
+    marginBottom: SPACING.sm,
+  },
+  tagsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: SPACING.xs,
+  },
+  tagChip: {
+    paddingHorizontal: SPACING.md,
+    paddingVertical: SPACING.xs,
+    borderRadius: 16,
+    backgroundColor: COLORS.surface,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  tagChipText: {
+    fontSize: FONT_SIZE.sm,
+    fontWeight: '500',
+    color: COLORS.textSecondary,
+  },
+  tagChipTextSelected: {
+    color: COLORS.textInverse,
   },
 });

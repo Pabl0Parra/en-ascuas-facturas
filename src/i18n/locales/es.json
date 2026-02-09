@@ -69,7 +69,8 @@
   "empty": {
     "clientes": "No hay clientes guardados",
     "historial": "No hay documentos",
-    "lineas": "Añade al menos una línea"
+    "lineas": "Añade al menos una línea",
+    "historialDescription": "Crea tu primera factura o presupuesto para verlo aquí"
   },
   "errors": {
     "campoRequerido": "Este campo es requerido",
@@ -81,7 +82,24 @@
   "success": {
     "clienteGuardado": "Cliente guardado",
     "documentoGenerado": "Documento generado correctamente",
-    "pdfGuardado": "PDF guardado"
+    "pdfGuardado": "PDF guardado",
+    "guardado": "Guardado correctamente"
+  },
+  "historial": {
+    "filters": {
+      "todos": "Todos",
+      "facturas": "Facturas",
+      "presupuestos": "Presupuestos"
+    },
+    "documentNotFound": "Documento no encontrado",
+    "documentNotFoundDescription": "El archivo PDF no está disponible. ¿Deseas eliminarlo del historial?",
+    "deleteDocument": "Eliminar Documento",
+    "deleteDocumentConfirm": "¿Estás seguro de que quieres eliminar {{type}} {{number}}?",
+    "invoice": "la factura",
+    "quote": "el presupuesto",
+    "Invoice": "Factura",
+    "Quote": "Presupuesto",
+    "errorOpeningDocument": "No se pudo abrir el documento"
   },
   "onboarding": {
     "welcome": {
@@ -219,6 +237,11 @@
     },
     "dataManagement": {
       "title": "Gestión de Datos",
+      "dataOverview": "Resumen de Datos",
+      "clients": "Clientes",
+      "documents": "Documentos",
+      "templates": "Plantillas",
+      "recurringRules": "Reglas Recurrentes",
       "exportData": "Exportar Todos los Datos",
       "exportDescription": "Descarga una copia de seguridad de todos tus datos (clientes, documentos, plantillas, reglas recurrentes) como archivo JSON",
       "importData": "Importar Datos",
@@ -226,16 +249,27 @@
       "clearAllData": "Borrar Todos los Datos",
       "clearDescription": "Eliminar permanentemente todos los datos de esta aplicación",
       "confirmClear": "¿Estás seguro de que quieres eliminar todos los datos? Esta acción no se puede deshacer.",
+      "warning": "Advertencia",
+      "finalConfirmation": "Confirmación Final",
+      "finalConfirmationMessage": "Esto eliminará permanentemente TODOS los datos incluyendo:\n\n• Perfil de Negocio\n• Todos los Clientes\n• Todos los Documentos\n• Todas las Plantillas\n• Todas las Reglas Recurrentes\n\n¡Esta acción NO se puede deshacer!\n\n¿Estás absolutamente seguro?",
+      "deleteEverything": "Eliminar Todo",
+      "exporting": "Exportando...",
+      "importing": "Importando...",
+      "clearing": "Borrando...",
       "exportSuccess": "Datos exportados correctamente",
       "importSuccess": "Datos importados correctamente",
-      "clearSuccess": "Todos los datos han sido eliminados"
+      "noNewData": "No hay nuevos datos para importar. Todos los elementos ya existen.",
+      "importSuccessDetails": "Importado exitosamente:\n\n• {{clients}} clientes\n• {{documents}} documentos\n• {{templates}} plantillas\n• {{recurringRules}} reglas recurrentes",
+      "clearSuccess": "Todos los datos han sido borrados correctamente. La aplicación reiniciará el proceso de configuración inicial.",
+      "failedToExport": "Error al exportar datos",
+      "failedToImport": "Error al importar datos",
+      "failedToClear": "Error al borrar datos"
     },
     "about": {
       "title": "Acerca de",
       "version": "Versión",
       "buildNumber": "Compilación",
       "support": "Soporte",
-      "licenses": "Licencias de Código Abierto",
       "privacy": "Política de Privacidad"
     }
   },
@@ -273,6 +307,8 @@
     "version": "Versión",
     "tagline": "Facturación profesional simplificada",
     "privacyPolicy": "Política de Privacidad",
+    "privacy": "Tu Privacidad",
+    "privacyMessage": "Esta aplicación es 100% offline. Todos tus datos permanecen en tu dispositivo. Sin sincronización en la nube, sin servidores, sin rastreo. Eres dueño completo de tus datos.",
     "support": "Contactar Soporte",
     "rate": "Calificar InvoiceForge",
     "rights": "Todos los derechos reservados.",

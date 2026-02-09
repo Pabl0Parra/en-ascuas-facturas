@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   View,
   Text,
@@ -14,7 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { Header } from '../../src/components/ui/Header';
 import { Card } from '../../src/components/ui/Card';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/theme';
+import { COLORS, SPACING, FONT_SIZE } from '../../src/constants/theme';
 
 const APP_VERSION = '2.0.0';
 const BUILD_NUMBER = '2024020800';
@@ -25,17 +24,7 @@ export default function AboutScreen() {
 
   const handleSupport = () => {
     // Open support email
-    Linking.openURL('mailto:support@enascuas.app?subject=App Support');
-  };
-
-  const handlePrivacy = () => {
-    // Open privacy policy
-    Linking.openURL('https://enascuas.app/privacy');
-  };
-
-  const handleLicenses = () => {
-    // Open open source licenses
-    Linking.openURL('https://enascuas.app/licenses');
+    Linking.openURL('mailto:frontend?subject=App Support');
   };
 
   return (
@@ -124,7 +113,34 @@ export default function AboutScreen() {
           </View>
         </Card>
 
-        {/* Links */}
+        {/* Privacy Notice */}
+        <Card style={styles.section}>
+          <View style={styles.privacyHeader}>
+            <Ionicons name="shield-checkmark" size={32} color={COLORS.success} />
+            <Text style={styles.privacyTitle}>{t('settings.about.privacy')}</Text>
+          </View>
+
+          <Text style={styles.privacyText}>
+            {t('about.privacyMessage')}
+          </Text>
+
+          <View style={styles.featureRow}>
+            <Ionicons name="lock-closed" size={20} color={COLORS.success} />
+            <Text style={styles.featureText}>{t('about.feature1')}</Text>
+          </View>
+
+          <View style={styles.featureRow}>
+            <Ionicons name="phone-portrait" size={20} color={COLORS.success} />
+            <Text style={styles.featureText}>{t('about.feature2')}</Text>
+          </View>
+
+          <View style={styles.featureRow}>
+            <Ionicons name="cloud-offline" size={20} color={COLORS.success} />
+            <Text style={styles.featureText}>{t('about.feature3')}</Text>
+          </View>
+        </Card>
+
+        {/* Support */}
         <Card style={styles.section}>
           <TouchableOpacity
             style={styles.linkRow}
@@ -133,26 +149,6 @@ export default function AboutScreen() {
           >
             <Ionicons name="mail" size={24} color={COLORS.primary} />
             <Text style={styles.linkText}>{t('settings.about.support')}</Text>
-            <Ionicons name="open-outline" size={20} color={COLORS.textSecondary} />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.linkRow}
-            onPress={handleLicenses}
-            activeOpacity={0.7}
-          >
-            <Ionicons name="code-slash" size={24} color={COLORS.primary} />
-            <Text style={styles.linkText}>{t('settings.about.licenses')}</Text>
-            <Ionicons name="open-outline" size={20} color={COLORS.textSecondary} />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.linkRow}
-            onPress={handlePrivacy}
-            activeOpacity={0.7}
-          >
-            <Ionicons name="shield-checkmark" size={24} color={COLORS.primary} />
-            <Text style={styles.linkText}>{t('settings.about.privacy')}</Text>
             <Ionicons name="open-outline" size={20} color={COLORS.textSecondary} />
           </TouchableOpacity>
         </Card>
@@ -255,5 +251,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 20,
     marginTop: SPACING.lg,
+  },
+  privacyHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: SPACING.md,
+  },
+  privacyTitle: {
+    fontSize: FONT_SIZE.xl,
+    fontWeight: '700',
+    color: COLORS.textPrimary,
+    marginLeft: SPACING.md,
+  },
+  privacyText: {
+    fontSize: FONT_SIZE.md,
+    color: COLORS.textSecondary,
+    lineHeight: 22,
+    marginBottom: SPACING.lg,
   },
 });

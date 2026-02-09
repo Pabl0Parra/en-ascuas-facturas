@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -36,6 +36,11 @@ export default function HomeScreen() {
       >
         {/* Header */}
         <View style={styles.header}>
+          <Image
+            source={require('../../assets/images/icon.png')}
+            style={styles.icon}
+            resizeMode="contain"
+          />
           <Text style={styles.greeting}>{t('dashboard.welcomeBack')}</Text>
           <Text style={styles.subtitle}>
             {businessProfile?.companyName || t('dashboard.yourBusiness')}
@@ -169,6 +174,11 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: SPACING.lg,
+  },
+  icon: {
+    width: 60,
+    height: 60,
+    marginBottom: SPACING.sm,
   },
   greeting: {
     fontSize: FONT_SIZE.xxl,

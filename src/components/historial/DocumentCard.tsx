@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { Card } from '../ui/Card';
 import { COLORS, SPACING, FONT_SIZE } from '../../constants/theme';
 import { formatDate, formatCurrency } from '../../utils/formatters';
@@ -17,6 +18,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
   onPress,
   onDelete,
 }) => {
+  const { t } = useTranslation();
   const isFactura = document.tipo === 'factura';
 
   return (
@@ -32,7 +34,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             />
             <View style={[styles.typeBadge, isFactura && styles.facturaBadge]}>
               <Text style={[styles.typeText, isFactura && styles.facturaText]}>
-                {isFactura ? 'FACTURA' : 'PRESUPUESTO'}
+                {isFactura ? t('document.factura') : t('document.presupuesto')}
               </Text>
             </View>
           </View>

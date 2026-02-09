@@ -3,7 +3,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import { COLORS, FONT_SIZE } from '../../src/constants/theme';
-import { STRINGS } from '../../src/constants/strings';
 
 // Extract icon components to prevent re-renders
 const HomeIcon = ({ color, size }: { color: string; size: number }) => (
@@ -49,21 +48,21 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: STRINGS.navigation.home,
+          title: t('navigation.home'),
           tabBarIcon: HomeIcon,
         }}
       />
       <Tabs.Screen
         name="clientes"
         options={{
-          title: STRINGS.navigation.clientes,
+          title: t('navigation.clientes'),
           tabBarIcon: ClientsIcon,
         }}
       />
       <Tabs.Screen
         name="historial"
         options={{
-          title: STRINGS.navigation.historial,
+          title: t('navigation.historial'),
           tabBarIcon: HistoryIcon,
         }}
       />

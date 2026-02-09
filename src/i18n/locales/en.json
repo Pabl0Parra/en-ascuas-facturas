@@ -70,7 +70,8 @@
   "empty": {
     "clientes": "No clients saved",
     "historial": "No documents",
-    "lineas": "Add at least one line"
+    "lineas": "Add at least one line",
+    "historialDescription": "Create your first invoice or quote to see it here"
   },
   "errors": {
     "campoRequerido": "This field is required",
@@ -82,7 +83,24 @@
   "success": {
     "clienteGuardado": "Client saved",
     "documentoGenerado": "Document generated successfully",
-    "pdfGuardado": "PDF saved"
+    "pdfGuardado": "PDF saved",
+    "guardado": "Saved successfully"
+  },
+  "historial": {
+    "filters": {
+      "todos": "All",
+      "facturas": "Invoices",
+      "presupuestos": "Quotes"
+    },
+    "documentNotFound": "Document not found",
+    "documentNotFoundDescription": "The PDF file is not available. Do you want to remove it from history?",
+    "deleteDocument": "Delete Document",
+    "deleteDocumentConfirm": "Are you sure you want to delete {{type}} {{number}}?",
+    "invoice": "invoice",
+    "quote": "quote",
+    "Invoice": "Invoice",
+    "Quote": "Quote",
+    "errorOpeningDocument": "Could not open document"
   },
   "onboarding": {
     "welcome": {
@@ -220,6 +238,11 @@
     },
     "dataManagement": {
       "title": "Data Management",
+      "dataOverview": "Data Overview",
+      "clients": "Clients",
+      "documents": "Documents",
+      "templates": "Templates",
+      "recurringRules": "Recurring Rules",
       "exportData": "Export All Data",
       "exportDescription": "Download a backup of all your data (clients, documents, templates, recurring rules) as a JSON file",
       "importData": "Import Data",
@@ -227,16 +250,27 @@
       "clearAllData": "Clear All Data",
       "clearDescription": "Permanently delete all data from this app",
       "confirmClear": "Are you sure you want to delete all data? This cannot be undone.",
+      "warning": "Warning",
+      "finalConfirmation": "Final Confirmation",
+      "finalConfirmationMessage": "This will permanently delete ALL data including:\n\n• Business Profile\n• All Clients\n• All Documents\n• All Templates\n• All Recurring Rules\n\nThis action CANNOT be undone!\n\nAre you absolutely sure?",
+      "deleteEverything": "Delete Everything",
+      "exporting": "Exporting...",
+      "importing": "Importing...",
+      "clearing": "Clearing...",
       "exportSuccess": "Data exported successfully",
       "importSuccess": "Data imported successfully",
-      "clearSuccess": "All data cleared"
+      "noNewData": "No new data to import. All items already exist.",
+      "importSuccessDetails": "Successfully imported:\n\n• {{clients}} clients\n• {{documents}} documents\n• {{templates}} templates\n• {{recurringRules}} recurring rules",
+      "clearSuccess": "All data has been cleared successfully. The app will restart the onboarding process.",
+      "failedToExport": "Failed to export data",
+      "failedToImport": "Failed to import data",
+      "failedToClear": "Failed to clear data"
     },
     "about": {
       "title": "About",
       "version": "Version",
       "buildNumber": "Build",
       "support": "Support",
-      "licenses": "Open Source Licenses",
       "privacy": "Privacy Policy"
     }
   },
@@ -274,6 +308,8 @@
     "version": "Version",
     "tagline": "Professional invoicing made simple",
     "privacyPolicy": "Privacy Policy",
+    "privacy": "Your Privacy",
+    "privacyMessage": "This app is 100% offline. All your data stays on your device. No cloud sync, no servers, no tracking. You own your data completely.",
     "support": "Contact Support",
     "rate": "Rate InvoiceForge",
     "rights": "All rights reserved.",

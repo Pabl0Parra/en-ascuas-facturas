@@ -31,11 +31,14 @@
         "android.permission.CAMERA"
       ]
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      "expo-splash-screen"
+    ],
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "2138da3e-331d-45f0-807d-4475f369f6aa"
+        "projectId": "cff596a8-0843-4972-94f0-310ebf0d9063"
       }
     },
     "privacy": "unlisted"

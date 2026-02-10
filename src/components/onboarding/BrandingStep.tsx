@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert, Platform, KeyboardAvoidingView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as ImagePicker from 'expo-image-picker';
 import { Button } from '../ui/Button';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 
 interface BrandingData {
   logoUri: string | null;
@@ -32,6 +34,9 @@ export const BrandingStep: React.FC<BrandingStepProps> = ({
   onNext,
   onBack,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [logoUri, setLogoUri] = useState<string | null>(initialData?.logoUri || null);
   const [primaryColor, setPrimaryColor] = useState<string>(
     initialData?.primaryColor || PRESET_COLORS[0].color
@@ -167,6 +172,7 @@ export const BrandingStep: React.FC<BrandingStepProps> = ({
               name={preset.name}
               selected={primaryColor === preset.color}
               onSelect={() => setPrimaryColor(preset.color)}
+              colors={colors}
             />
           ))}
         </View>
@@ -203,27 +209,32 @@ interface ColorOptionProps {
   name: string;
   selected: boolean;
   onSelect: () => void;
+  colors: AppColors;
 }
 
-const ColorOption: React.FC<ColorOptionProps> = ({ color, name, selected, onSelect }) => (
-  <TouchableOpacity
-    style={[
-      styles.colorOption,
-      { borderColor: selected ? color : COLORS.border },
-      selected && styles.colorOptionSelected,
-    ]}
-    onPress={onSelect}
-  >
-    <View style={[styles.colorCircle, { backgroundColor: color }]} />
-    <Text style={styles.colorName}>{name}</Text>
-    {selected && <Text style={styles.checkmark}>✓</Text>}
-  </TouchableOpacity>
-);
+const ColorOption: React.FC<ColorOptionProps> = ({ color, name, selected, onSelect, colors }) => {
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
-const styles = StyleSheet.create({
+  return (
+    <TouchableOpacity
+      style={[
+        styles.colorOption,
+        { borderColor: selected ? color : colors.border },
+        selected && styles.colorOptionSelected,
+      ]}
+      onPress={onSelect}
+    >
+      <View style={[styles.colorCircle, { backgroundColor: color }]} />
+      <Text style={styles.colorName}>{name}</Text>
+      {selected && <Text style={styles.checkmark}>✓</Text>}
+    </TouchableOpacity>
+  );
+};
+
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,
@@ -238,12 +249,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: 'bold',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   subtitle: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   section: {
     marginBottom: SPACING.xl,
@@ -251,12 +262,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   sectionHint: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: SPACING.md,
   },
   logoPreview: {
@@ -278,12 +289,12 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: COLORS.error,
+    backgroundColor: colors.error,
     justifyContent: 'center',
     alignItems: 'center',
   },
   removeLogoText: {
-    color: COLORS.textInverse,
+    color: colors.textInverse,
     fontSize: FONT_SIZE.lg,
     fontWeight: 'bold',
   },
@@ -295,14 +306,14 @@ const styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS.md,
     borderWidth: 2,
     borderStyle: 'dashed',
-    borderColor: COLORS.border,
+    borderColor: colors.border,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
   },
   logoPlaceholderText: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
   },
   logoButtons: {
     flexDirection: 'row',
@@ -321,7 +332,7 @@ const styles = StyleSheet.create({
     padding: SPACING.md,
     borderWidth: 2,
     borderRadius: BORDER_RADIUS.md,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   colorOptionSelected: {
     borderWidth: 3,
@@ -335,11 +346,11 @@ const styles = StyleSheet.create({
   colorName: {
     flex: 1,
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   checkmark: {
     fontSize: FONT_SIZE.xl,
-    color: COLORS.success,
+    color: colors.success,
     fontWeight: 'bold',
   },
   colorPreview: {
@@ -349,7 +360,7 @@ const styles = StyleSheet.create({
   },
   colorPreviewText: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textInverse,
+    color: colors.textInverse,
     fontWeight: '600',
   },
   footer: {
@@ -364,7 +375,7 @@ const styles = StyleSheet.create({
   },
   progress: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     textAlign: 'center',
     marginTop: SPACING.md,
   },

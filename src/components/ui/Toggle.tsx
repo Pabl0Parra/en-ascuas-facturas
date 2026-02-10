@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, Switch, StyleSheet } from 'react-native';
-import { COLORS, SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 
 interface ToggleProps {
   label: string;
@@ -15,6 +17,9 @@ export const Toggle: React.FC<ToggleProps> = ({
   onValueChange,
   description,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   return (
     <View style={styles.container}>
       <View style={styles.labelContainer}>
@@ -24,14 +29,14 @@ export const Toggle: React.FC<ToggleProps> = ({
       <Switch
         value={value}
         onValueChange={onValueChange}
-        trackColor={{ false: COLORS.border, true: COLORS.primaryLight }}
-        thumbColor={value ? COLORS.primary : COLORS.textMuted}
+        trackColor={{ false: colors.border, true: colors.primaryLight }}
+        thumbColor={value ? colors.primary : colors.textMuted}
       />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -45,11 +50,11 @@ const styles = StyleSheet.create({
   label: {
     fontSize: FONT_SIZE.md,
     fontWeight: '500',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   description: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginTop: SPACING.xs,
   },
 });

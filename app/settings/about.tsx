@@ -1,3 +1,4 @@
+import React, { useMemo } from 'react';
 import {
   View,
   Text,
@@ -13,7 +14,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { Header } from '../../src/components/ui/Header';
 import { Card } from '../../src/components/ui/Card';
-import { COLORS, SPACING, FONT_SIZE } from '../../src/constants/theme';
+import { useTheme } from '../../src/hooks/useTheme';
+import type { AppColors } from '../../src/constants/theme';
+import { SPACING, FONT_SIZE } from '../../src/constants/theme';
 
 const APP_VERSION = '2.0.0';
 const BUILD_NUMBER = '2024020800';
@@ -21,6 +24,8 @@ const BUILD_NUMBER = '2024020800';
 export default function AboutScreen() {
   const router = useRouter();
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   const handleSupport = () => {
     // Open support email
@@ -78,37 +83,37 @@ export default function AboutScreen() {
           <Text style={styles.sectionTitle}>Features</Text>
 
           <View style={styles.featureRow}>
-            <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
+            <Ionicons name="checkmark-circle" size={20} color={colors.success} />
             <Text style={styles.featureText}>Multi-language support (5 languages)</Text>
           </View>
 
           <View style={styles.featureRow}>
-            <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
+            <Ionicons name="checkmark-circle" size={20} color={colors.success} />
             <Text style={styles.featureText}>Multi-currency support (8 currencies)</Text>
           </View>
 
           <View style={styles.featureRow}>
-            <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
+            <Ionicons name="checkmark-circle" size={20} color={colors.success} />
             <Text style={styles.featureText}>Professional PDF templates (3 styles)</Text>
           </View>
 
           <View style={styles.featureRow}>
-            <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
+            <Ionicons name="checkmark-circle" size={20} color={colors.success} />
             <Text style={styles.featureText}>Document templates</Text>
           </View>
 
           <View style={styles.featureRow}>
-            <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
+            <Ionicons name="checkmark-circle" size={20} color={colors.success} />
             <Text style={styles.featureText}>Recurring invoices</Text>
           </View>
 
           <View style={styles.featureRow}>
-            <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
+            <Ionicons name="checkmark-circle" size={20} color={colors.success} />
             <Text style={styles.featureText}>Flexible tax configuration</Text>
           </View>
 
           <View style={styles.featureRow}>
-            <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
+            <Ionicons name="checkmark-circle" size={20} color={colors.success} />
             <Text style={styles.featureText}>Completely offline (no cloud sync)</Text>
           </View>
         </Card>
@@ -116,7 +121,7 @@ export default function AboutScreen() {
         {/* Privacy Notice */}
         <Card style={styles.section}>
           <View style={styles.privacyHeader}>
-            <Ionicons name="shield-checkmark" size={32} color={COLORS.success} />
+            <Ionicons name="shield-checkmark" size={32} color={colors.success} />
             <Text style={styles.privacyTitle}>{t('settings.about.privacy')}</Text>
           </View>
 
@@ -125,17 +130,17 @@ export default function AboutScreen() {
           </Text>
 
           <View style={styles.featureRow}>
-            <Ionicons name="lock-closed" size={20} color={COLORS.success} />
+            <Ionicons name="lock-closed" size={20} color={colors.success} />
             <Text style={styles.featureText}>{t('about.feature1')}</Text>
           </View>
 
           <View style={styles.featureRow}>
-            <Ionicons name="phone-portrait" size={20} color={COLORS.success} />
+            <Ionicons name="phone-portrait" size={20} color={colors.success} />
             <Text style={styles.featureText}>{t('about.feature2')}</Text>
           </View>
 
           <View style={styles.featureRow}>
-            <Ionicons name="cloud-offline" size={20} color={COLORS.success} />
+            <Ionicons name="cloud-offline" size={20} color={colors.success} />
             <Text style={styles.featureText}>{t('about.feature3')}</Text>
           </View>
         </Card>
@@ -147,9 +152,9 @@ export default function AboutScreen() {
             onPress={handleSupport}
             activeOpacity={0.7}
           >
-            <Ionicons name="mail" size={24} color={COLORS.primary} />
+            <Ionicons name="mail" size={24} color={colors.primary} />
             <Text style={styles.linkText}>{t('settings.about.support')}</Text>
-            <Ionicons name="open-outline" size={20} color={COLORS.textSecondary} />
+            <Ionicons name="open-outline" size={20} color={colors.textSecondary} />
           </TouchableOpacity>
         </Card>
 
@@ -162,10 +167,10 @@ export default function AboutScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,
@@ -186,12 +191,12 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: '900',
-    color: COLORS.black,
+    color: colors.black,
     letterSpacing: 2,
   },
   tagline: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.ember,
+    color: colors.primary,
     textTransform: 'uppercase',
     letterSpacing: 1,
   },
@@ -201,7 +206,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
   infoRow: {
@@ -210,16 +215,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.divider,
+    borderBottomColor: colors.divider,
   },
   infoLabel: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   infoValue: {
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   featureRow: {
     flexDirection: 'row',
@@ -228,7 +233,7 @@ const styles = StyleSheet.create({
   },
   featureText: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginLeft: SPACING.md,
   },
   linkRow: {
@@ -236,18 +241,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.divider,
+    borderBottomColor: colors.divider,
   },
   linkText: {
     flex: 1,
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginLeft: SPACING.md,
   },
   credits: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     textAlign: 'center',
     lineHeight: 20,
     marginTop: SPACING.lg,
@@ -260,12 +265,12 @@ const styles = StyleSheet.create({
   privacyTitle: {
     fontSize: FONT_SIZE.xl,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginLeft: SPACING.md,
   },
   privacyText: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     lineHeight: 22,
     marginBottom: SPACING.lg,
   },

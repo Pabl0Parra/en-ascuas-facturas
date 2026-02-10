@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { WelcomeStep } from './WelcomeStep';
 import { BusinessInfoStep } from './BusinessInfoStep';
@@ -10,7 +10,8 @@ import { useBusinessProfileStore } from '../../stores/businessProfileStore';
 import { getCountryDefaults } from '../../config/countryDefaults';
 import { generateSecureId } from '../../utils/idGenerator';
 import type { BusinessProfile } from '../../types/businessProfile';
-import { COLORS } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 
 interface OnboardingNavigatorProps {
   onComplete: () => void;
@@ -19,6 +20,9 @@ interface OnboardingNavigatorProps {
 export const OnboardingNavigator: React.FC<OnboardingNavigatorProps> = ({
   onComplete,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [currentStep, setCurrentStep] = useState(0);
   const { setProfile, completeOnboarding } = useBusinessProfileStore();
 
@@ -187,9 +191,9 @@ export const OnboardingNavigator: React.FC<OnboardingNavigatorProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
 });

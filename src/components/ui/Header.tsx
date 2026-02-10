@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS, SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 
 interface HeaderProps {
   title: string;
@@ -21,7 +23,9 @@ export const Header: React.FC<HeaderProps> = ({
   rightAction,
 }) => {
   const router = useRouter();
-  
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const handleBack = () => {
     if (onBack) {
       onBack();
@@ -29,23 +33,23 @@ export const Header: React.FC<HeaderProps> = ({
       router.back();
     }
   };
-  
+
   return (
     <View style={styles.header}>
       <View style={styles.leftSection}>
         {showBack && (
           <TouchableOpacity onPress={handleBack} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={COLORS.textPrimary} />
+            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
           </TouchableOpacity>
         )}
       </View>
-      
+
       <Text style={styles.title} numberOfLines={1}>{title}</Text>
-      
+
       <View style={styles.rightSection}>
         {rightAction && (
           <TouchableOpacity onPress={rightAction.onPress} style={styles.actionButton}>
-            <Ionicons name={rightAction.icon} size={24} color={COLORS.primary} />
+            <Ionicons name={rightAction.icon} size={24} color={colors.primary} />
           </TouchableOpacity>
         )}
       </View>
@@ -53,16 +57,16 @@ export const Header: React.FC<HeaderProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: SPACING.md,
     paddingVertical: SPACING.md,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.divider,
+    borderBottomColor: colors.divider,
   },
   leftSection: {
     width: 40,
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: FONT_SIZE.xl,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     textAlign: 'center',
   },
   backButton: {

@@ -1,9 +1,11 @@
 // src/components/ui/StatusBadge.tsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { DocumentStatus } from '../../types/document';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 
 interface StatusBadgeProps {
   status: DocumentStatus;
@@ -60,6 +62,8 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   status,
   size = 'medium',
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const config = STATUS_CONFIG[status];
   const isSmall = size === 'small';
 
@@ -89,7 +93,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',

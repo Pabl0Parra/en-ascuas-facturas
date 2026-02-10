@@ -1,9 +1,10 @@
 // src/components/settings/PrivacyPolicy.tsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import {
-  COLORS,
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
@@ -11,6 +12,8 @@ import {
 
 export const PrivacyPolicy: React.FC = () => {
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -182,10 +185,10 @@ export const PrivacyPolicy: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   content: {
     padding: SPACING.lg,
@@ -193,12 +196,12 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   lastUpdated: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     marginBottom: SPACING.xl,
   },
   section: {
@@ -207,12 +210,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.sm,
   },
   paragraph: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     lineHeight: FONT_SIZE.md * 1.5,
     marginBottom: SPACING.sm,
   },
@@ -222,26 +225,26 @@ const styles = StyleSheet.create({
   },
   bullet: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     lineHeight: FONT_SIZE.md * 1.5,
     marginBottom: SPACING.xs,
   },
   bulletBold: {
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   highlight: {
-    backgroundColor: COLORS.primary + '15',
+    backgroundColor: colors.primary + '15',
     padding: SPACING.md,
     borderRadius: BORDER_RADIUS.md,
     borderWidth: 1,
-    borderColor: COLORS.primary + '30',
+    borderColor: colors.primary + '30',
     marginTop: SPACING.md,
   },
   highlightText: {
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.primary,
+    color: colors.primary,
     textAlign: 'center',
     lineHeight: FONT_SIZE.md * 1.4,
   },

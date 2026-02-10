@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Card } from '../ui/Card';
-import { COLORS, SPACING, FONT_SIZE } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
+import { SPACING, FONT_SIZE } from '../../constants/theme';
 import type { Client } from '../../types/client';
 
 interface ClientCardProps {
@@ -18,6 +20,9 @@ export const ClientCard: React.FC<ClientCardProps> = ({
   onEdit,
   onDelete,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
       <Card padding="md" style={styles.container}>
@@ -44,7 +49,7 @@ export const ClientCard: React.FC<ClientCardProps> = ({
                 }}
                 style={styles.actionButton}
               >
-                <Ionicons name="pencil" size={20} color={COLORS.primary} />
+                <Ionicons name="pencil" size={20} color={colors.primary} />
               </TouchableOpacity>
             )}
             {onDelete && (
@@ -55,7 +60,7 @@ export const ClientCard: React.FC<ClientCardProps> = ({
                 }}
                 style={styles.actionButton}
               >
-                <Ionicons name="trash-outline" size={20} color={COLORS.error} />
+                <Ionicons name="trash-outline" size={20} color={colors.error} />
               </TouchableOpacity>
             )}
           </View>
@@ -65,7 +70,7 @@ export const ClientCard: React.FC<ClientCardProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     marginBottom: SPACING.sm,
   },
@@ -79,22 +84,22 @@ const styles = StyleSheet.create({
   nombre: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: 2,
   },
   nifCif: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.primary,
+    color: colors.primary,
     fontWeight: '500',
     marginBottom: SPACING.xs,
   },
   direccion: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   ubicacion: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
   },
   actions: {
     flexDirection: 'row',

@@ -1,5 +1,5 @@
 // src/components/dashboard/RecentDocuments.tsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -8,8 +8,9 @@ import type { DocumentMetadata } from '../../types/document';
 import { formatCurrencyByCode } from '../../utils/currencyFormatter';
 import { useBusinessProfileStore } from '../../stores/businessProfileStore';
 import { StatusBadge } from '../ui/StatusBadge';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import {
-  COLORS,
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
@@ -28,6 +29,8 @@ export const RecentDocuments: React.FC<RecentDocumentsProps> = ({
   const { t } = useTranslation();
   const businessProfile = useBusinessProfileStore((state) => state.profile);
   const currency = businessProfile?.currency || 'EUR';
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   if (documents.length === 0) {
     return (
@@ -39,7 +42,7 @@ export const RecentDocuments: React.FC<RecentDocumentsProps> = ({
           <Ionicons
             name="document-text-outline"
             size={48}
-            color={COLORS.textMuted}
+            color={colors.textMuted}
           />
           <Text style={styles.emptyText}>{t('dashboard.noDocumentsYet')}</Text>
           <Text style={styles.emptySubtext}>
@@ -84,7 +87,7 @@ export const RecentDocuments: React.FC<RecentDocumentsProps> = ({
                     : 'document-outline'
                 }
                 size={20}
-                color={COLORS.surface}
+                color={colors.surface}
               />
             </View>
 
@@ -108,7 +111,7 @@ export const RecentDocuments: React.FC<RecentDocumentsProps> = ({
               <Ionicons
                 name="chevron-forward"
                 size={20}
-                color={COLORS.textMuted}
+                color={colors.textMuted}
               />
             </View>
           </TouchableOpacity>
@@ -118,9 +121,9 @@ export const RecentDocuments: React.FC<RecentDocumentsProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
     marginBottom: SPACING.md,
@@ -134,11 +137,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   viewAllText: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.primary,
+    color: colors.primary,
     fontWeight: '600',
   },
   list: {
@@ -148,7 +151,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: SPACING.sm,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
     borderRadius: BORDER_RADIUS.sm,
   },
   iconContainer: {
@@ -160,10 +163,10 @@ const styles = StyleSheet.create({
     marginRight: SPACING.sm,
   },
   invoiceIcon: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: colors.primary,
   },
   quoteIcon: {
-    backgroundColor: COLORS.textSecondary,
+    backgroundColor: colors.textSecondary,
   },
   documentContent: {
     flex: 1,
@@ -177,16 +180,16 @@ const styles = StyleSheet.create({
   documentNumber: {
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   documentClient: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 2,
   },
   documentDate: {
     fontSize: FONT_SIZE.xs,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
   },
   documentRight: {
     flexDirection: 'row',
@@ -196,7 +199,7 @@ const styles = StyleSheet.create({
   documentTotal: {
     fontSize: FONT_SIZE.md,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   emptyState: {
     alignItems: 'center',
@@ -205,12 +208,12 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginTop: SPACING.sm,
   },
   emptySubtext: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     marginTop: SPACING.xs,
   },
 });

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { Card } from '../ui/Card';
-import { COLORS, SPACING, FONT_SIZE } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
+import { SPACING, FONT_SIZE } from '../../constants/theme';
 import { formatDate, formatCurrency } from '../../utils/formatters';
 import type { DocumentMetadata } from '../../types/document';
 
@@ -19,6 +21,8 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
   onDelete,
 }) => {
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const isFactura = document.tipo === 'factura';
 
   return (
@@ -30,7 +34,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             <Ionicons
               name={isFactura ? 'document-text' : 'clipboard'}
               size={20}
-              color={isFactura ? COLORS.primary : COLORS.ember}
+              color={isFactura ? colors.primary : colors.primary}
             />
             <View style={[styles.typeBadge, isFactura && styles.facturaBadge]}>
               <Text style={[styles.typeText, isFactura && styles.facturaText]}>
@@ -53,7 +57,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
                 style={styles.deleteButton}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
               >
-                <Ionicons name="trash-outline" size={18} color={COLORS.error} />
+                <Ionicons name="trash-outline" size={18} color={colors.error} />
               </TouchableOpacity>
             )}
           </View>
@@ -79,7 +83,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     marginBottom: SPACING.sm,
   },
@@ -96,21 +100,21 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   typeBadge: {
-    backgroundColor: COLORS.ember + '20',
+    backgroundColor: colors.primary + '20',
     paddingHorizontal: SPACING.xs,
     paddingVertical: 2,
     borderRadius: 4,
   },
   facturaBadge: {
-    backgroundColor: COLORS.primary + '20',
+    backgroundColor: colors.primary + '20',
   },
   typeText: {
     fontSize: FONT_SIZE.xs,
     fontWeight: '600',
-    color: COLORS.ember,
+    color: colors.primary,
   },
   facturaText: {
-    color: COLORS.primary,
+    color: colors.primary,
   },
   headerRight: {
     flexDirection: 'row',
@@ -120,7 +124,7 @@ const styles = StyleSheet.create({
   numero: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     maxWidth: 120,
   },
   deleteButton: {
@@ -132,11 +136,11 @@ const styles = StyleSheet.create({
   cliente: {
     fontSize: FONT_SIZE.md,
     fontWeight: '500',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   nifCif: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   footer: {
     flexDirection: 'row',
@@ -144,15 +148,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: SPACING.sm,
     borderTopWidth: 1,
-    borderTopColor: COLORS.divider,
+    borderTopColor: colors.divider,
   },
   fecha: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
   },
   total: {
     fontSize: FONT_SIZE.xl,
     fontWeight: '700',
-    color: COLORS.primary,
+    color: colors.primary,
   },
 });

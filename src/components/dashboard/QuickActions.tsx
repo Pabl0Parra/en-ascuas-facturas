@@ -1,11 +1,12 @@
 // src/components/dashboard/QuickActions.tsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import {
-  COLORS,
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
@@ -22,13 +23,15 @@ interface QuickActionButton {
 export const QuickActions: React.FC = () => {
   const router = useRouter();
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   const actions: QuickActionButton[] = [
     {
       id: 'new-invoice',
       titleKey: 'dashboard.newInvoice',
       icon: 'document-text',
-      color: COLORS.primary,
+      color: colors.primary,
       onPress: () => router.push('/documento/nuevo?tipo=factura'),
     },
     {
@@ -81,14 +84,14 @@ export const QuickActions: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     marginBottom: SPACING.md,
   },
   title: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.sm,
     paddingHorizontal: SPACING.xs,
   },
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
   actionButton: {
     flex: 1,
     minWidth: '47%',
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
     alignItems: 'center',
@@ -118,7 +121,7 @@ const styles = StyleSheet.create({
   actionTitle: {
     fontSize: FONT_SIZE.sm,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     textAlign: 'center',
   },
 });

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS, BORDER_RADIUS } from '../../constants/theme';
+import { BORDER_RADIUS } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 
 type IconButtonSize = 'sm' | 'md' | 'lg';
 type IconButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
@@ -21,12 +23,12 @@ const sizeMap: Record<IconButtonSize, { button: number; icon: number }> = {
   lg: { button: 56, icon: 32 },
 };
 
-const variantStyles: Record<IconButtonVariant, { bg: string; color: string }> = {
-  primary: { bg: COLORS.primary, color: COLORS.textInverse },
-  secondary: { bg: COLORS.surface, color: COLORS.textPrimary },
-  ghost: { bg: 'transparent', color: COLORS.textSecondary },
-  danger: { bg: COLORS.error, color: COLORS.textInverse },
-};
+const getVariantStyles = (colors: AppColors): Record<IconButtonVariant, { bg: string; color: string }> => ({
+  primary: { bg: colors.primary, color: colors.textInverse },
+  secondary: { bg: colors.surface, color: colors.textPrimary },
+  ghost: { bg: 'transparent', color: colors.textSecondary },
+  danger: { bg: colors.error, color: colors.textInverse },
+});
 
 export const IconButton: React.FC<IconButtonProps> = ({
   icon,
@@ -36,6 +38,10 @@ export const IconButton: React.FC<IconButtonProps> = ({
   disabled = false,
   style,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+  const variantStyles = useMemo(() => getVariantStyles(colors), [colors]);
+
   const { button: buttonSize, icon: iconSize } = sizeMap[size];
   const { bg, color } = variantStyles[variant];
 
@@ -60,7 +66,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   button: {
     borderRadius: BORDER_RADIUS.full,
     alignItems: 'center',

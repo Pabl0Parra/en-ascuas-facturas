@@ -1,34 +1,92 @@
-export const COLORS = {
-  // Primarios (acentos fuego)
-  primary: '#FF4500',        // Orange Red - acento principal
-  primaryDark: '#CC3700',    // Pressed states
-  primaryLight: '#FF6A33',   // Highlights
-  
-  // Neutros
-  background: '#FFFFFF',     // Fondo principal
-  surface: '#F5F5F5',        // Superficies elevadas
-  card: '#FAFAFA',           // Cards
-  
-  // Texto
-  textPrimary: '#1A1A1A',    // Texto principal (casi negro)
-  textSecondary: '#666666',  // Texto secundario
-  textMuted: '#999999',      // Texto deshabilitado
-  textInverse: '#FFFFFF',    // Texto sobre fondos oscuros
-  
-  // Bordes
-  border: '#E0E0E0',
-  borderDark: '#CCCCCC',
-  divider: '#EEEEEE',
-  
-  // Estados
-  success: '#28A745',
-  error: '#DC3545',
-  warning: '#FFC107',
-  
-  // Especiales
-  black: '#000000',          // Logo, headers importantes
-  ember: '#E25822',          // Variante brasa
-} as const;
+// Type for the color palette
+export interface AppColors {
+  // Primary
+  primary: string;
+  primaryDark: string;
+  primaryLight: string;
+
+  // Backgrounds
+  background: string;
+  surface: string;
+  card: string;
+
+  // Text
+  textPrimary: string;
+  textSecondary: string;
+  textMuted: string;
+  textInverse: string;
+
+  // Borders
+  border: string;
+  borderDark: string;
+  divider: string;
+
+  // Status
+  success: string;
+  error: string;
+  warning: string;
+  info: string;
+
+  // Special
+  black: string;
+}
+
+// Light Mode — Comfortable & Safe
+export const lightColors: AppColors = {
+  primary: '#5B8FCC',
+  primaryDark: '#4A7AB8',
+  primaryLight: '#6FA8DC',
+
+  background: '#F8FBFE',
+  surface: '#E8F1FA',
+  card: '#FFFFFF',
+
+  textPrimary: '#2C3E50',
+  textSecondary: '#7A8C9E',
+  textMuted: '#A0B4C8',
+  textInverse: '#FFFFFF',
+
+  border: '#D0DEE8',
+  borderDark: '#B0C4D8',
+  divider: '#E0EAF2',
+
+  success: '#81C784',
+  error: '#E57373',
+  warning: '#FFB74D',
+  info: '#6FA8DC',
+
+  black: '#1A2332',
+};
+
+// Dark Mode — Cozy & Secure
+export const darkColors: AppColors = {
+  primary: '#6FA8DC',
+  primaryDark: '#5B8FCC',
+  primaryLight: '#7FB8E8',
+
+  background: '#1A1F2E',
+  surface: '#2A3F5F',
+  card: '#232A3E',
+
+  textPrimary: '#E8E8E8',
+  textSecondary: '#A0A8B0',
+  textMuted: '#6B7580',
+  textInverse: '#1A1F2E',
+
+  border: '#354560',
+  borderDark: '#2A3F5F',
+  divider: '#253045',
+
+  success: '#6DB672',
+  error: '#CF6679',
+  warning: '#FFB74D',
+  info: '#5DA3D5',
+
+  black: '#FFFFFF',
+};
+
+// Static fallback for class components (ErrorBoundary) that can't use hooks
+export const COLORS = lightColors;
 
 export const SPACING = {
   xs: 4,

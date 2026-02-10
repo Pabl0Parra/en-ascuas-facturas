@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -21,11 +21,15 @@ import { useTemplateStore } from '../../src/stores/templateStore';
 import { useRecurringStore } from '../../src/stores/recurringStore';
 import { useTaxConfigStore } from '../../src/stores/taxConfigStore';
 import { exportBackup, importBackup, getBackupStats } from '../../src/services/backupService';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/theme';
+import { useTheme } from '../../src/hooks/useTheme';
+import type { AppColors } from '../../src/constants/theme';
+import { SPACING, FONT_SIZE } from '../../src/constants/theme';
 
 export default function DataManagementScreen() {
   const router = useRouter();
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   const [isExporting, setIsExporting] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
@@ -58,7 +62,7 @@ export default function DataManagementScreen() {
       setIsExporting(false);
     }
   };
-  
+
   const handleImportData = async () => {
     try {
       setIsImporting(true);
@@ -190,25 +194,25 @@ export default function DataManagementScreen() {
           <Text style={styles.sectionTitle}>Data Overview</Text>
 
           <View style={styles.statRow}>
-            <Ionicons name="people" size={24} color={COLORS.primary} />
+            <Ionicons name="people" size={24} color={colors.primary} />
             <Text style={styles.statLabel}>Clients</Text>
             <Text style={styles.statValue}>{stats.clients}</Text>
           </View>
 
           <View style={styles.statRow}>
-            <Ionicons name="document-text" size={24} color={COLORS.primary} />
+            <Ionicons name="document-text" size={24} color={colors.primary} />
             <Text style={styles.statLabel}>Documents</Text>
             <Text style={styles.statValue}>{stats.documents}</Text>
           </View>
 
           <View style={styles.statRow}>
-            <Ionicons name="copy" size={24} color={COLORS.primary} />
+            <Ionicons name="copy" size={24} color={colors.primary} />
             <Text style={styles.statLabel}>Templates</Text>
             <Text style={styles.statValue}>{stats.templates}</Text>
           </View>
 
           <View style={styles.statRow}>
-            <Ionicons name="repeat" size={24} color={COLORS.primary} />
+            <Ionicons name="repeat" size={24} color={colors.primary} />
             <Text style={styles.statLabel}>Recurring Rules</Text>
             <Text style={styles.statValue}>{stats.recurringRules}</Text>
           </View>
@@ -217,7 +221,7 @@ export default function DataManagementScreen() {
         {/* Export Data */}
         <Card style={styles.section}>
           <View style={styles.actionHeader}>
-            <Ionicons name="download" size={32} color={COLORS.primary} />
+            <Ionicons name="download" size={32} color={colors.primary} />
             <Text style={styles.actionTitle}>
               {t('settings.dataManagement.exportData')}
             </Text>
@@ -234,7 +238,7 @@ export default function DataManagementScreen() {
           {isExporting && (
             <ActivityIndicator
               size="small"
-              color={COLORS.primary}
+              color={colors.primary}
               style={styles.loader}
             />
           )}
@@ -243,7 +247,7 @@ export default function DataManagementScreen() {
         {/* Import Data */}
         <Card style={styles.section}>
           <View style={styles.actionHeader}>
-            <Ionicons name="cloud-upload" size={32} color={COLORS.primary} />
+            <Ionicons name="cloud-upload" size={32} color={colors.primary} />
             <Text style={styles.actionTitle}>
               {t('settings.dataManagement.importData')}
             </Text>
@@ -260,7 +264,7 @@ export default function DataManagementScreen() {
           {isImporting && (
             <ActivityIndicator
               size="small"
-              color={COLORS.primary}
+              color={colors.primary}
               style={styles.loader}
             />
           )}
@@ -269,7 +273,7 @@ export default function DataManagementScreen() {
         {/* Clear All Data */}
         <Card style={[styles.section, styles.dangerSection]}>
           <View style={styles.actionHeader}>
-            <Ionicons name="warning" size={32} color={COLORS.error} />
+            <Ionicons name="warning" size={32} color={colors.error} />
             <Text style={[styles.actionTitle, styles.dangerTitle]}>
               {t('settings.dataManagement.clearAllData')}
             </Text>
@@ -287,7 +291,7 @@ export default function DataManagementScreen() {
           {isClearing && (
             <ActivityIndicator
               size="small"
-              color={COLORS.error}
+              color={colors.error}
               style={styles.loader}
             />
           )}
@@ -297,10 +301,10 @@ export default function DataManagementScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,
@@ -315,7 +319,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
   statRow: {
@@ -323,18 +327,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.divider,
+    borderBottomColor: colors.divider,
   },
   statLabel: {
     flex: 1,
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginLeft: SPACING.md,
   },
   statValue: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.primary,
+    color: colors.primary,
   },
   actionHeader: {
     flexDirection: 'row',
@@ -345,24 +349,24 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginLeft: SPACING.md,
   },
   actionDescription: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: SPACING.md,
     lineHeight: 20,
   },
   dangerSection: {
     borderWidth: 2,
-    borderColor: COLORS.error + '30',
+    borderColor: colors.error + '30',
   },
   dangerTitle: {
-    color: COLORS.error,
+    color: colors.error,
   },
   dangerButton: {
-    borderColor: COLORS.error,
+    borderColor: colors.error,
   },
   loader: {
     marginTop: SPACING.md,

@@ -2,7 +2,8 @@ import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
-import { COLORS, FONT_SIZE } from '../../src/constants/theme';
+import { useTheme } from '../../src/hooks/useTheme';
+import { FONT_SIZE } from '../../src/constants/theme';
 
 // Extract icon components to prevent re-renders
 const HomeIcon = ({ color, size }: { color: string; size: number }) => (
@@ -24,16 +25,17 @@ const SettingsIcon = ({ color, size }: { color: string; size: number }) => (
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
+  const { colors } = useTheme();
 
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: COLORS.primary,
-        tabBarInactiveTintColor: COLORS.textMuted,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textMuted,
         tabBarStyle: {
-          backgroundColor: COLORS.background,
-          borderTopColor: COLORS.divider,
+          backgroundColor: colors.background,
+          borderTopColor: colors.divider,
           borderTopWidth: 1,
           paddingTop: 4,
           paddingBottom: Math.max(insets.bottom, 8),

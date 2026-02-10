@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -23,11 +23,12 @@ import { createPDF } from '../../services/pdfGenerator';
 import { savePDF, sharePDF } from '../../services/fileService';
 import { generatePDFFileName } from '../../utils/idGenerator';
 import {
-  COLORS,
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
 } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
 import type { DocumentData, DocumentType, LineItem } from '../../types/document';
 
@@ -47,6 +48,8 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   // Form store
   const {
@@ -333,7 +336,7 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
             value={comentarios}
             onChangeText={setComentarios}
             placeholder="Condiciones de pago, notas adicionales, etc..."
-            placeholderTextColor={COLORS.textMuted}
+            placeholderTextColor={colors.textMuted}
             multiline
             numberOfLines={4}
             style={styles.commentsInput}
@@ -357,10 +360,10 @@ export const DocumentForm: React.FC<DocumentFormProps> = ({ tipo }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,
@@ -372,7 +375,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.lg,
     textAlign: 'center',
   },
@@ -389,17 +392,17 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
   commentsInput: {
     borderWidth: 1.5,
-    borderColor: COLORS.border,
+    borderColor: colors.border,
     borderRadius: BORDER_RADIUS.md,
     padding: SPACING.sm,
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     minHeight: 100,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
 });

@@ -1,8 +1,10 @@
 // src/components/dashboard/StatCard.tsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
 
 interface StatCardProps {
   title: string;
@@ -17,12 +19,16 @@ export const StatCard: React.FC<StatCardProps> = ({
   value,
   subtitle,
   icon,
-  color = COLORS.primary,
+  color,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+  const effectiveColor = color || colors.primary;
+
   return (
     <View style={styles.container}>
-      <View style={[styles.iconContainer, { backgroundColor: color + '15' }]}>
-        <Ionicons name={icon} size={24} color={color} />
+      <View style={[styles.iconContainer, { backgroundColor: effectiveColor + '15' }]}>
+        <Ionicons name={icon} size={24} color={effectiveColor} />
       </View>
 
       <View style={styles.content}>
@@ -34,11 +40,11 @@ export const StatCard: React.FC<StatCardProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
     marginBottom: SPACING.sm,
@@ -56,17 +62,17 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 4,
   },
   value: {
     fontSize: FONT_SIZE.xl,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   subtitle: {
     fontSize: FONT_SIZE.xs,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     marginTop: 2,
   },
 });

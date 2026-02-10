@@ -1,12 +1,13 @@
 // src/components/settings/AboutSection.tsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import Constants from 'expo-constants';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import {
-  COLORS,
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
@@ -15,6 +16,8 @@ import {
 export const AboutSection: React.FC = () => {
   const router = useRouter();
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const appVersion = Constants.expoConfig?.version || '2.0.0';
 
   const handlePrivacyPress = () => {
@@ -38,7 +41,7 @@ export const AboutSection: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.iconContainer}>
-          <Ionicons name="document-text" size={40} color={COLORS.primary} />
+          <Ionicons name="document-text" size={40} color={colors.primary} />
         </View>
         <Text style={styles.appName}>Bilio</Text>
         <Text style={styles.version}>
@@ -51,27 +54,27 @@ export const AboutSection: React.FC = () => {
 
       <View style={styles.section}>
         <TouchableOpacity style={styles.listItem} onPress={handlePrivacyPress}>
-          <Ionicons name="shield-checkmark" size={24} color={COLORS.primary} />
+          <Ionicons name="shield-checkmark" size={24} color={colors.primary} />
           <Text style={styles.listItemText}>
             {t('about.privacyPolicy', 'Privacy Policy')}
           </Text>
-          <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+          <Ionicons name="chevron-forward" size={20} color={colors.textMuted} />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.listItem} onPress={handleSupportPress}>
-          <Ionicons name="mail" size={24} color={COLORS.primary} />
+          <Ionicons name="mail" size={24} color={colors.primary} />
           <Text style={styles.listItemText}>
             {t('about.support', 'Contact Support')}
           </Text>
-          <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+          <Ionicons name="chevron-forward" size={20} color={colors.textMuted} />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.listItem} onPress={handleRatePress}>
-          <Ionicons name="star" size={24} color={COLORS.primary} />
+          <Ionicons name="star" size={24} color={colors.primary} />
           <Text style={styles.listItemText}>
             {t('about.rate', 'Rate Bilio')}
           </Text>
-          <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+          <Ionicons name="chevron-forward" size={20} color={colors.textMuted} />
         </TouchableOpacity>
       </View>
 
@@ -124,22 +127,22 @@ export const AboutSection: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   header: {
     alignItems: 'center',
     paddingVertical: SPACING.xl,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     marginBottom: SPACING.md,
   },
   iconContainer: {
     width: 80,
     height: 80,
     borderRadius: BORDER_RADIUS.lg,
-    backgroundColor: COLORS.primary + '15',
+    backgroundColor: colors.primary + '15',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: SPACING.md,
@@ -147,21 +150,21 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   version: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     marginBottom: SPACING.xs,
   },
   tagline: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     textAlign: 'center',
   },
   section: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     marginBottom: SPACING.md,
   },
   listItem: {
@@ -169,23 +172,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
+    borderBottomColor: colors.border,
   },
   listItemText: {
     flex: 1,
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginLeft: SPACING.md,
   },
   features: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     padding: SPACING.md,
     marginBottom: SPACING.md,
   },
   featuresTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
   featureItem: {
@@ -196,12 +199,12 @@ const styles = StyleSheet.create({
   featureText: {
     flex: 1,
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginLeft: SPACING.sm,
   },
   copyright: {
     fontSize: FONT_SIZE.xs,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     textAlign: 'center',
     paddingVertical: SPACING.lg,
   },

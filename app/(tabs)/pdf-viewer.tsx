@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
   View,
   StyleSheet,
@@ -17,11 +17,15 @@ import { Header } from '../../src/components/ui/Header';
 import { useDocumentStore } from '../../src/stores/documentStore';
 import { useClientStore } from '../../src/stores/clientStore';
 import { formatCurrency } from '../../src/utils/formatters';
-import { COLORS, SPACING, BORDER_RADIUS, FONT_SIZE } from '../../src/constants/theme';
+import { useTheme } from '../../src/hooks/useTheme';
+import type { AppColors } from '../../src/constants/theme';
+import { SPACING, BORDER_RADIUS, FONT_SIZE } from '../../src/constants/theme';
 
 export default function PDFViewerScreen() {
   const router = useRouter();
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const { filePath, title, documentId } = useLocalSearchParams<{
     filePath: string;
     title: string;
@@ -144,7 +148,7 @@ export default function PDFViewerScreen() {
         {document && (
           <View style={styles.card}>
             <View style={styles.cardHeader}>
-              <Ionicons name="information-circle" size={20} color={COLORS.primary} />
+              <Ionicons name="information-circle" size={20} color={colors.primary} />
               <Text style={styles.cardTitle}>{t('document.datosFacturacion')}</Text>
             </View>
 
@@ -185,7 +189,7 @@ export default function PDFViewerScreen() {
         {document && (
           <View style={styles.card}>
             <View style={styles.cardHeader}>
-              <Ionicons name="cash" size={20} color={COLORS.primary} />
+              <Ionicons name="cash" size={20} color={colors.primary} />
               <Text style={styles.cardTitle}>{t('totals.total')}</Text>
             </View>
 
@@ -199,7 +203,7 @@ export default function PDFViewerScreen() {
         {/* PDF Preview */}
         <View style={styles.card}>
           <View style={styles.pdfPreviewContainer}>
-            <Ionicons name="document-text-outline" size={80} color={COLORS.textMuted} />
+            <Ionicons name="document-text-outline" size={80} color={colors.textMuted} />
             <Text style={styles.pdfPreviewLabel}>PDF {t('document.document')}</Text>
             <Text style={styles.pdfPreviewHint}>
               Tap "View Full PDF" below to open in your PDF reader
@@ -225,7 +229,7 @@ export default function PDFViewerScreen() {
             onPress={handleShare}
             activeOpacity={0.7}
           >
-            <Ionicons name="share-outline" size={24} color={COLORS.primary} />
+            <Ionicons name="share-outline" size={24} color={colors.primary} />
           </TouchableOpacity>
         </View>
       )}
@@ -233,10 +237,10 @@ export default function PDFViewerScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   centerContainer: {
     flex: 1,
@@ -244,7 +248,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingText: {
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     fontSize: FONT_SIZE.md,
   },
   scrollView: {
@@ -267,10 +271,10 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.sm,
   },
   badgeFactura: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: colors.primary,
   },
   badgePresupuesto: {
-    backgroundColor: COLORS.ember,
+    backgroundColor: colors.primary,
   },
   badgeText: {
     color: '#fff',
@@ -281,10 +285,10 @@ const styles = StyleSheet.create({
   documentNumber: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: '900',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   card: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.lg,
     padding: SPACING.lg,
     marginBottom: SPACING.md,
@@ -301,12 +305,12 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.md,
     paddingBottom: SPACING.sm,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.divider,
+    borderBottomColor: colors.divider,
   },
   cardTitle: {
     fontSize: FONT_SIZE.md,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
@@ -315,14 +319,14 @@ const styles = StyleSheet.create({
   },
   infoLabel: {
     fontSize: FONT_SIZE.xs,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 2,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   infoValue: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     fontWeight: '600',
   },
   totalContainer: {
@@ -334,13 +338,13 @@ const styles = StyleSheet.create({
   totalAmount: {
     fontSize: 48,
     fontWeight: '900',
-    color: COLORS.primary,
+    color: colors.primary,
     marginRight: SPACING.xs,
   },
   totalCurrency: {
     fontSize: FONT_SIZE.xl,
     fontWeight: '600',
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   pdfPreviewContainer: {
     alignItems: 'center',
@@ -350,21 +354,21 @@ const styles = StyleSheet.create({
     marginTop: SPACING.md,
     fontSize: FONT_SIZE.lg,
     fontWeight: '600',
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   pdfPreviewHint: {
     marginTop: SPACING.xs,
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     textAlign: 'center',
   },
   actionContainer: {
     flexDirection: 'row',
     padding: SPACING.md,
     gap: SPACING.sm,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderTopWidth: 1,
-    borderTopColor: COLORS.divider,
+    borderTopColor: colors.divider,
     elevation: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -2 },
@@ -381,13 +385,13 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     flex: 1,
-    backgroundColor: COLORS.primary,
+    backgroundColor: colors.primary,
   },
   secondaryButton: {
     width: 56,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
     borderWidth: 2,
-    borderColor: COLORS.primary,
+    borderColor: colors.primary,
   },
   actionButtonText: {
     color: '#fff',

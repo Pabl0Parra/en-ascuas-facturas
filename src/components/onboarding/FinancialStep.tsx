@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
-import { COLORS, SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 
 interface FinancialData {
   currency: string;
@@ -47,6 +49,9 @@ export const FinancialStep: React.FC<FinancialStepProps> = ({
   onNext,
   onBack,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [formData, setFormData] = useState<FinancialData>({
     currency: initialData?.currency || 'EUR',
     defaultTaxRate: initialData?.defaultTaxRate ?? 21,
@@ -122,7 +127,7 @@ export const FinancialStep: React.FC<FinancialStepProps> = ({
 
         <View style={styles.infoBox}>
           <Text style={styles.infoText}>
-            💡 Selected currency will be used for all invoices and quotes
+            Selected currency will be used for all invoices and quotes
           </Text>
         </View>
 
@@ -153,7 +158,7 @@ export const FinancialStep: React.FC<FinancialStepProps> = ({
 
         <View style={styles.infoBox}>
           <Text style={styles.infoText}>
-            💡 You can add more tax rates later in Settings
+            You can add more tax rates later in Settings
           </Text>
         </View>
 
@@ -211,10 +216,10 @@ export const FinancialStep: React.FC<FinancialStepProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,
@@ -229,12 +234,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: 'bold',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   subtitle: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   form: {
     marginBottom: SPACING.xl,
@@ -247,39 +252,39 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   infoBox: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     padding: SPACING.md,
     borderRadius: 8,
     marginBottom: SPACING.md,
   },
   infoText: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     fontStyle: 'italic',
   },
   exampleBox: {
-    backgroundColor: COLORS.primaryLight + '15',
+    backgroundColor: colors.primaryLight + '15',
     padding: SPACING.md,
     borderRadius: 8,
     marginTop: SPACING.md,
     borderLeftWidth: 3,
-    borderLeftColor: COLORS.primary,
+    borderLeftColor: colors.primary,
   },
   exampleTitle: {
     fontSize: FONT_SIZE.sm,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   exampleText: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: SPACING.xs,
   },
   exampleAmount: {
     fontSize: FONT_SIZE.xl,
     fontWeight: 'bold',
-    color: COLORS.primary,
+    color: colors.primary,
   },
   footer: {
     marginTop: SPACING.xl,
@@ -293,7 +298,7 @@ const styles = StyleSheet.create({
   },
   progress: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     textAlign: 'center',
     marginTop: SPACING.md,
   },

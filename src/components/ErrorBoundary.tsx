@@ -1,4 +1,6 @@
 // src/components/ErrorBoundary.tsx
+// NOTE: This is a class component, so it cannot use hooks (useTheme).
+// It uses the static COLORS import (light theme) as a fallback.
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';

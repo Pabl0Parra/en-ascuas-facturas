@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   View,
   Text,
@@ -13,7 +13,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { Header } from '../../src/components/ui/Header';
 import { Card } from '../../src/components/ui/Card';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/theme';
+import { useTheme } from '../../src/hooks/useTheme';
+import type { AppColors } from '../../src/constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/theme';
 
 type SettingsSection = {
   id: string;
@@ -26,6 +28,8 @@ type SettingsSection = {
 export default function SettingsScreen() {
   const router = useRouter();
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   const sections: SettingsSection[] = [
     {
@@ -97,7 +101,7 @@ export default function SettingsScreen() {
                     <Ionicons
                       name={section.icon}
                       size={24}
-                      color={COLORS.primary}
+                      color={colors.primary}
                     />
                   </View>
                   <Text style={styles.sectionTitle}>
@@ -106,7 +110,7 @@ export default function SettingsScreen() {
                   <Ionicons
                     name="chevron-forward"
                     size={20}
-                    color={COLORS.textSecondary}
+                    color={colors.textSecondary}
                   />
                 </View>
               </Card>
@@ -128,10 +132,10 @@ export default function SettingsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,
@@ -155,7 +159,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: BORDER_RADIUS.md,
-    backgroundColor: COLORS.primary + '15',
+    backgroundColor: colors.primary + '15',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: SPACING.md,
@@ -164,7 +168,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   versionContainer: {
     marginTop: SPACING.xl,
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
   },
   versionText: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     marginBottom: SPACING.xs,
   },
 });

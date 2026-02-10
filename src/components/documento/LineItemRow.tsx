@@ -1,14 +1,15 @@
 // src/components/documento/LineItemRow.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { IconButton } from '../ui/IconButton';
 import { Card } from '../ui/Card';
 import {
-  COLORS,
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
 } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import { formatCurrency } from '../../utils/formatters';
 import type { LineItem } from '../../types/document';
 
@@ -27,6 +28,9 @@ export const LineItemRow: React.FC<LineItemRowProps> = ({
   canRemove,
   errors,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   // Local state to allow typing decimals
   const [cantidadText, setCantidadText] = useState(
     item.cantidad > 0 ? item.cantidad.toString().replaceAll('.', ',') : '',
@@ -91,12 +95,12 @@ export const LineItemRow: React.FC<LineItemRowProps> = ({
             value={item.descripcion}
             onChangeText={(text) => onUpdate({ descripcion: text })}
             placeholder="Descripción del concepto..."
-            placeholderTextColor={COLORS.textMuted}
+            placeholderTextColor={colors.textMuted}
             multiline
             numberOfLines={2}
             style={[
               styles.descripcionInput,
-              errors?.descripcion && { borderColor: COLORS.error },
+              errors?.descripcion && { borderColor: colors.error },
             ]}
           />
         </View>
@@ -119,10 +123,10 @@ export const LineItemRow: React.FC<LineItemRowProps> = ({
             onChangeText={handleCantidadChange}
             keyboardType="decimal-pad"
             placeholder="0"
-            placeholderTextColor={COLORS.textMuted}
+            placeholderTextColor={colors.textMuted}
             style={[
               styles.numberInput,
-              errors?.cantidad && { borderColor: COLORS.error },
+              errors?.cantidad && { borderColor: colors.error },
             ]}
           />
         </View>
@@ -134,10 +138,10 @@ export const LineItemRow: React.FC<LineItemRowProps> = ({
             onChangeText={handlePrecioChange}
             keyboardType="decimal-pad"
             placeholder="0,00"
-            placeholderTextColor={COLORS.textMuted}
+            placeholderTextColor={colors.textMuted}
             style={[
               styles.numberInput,
-              errors?.precio && { borderColor: COLORS.error },
+              errors?.precio && { borderColor: colors.error },
             ]}
           />
         </View>
@@ -155,7 +159,7 @@ export const LineItemRow: React.FC<LineItemRowProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     marginBottom: SPACING.sm,
   },
@@ -170,16 +174,16 @@ const styles = StyleSheet.create({
   label: {
     fontSize: FONT_SIZE.md,
     fontWeight: '700',
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: SPACING.xs,
   },
   descripcionInput: {
     borderWidth: 1,
-    borderColor: COLORS.border,
+    borderColor: colors.border,
     borderRadius: BORDER_RADIUS.sm,
     padding: SPACING.xs,
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     minHeight: 40,
     textAlignVertical: 'top',
   },
@@ -193,18 +197,18 @@ const styles = StyleSheet.create({
   },
   numberInput: {
     borderWidth: 1,
-    borderColor: COLORS.border,
+    borderColor: colors.border,
     borderRadius: BORDER_RADIUS.sm,
     padding: SPACING.xs,
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     textAlign: 'center',
   },
   importeContainer: {
     flex: 1,
   },
   importeValue: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.sm,
     padding: SPACING.xs,
     alignItems: 'center',
@@ -214,6 +218,6 @@ const styles = StyleSheet.create({
   importeText: {
     fontSize: FONT_SIZE.sm,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
 });

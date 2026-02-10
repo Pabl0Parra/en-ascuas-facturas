@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   View,
   Text,
@@ -19,7 +19,9 @@ import { Header } from '../../src/components/ui/Header';
 import { Card } from '../../src/components/ui/Card';
 import { Button } from '../../src/components/ui/Button';
 import { useBusinessProfileStore } from '../../src/stores/businessProfileStore';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/theme';
+import { useTheme } from '../../src/hooks/useTheme';
+import type { AppColors } from '../../src/constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/theme';
 import type { PdfTemplateId } from '../../src/types/pdfTemplate';
 
 const COLOR_PRESETS = [
@@ -43,6 +45,8 @@ export default function BrandingScreen() {
   const router = useRouter();
   const { t } = useTranslation();
   const { profile, updateProfile } = useBusinessProfileStore();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   const [logoUri, setLogoUri] = useState<string | null>(null);
   const [primaryColor, setPrimaryColor] = useState('#FF4500');
@@ -143,7 +147,7 @@ export default function BrandingScreen() {
               <Image source={{ uri: logoUri }} style={styles.logo} />
             ) : (
               <View style={styles.logoPlaceholder}>
-                <Ionicons name="image-outline" size={48} color={COLORS.textMuted} />
+                <Ionicons name="image-outline" size={48} color={colors.textMuted} />
               </View>
             )}
           </View>
@@ -197,7 +201,7 @@ export default function BrandingScreen() {
                 activeOpacity={0.7}
               >
                 {primaryColor === color && (
-                  <Ionicons name="checkmark" size={24} color={COLORS.textInverse} />
+                  <Ionicons name="checkmark" size={24} color={colors.textInverse} />
                 )}
               </TouchableOpacity>
             ))}
@@ -225,13 +229,13 @@ export default function BrandingScreen() {
                   <Ionicons
                     name="document-text"
                     size={32}
-                    color={selectedTemplate === template.id ? COLORS.primary : COLORS.textSecondary}
+                    color={selectedTemplate === template.id ? colors.primary : colors.textSecondary}
                   />
                 </View>
                 <Text style={styles.templateName}>{t(template.labelKey)}</Text>
                 {selectedTemplate === template.id && (
                   <View style={styles.selectedBadge}>
-                    <Ionicons name="checkmark-circle" size={20} color={COLORS.primary} />
+                    <Ionicons name="checkmark-circle" size={20} color={colors.primary} />
                   </View>
                 )}
               </TouchableOpacity>
@@ -253,10 +257,10 @@ export default function BrandingScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   keyboardView: {
     flex: 1,
@@ -274,7 +278,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
   logoContainer: {
@@ -290,11 +294,11 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: BORDER_RADIUS.md,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
-    borderColor: COLORS.border,
+    borderColor: colors.border,
     borderStyle: 'dashed',
   },
   logoButtons: {
@@ -309,7 +313,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: SPACING.md,
     padding: SPACING.md,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.md,
   },
   colorPreviewBox: {
@@ -321,7 +325,7 @@ const styles = StyleSheet.create({
   colorCode: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   colorGrid: {
     flexDirection: 'row',
@@ -337,7 +341,7 @@ const styles = StyleSheet.create({
   },
   colorSwatchSelected: {
     borderWidth: 3,
-    borderColor: COLORS.textPrimary,
+    borderColor: colors.textPrimary,
   },
   templateGrid: {
     flexDirection: 'row',
@@ -346,17 +350,17 @@ const styles = StyleSheet.create({
   templateCard: {
     flex: 1,
     aspectRatio: 0.7,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
-    borderColor: COLORS.border,
+    borderColor: colors.border,
   },
   templateCardSelected: {
-    borderColor: COLORS.primary,
-    backgroundColor: COLORS.primary + '10',
+    borderColor: colors.primary,
+    backgroundColor: colors.primary + '10',
   },
   templatePreview: {
     flex: 1,
@@ -366,7 +370,7 @@ const styles = StyleSheet.create({
   templateName: {
     fontSize: FONT_SIZE.sm,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     textAlign: 'center',
     marginTop: SPACING.xs,
   },

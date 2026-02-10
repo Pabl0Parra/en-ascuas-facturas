@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import { Stack } from 'expo-router';
 import { AboutSection } from '../src/components/settings/AboutSection';
-import { COLORS } from '../src/constants/theme';
+import { useTheme } from '../src/hooks/useTheme';
+import type { AppColors } from '../src/constants/theme';
 
 export default function AboutScreen() {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   return (
     <SafeAreaView style={styles.container}>
       <Stack.Screen
@@ -12,9 +16,9 @@ export default function AboutScreen() {
           title: 'About',
           headerShown: true,
           headerStyle: {
-            backgroundColor: COLORS.surface,
+            backgroundColor: colors.surface,
           },
-          headerTintColor: COLORS.primary,
+          headerTintColor: colors.primary,
         }}
       />
       <ScrollView style={styles.scrollView}>
@@ -24,10 +28,10 @@ export default function AboutScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,

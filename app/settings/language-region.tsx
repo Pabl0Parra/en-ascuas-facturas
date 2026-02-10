@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   View,
   Text,
@@ -17,7 +17,9 @@ import { Button } from '../../src/components/ui/Button';
 import { useBusinessProfileStore } from '../../src/stores/businessProfileStore';
 import { changeLanguage, LANGUAGES } from '../../src/i18n';
 import { getSupportedCurrencies, getCurrencyConfig } from '../../src/config/currencyConfig';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/theme';
+import { useTheme } from '../../src/hooks/useTheme';
+import type { AppColors } from '../../src/constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/theme';
 
 type LanguageCode = keyof typeof LANGUAGES;
 
@@ -25,6 +27,8 @@ export default function LanguageRegionScreen() {
   const router = useRouter();
   const { t, i18n } = useTranslation();
   const { profile, updateProfile } = useBusinessProfileStore();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageCode>('en');
   const [selectedCurrency, setSelectedCurrency] = useState('EUR');
@@ -93,7 +97,7 @@ export default function LanguageRegionScreen() {
                 <Ionicons
                   name="checkmark-circle"
                   size={24}
-                  color={COLORS.primary}
+                  color={colors.primary}
                 />
               )}
             </TouchableOpacity>
@@ -126,7 +130,7 @@ export default function LanguageRegionScreen() {
                       <Ionicons
                         name="checkmark-circle"
                         size={16}
-                        color={COLORS.primary}
+                        color={colors.primary}
                       />
                     </View>
                   )}
@@ -174,10 +178,10 @@ export default function LanguageRegionScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,
@@ -192,7 +196,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
   optionCard: {
@@ -202,12 +206,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.sm,
     borderRadius: BORDER_RADIUS.md,
     marginBottom: SPACING.sm,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
   },
   optionCardSelected: {
-    backgroundColor: COLORS.primary + '15',
+    backgroundColor: colors.primary + '15',
     borderWidth: 2,
-    borderColor: COLORS.primary,
+    borderColor: colors.primary,
   },
   optionFlag: {
     fontSize: FONT_SIZE.xxl,
@@ -217,7 +221,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   currencyGrid: {
     flexDirection: 'row',
@@ -227,28 +231,28 @@ const styles = StyleSheet.create({
   currencyCard: {
     width: '31%',
     aspectRatio: 1.2,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
-    borderColor: COLORS.border,
+    borderColor: colors.border,
   },
   currencyCardSelected: {
-    borderColor: COLORS.primary,
-    backgroundColor: COLORS.primary + '10',
+    borderColor: colors.primary,
+    backgroundColor: colors.primary + '10',
   },
   currencySymbol: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   currencyCode: {
     fontSize: FONT_SIZE.sm,
     fontWeight: '600',
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   currencyBadge: {
     position: 'absolute',
@@ -261,20 +265,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.divider,
+    borderBottomColor: colors.divider,
   },
   infoLabel: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   infoValue: {
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   hint: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     textAlign: 'center',
     fontStyle: 'italic',
   },

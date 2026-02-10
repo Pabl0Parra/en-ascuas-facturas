@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import {
   View,
   FlatList,
@@ -18,7 +18,9 @@ import {
   deletePDF,
   doesPDFExist,
 } from '../../src/services/fileService';
-import { COLORS, SPACING, BORDER_RADIUS } from '../../src/constants/theme';
+import { useTheme } from '../../src/hooks/useTheme';
+import type { AppColors } from '../../src/constants/theme';
+import { SPACING, BORDER_RADIUS } from '../../src/constants/theme';
 import type { DocumentMetadata } from '../../src/types/document';
 
 type FilterType = 'todos' | 'factura' | 'presupuesto';
@@ -26,6 +28,8 @@ type FilterType = 'todos' | 'factura' | 'presupuesto';
 export default function HistorialScreen() {
   const router = useRouter();
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const [filter, setFilter] = useState<FilterType>('todos');
 
   const documents = useDocumentStore((state) => state.documents);
@@ -155,10 +159,10 @@ export default function HistorialScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   filterContainer: {
     flexDirection: 'row',
@@ -170,19 +174,19 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.sm,
     paddingHorizontal: SPACING.md,
     borderRadius: BORDER_RADIUS.md,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     alignItems: 'center',
   },
   filterTabActive: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: colors.primary,
   },
   filterText: {
     fontSize: 11,
     fontWeight: '500',
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   filterTextActive: {
-    color: COLORS.textInverse,
+    color: colors.textInverse,
   },
   listContent: {
     padding: SPACING.md,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -11,11 +11,12 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import {
-  COLORS,
   SPACING,
   BORDER_RADIUS,
   FONT_SIZE,
 } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 
 interface SelectOption {
   label: string;
@@ -44,6 +45,8 @@ export const Select: React.FC<SelectProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const insets = useSafeAreaInsets();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   const selectedOption = options.find((opt) => opt.value === value);
 
@@ -77,7 +80,7 @@ export const Select: React.FC<SelectProps> = ({
         >
           {selectedOption?.label || placeholder}
         </Text>
-        <Ionicons name="chevron-down" size={20} color={COLORS.textSecondary} />
+        <Ionicons name="chevron-down" size={20} color={colors.textSecondary} />
       </TouchableOpacity>
 
       {error && <Text style={styles.errorText}>{error}</Text>}
@@ -92,7 +95,7 @@ export const Select: React.FC<SelectProps> = ({
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>{label}</Text>
             <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
-              <Ionicons name="close" size={24} color={COLORS.textPrimary} />
+              <Ionicons name="close" size={24} color={colors.textPrimary} />
             </TouchableOpacity>
           </View>
 
@@ -101,7 +104,7 @@ export const Select: React.FC<SelectProps> = ({
               value={searchQuery}
               onChangeText={setSearchQuery}
               placeholder="Buscar..."
-              placeholderTextColor={COLORS.textMuted}
+              placeholderTextColor={colors.textMuted}
               style={styles.searchInput}
             />
           )}
@@ -130,7 +133,7 @@ export const Select: React.FC<SelectProps> = ({
                   {item.label}
                 </Text>
                 {item.value === value && (
-                  <Ionicons name="checkmark" size={20} color={COLORS.primary} />
+                  <Ionicons name="checkmark" size={20} color={colors.primary} />
                 )}
               </TouchableOpacity>
             )}
@@ -144,14 +147,14 @@ export const Select: React.FC<SelectProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     marginBottom: SPACING.md,
   },
   label: {
     fontSize: FONT_SIZE.md,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   selectButton: {
@@ -159,30 +162,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     borderWidth: 1.5,
-    borderColor: COLORS.border,
+    borderColor: colors.border,
     borderRadius: BORDER_RADIUS.md,
     paddingHorizontal: SPACING.sm,
     paddingVertical: SPACING.sm,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   selectButtonError: {
-    borderColor: COLORS.error,
+    borderColor: colors.error,
   },
   selectText: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   placeholderText: {
-    color: COLORS.textMuted,
+    color: colors.textMuted,
   },
   errorText: {
     fontSize: FONT_SIZE.xs,
-    color: COLORS.error,
+    color: colors.error,
     marginTop: SPACING.xs,
   },
   modalContainer: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   modalHeader: {
     flexDirection: 'row',
@@ -190,12 +193,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.divider,
+    borderBottomColor: colors.divider,
   },
   modalTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   closeButton: {
     padding: SPACING.xs,
@@ -204,10 +207,10 @@ const styles = StyleSheet.create({
     margin: SPACING.md,
     padding: SPACING.sm,
     borderWidth: 1,
-    borderColor: COLORS.border,
+    borderColor: colors.border,
     borderRadius: BORDER_RADIUS.md,
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   optionItem: {
     flexDirection: 'row',
@@ -215,23 +218,23 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.divider,
+    borderBottomColor: colors.divider,
   },
   selectedOption: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
   },
   optionText: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   selectedOptionText: {
-    color: COLORS.primary,
+    color: colors.primary,
     fontWeight: '600',
   },
   emptyText: {
     padding: SPACING.lg,
     textAlign: 'center',
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     fontSize: FONT_SIZE.md,
   },
 });

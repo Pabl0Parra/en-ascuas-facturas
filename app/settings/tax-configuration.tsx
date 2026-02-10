@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -19,13 +19,17 @@ import { Button } from '../../src/components/ui/Button';
 import { Input } from '../../src/components/ui/Input';
 import { useTaxConfigStore } from '../../src/stores/taxConfigStore';
 import { useBusinessProfileStore } from '../../src/stores/businessProfileStore';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/theme';
+import { useTheme } from '../../src/hooks/useTheme';
+import type { AppColors } from '../../src/constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/theme';
 
 export default function TaxConfigurationScreen() {
   const router = useRouter();
   const { t } = useTranslation();
   const { config, addPreset, updatePreset, deletePreset, setDefault } = useTaxConfigStore();
   const { profile, updateProfile } = useBusinessProfileStore();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   const [showAddPreset, setShowAddPreset] = useState(false);
   const [newPresetName, setNewPresetName] = useState('');
@@ -161,7 +165,7 @@ export default function TaxConfigurationScreen() {
                   onPress={() => handleDeletePreset(preset.id)}
                   style={styles.deleteButton}
                 >
-                  <Ionicons name="trash-outline" size={20} color={COLORS.error} />
+                  <Ionicons name="trash-outline" size={20} color={colors.error} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -232,10 +236,10 @@ export default function TaxConfigurationScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   keyboardView: {
     flex: 1,
@@ -253,18 +257,18 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
   taxName: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: '600',
-    color: COLORS.primary,
+    color: colors.primary,
     marginBottom: SPACING.xs,
   },
   hint: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
   },
   presetCard: {
     flexDirection: 'row',
@@ -272,7 +276,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: SPACING.md,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.divider,
+    borderBottomColor: colors.divider,
   },
   presetInfo: {
     flex: 1,
@@ -280,13 +284,13 @@ const styles = StyleSheet.create({
   presetName: {
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   presetRate: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.primary,
+    color: colors.primary,
   },
   presetActions: {
     flexDirection: 'row',
@@ -297,30 +301,30 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.sm,
     paddingVertical: SPACING.xs,
     borderRadius: BORDER_RADIUS.sm,
-    backgroundColor: COLORS.primary + '15',
+    backgroundColor: colors.primary + '15',
   },
   actionButtonText: {
     fontSize: FONT_SIZE.xs,
     fontWeight: '600',
-    color: COLORS.primary,
+    color: colors.primary,
   },
   defaultBadge: {
     paddingHorizontal: SPACING.sm,
     paddingVertical: SPACING.xs,
     borderRadius: BORDER_RADIUS.sm,
-    backgroundColor: COLORS.success + '15',
+    backgroundColor: colors.success + '15',
   },
   defaultBadgeText: {
     fontSize: FONT_SIZE.xs,
     fontWeight: '600',
-    color: COLORS.success,
+    color: colors.success,
   },
   deleteButton: {
     padding: SPACING.xs,
   },
   emptyText: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     textAlign: 'center',
     paddingVertical: SPACING.lg,
   },

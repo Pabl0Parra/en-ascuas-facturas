@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Platform, KeyboardAvoidingView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from '../ui/Button';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import type { BusinessProfile } from '../../types/businessProfile';
 
 interface ReviewStepProps {
@@ -18,6 +20,9 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
   onComplete,
   onBack,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -44,20 +49,22 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
         <ReviewSection
           title="Business Information"
           onEdit={() => onEdit(1)}
+          colors={colors}
         >
-          <ReviewItem label="Company Name" value={profileData.companyName} />
-          <ReviewItem label="Country" value={profileData.country} />
-          <ReviewItem label="Address" value={profileData.address} />
-          <ReviewItem label="City" value={profileData.city} />
+          <ReviewItem label="Company Name" value={profileData.companyName} colors={colors} />
+          <ReviewItem label="Country" value={profileData.country} colors={colors} />
+          <ReviewItem label="Address" value={profileData.address} colors={colors} />
+          <ReviewItem label="City" value={profileData.city} colors={colors} />
           {profileData.postalCode && (
-            <ReviewItem label="Postal Code" value={profileData.postalCode} />
+            <ReviewItem label="Postal Code" value={profileData.postalCode} colors={colors} />
           )}
           {profileData.region && (
-            <ReviewItem label="Region" value={profileData.region} />
+            <ReviewItem label="Region" value={profileData.region} colors={colors} />
           )}
           <ReviewItem
             label={profileData.taxIdLabel || 'Tax ID'}
             value={profileData.taxId}
+            colors={colors}
           />
         </ReviewSection>
 
@@ -65,6 +72,7 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
         <ReviewSection
           title="Branding"
           onEdit={() => onEdit(2)}
+          colors={colors}
         >
           {profileData.logoUri ? (
             <View style={styles.logoContainer}>
@@ -75,7 +83,7 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
               />
             </View>
           ) : (
-            <ReviewItem label="Logo" value="No logo uploaded" muted />
+            <ReviewItem label="Logo" value="No logo uploaded" muted colors={colors} />
           )}
           <View style={styles.colorContainer}>
             <Text style={styles.reviewLabel}>Primary Color</Text>
@@ -83,7 +91,7 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
               <View
                 style={[
                   styles.colorSwatch,
-                  { backgroundColor: profileData.primaryColor || COLORS.primary },
+                  { backgroundColor: profileData.primaryColor || colors.primary },
                 ]}
               />
               <Text style={styles.reviewValue}>
@@ -97,17 +105,20 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
         <ReviewSection
           title="Financial Settings"
           onEdit={() => onEdit(3)}
+          colors={colors}
         >
-          <ReviewItem label="Currency" value={profileData.currency} />
+          <ReviewItem label="Currency" value={profileData.currency} colors={colors} />
           <ReviewItem
             label="Tax"
             value={`${profileData.taxName} (${profileData.defaultTaxRate}%)`}
+            colors={colors}
           />
-          <ReviewItem label="Payment Method" value={profileData.paymentMethod} />
+          <ReviewItem label="Payment Method" value={profileData.paymentMethod} colors={colors} />
           <ReviewItem
             label="Payment Details"
             value={profileData.paymentDetails}
             multiline
+            colors={colors}
           />
         </ReviewSection>
 
@@ -115,14 +126,17 @@ export const ReviewStep: React.FC<ReviewStepProps> = ({
         <ReviewSection
           title="Document Numbering"
           onEdit={() => onEdit(4)}
+          colors={colors}
         >
           <ReviewItem
             label="Invoice Format"
             value={`${profileData.invoicePrefix}${String(profileData.nextInvoiceNumber || 1).padStart(4, '0')}`}
+            colors={colors}
           />
           <ReviewItem
             label="Quote Format"
             value={`${profileData.quotePrefix}${String(profileData.nextQuoteNumber || 1).padStart(4, '0')}`}
+            colors={colors}
           />
         </ReviewSection>
       </View>
@@ -150,40 +164,50 @@ interface ReviewSectionProps {
   title: string;
   onEdit: () => void;
   children: React.ReactNode;
+  colors: AppColors;
 }
 
-const ReviewSection: React.FC<ReviewSectionProps> = ({ title, onEdit, children }) => (
-  <View style={styles.section}>
-    <View style={styles.sectionHeader}>
-      <Text style={styles.sectionTitle}>{title}</Text>
-      <TouchableOpacity onPress={onEdit} style={styles.editButton}>
-        <Text style={styles.editButtonText}>Edit</Text>
-      </TouchableOpacity>
+const ReviewSection: React.FC<ReviewSectionProps> = ({ title, onEdit, children, colors }) => {
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
+  return (
+    <View style={styles.section}>
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>{title}</Text>
+        <TouchableOpacity onPress={onEdit} style={styles.editButton}>
+          <Text style={styles.editButtonText}>Edit</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.sectionContent}>{children}</View>
     </View>
-    <View style={styles.sectionContent}>{children}</View>
-  </View>
-);
+  );
+};
 
 interface ReviewItemProps {
   label: string;
   value?: string;
   multiline?: boolean;
   muted?: boolean;
+  colors: AppColors;
 }
 
-const ReviewItem: React.FC<ReviewItemProps> = ({ label, value, multiline, muted }) => (
-  <View style={[styles.reviewItem, multiline && styles.reviewItemMultiline]}>
-    <Text style={styles.reviewLabel}>{label}</Text>
-    <Text style={[styles.reviewValue, muted && styles.reviewValueMuted]}>
-      {value || '—'}
-    </Text>
-  </View>
-);
+const ReviewItem: React.FC<ReviewItemProps> = ({ label, value, multiline, muted, colors }) => {
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
-const styles = StyleSheet.create({
+  return (
+    <View style={[styles.reviewItem, multiline && styles.reviewItemMultiline]}>
+      <Text style={styles.reviewLabel}>{label}</Text>
+      <Text style={[styles.reviewValue, muted && styles.reviewValueMuted]}>
+        {value || '\u2014'}
+      </Text>
+    </View>
+  );
+};
+
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,
@@ -198,18 +222,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: 'bold',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   subtitle: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   sections: {
     gap: SPACING.md,
   },
   section: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.md,
     padding: SPACING.md,
     marginBottom: SPACING.md,
@@ -221,12 +245,12 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.md,
     paddingBottom: SPACING.sm,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.divider,
+    borderBottomColor: colors.divider,
   },
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   editButton: {
     paddingHorizontal: SPACING.sm,
@@ -234,7 +258,7 @@ const styles = StyleSheet.create({
   },
   editButtonText: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.primary,
+    color: colors.primary,
     fontWeight: '600',
   },
   sectionContent: {
@@ -248,16 +272,16 @@ const styles = StyleSheet.create({
   },
   reviewLabel: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: 2,
   },
   reviewValue: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     fontWeight: '500',
   },
   reviewValueMuted: {
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     fontStyle: 'italic',
   },
   logoContainer: {
@@ -291,7 +315,7 @@ const styles = StyleSheet.create({
   },
   progress: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     textAlign: 'center',
     marginTop: SPACING.md,
   },

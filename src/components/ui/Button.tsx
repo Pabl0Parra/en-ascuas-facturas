@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   TouchableOpacity,
   Text,
@@ -7,7 +7,9 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import { COLORS, SPACING, BORDER_RADIUS, FONT_SIZE } from '../../constants/theme';
+import { SPACING, BORDER_RADIUS, FONT_SIZE } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
@@ -24,29 +26,29 @@ interface ButtonProps {
   style?: ViewStyle;
 }
 
-const getButtonStyles = (variant: ButtonVariant, size: ButtonSize, disabled: boolean): ViewStyle => {
+const getButtonStyles = (variant: ButtonVariant, size: ButtonSize, disabled: boolean, colors: AppColors): ViewStyle => {
   const baseStyle: ViewStyle = {
     borderRadius: BORDER_RADIUS.md,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   };
-  
+
   // Size styles
   const sizeStyles: Record<ButtonSize, ViewStyle> = {
     sm: { paddingVertical: SPACING.xs, paddingHorizontal: SPACING.sm },
     md: { paddingVertical: SPACING.sm, paddingHorizontal: SPACING.md },
     lg: { paddingVertical: SPACING.md, paddingHorizontal: SPACING.lg },
   };
-  
+
   // Variant styles
   const variantStyles: Record<ButtonVariant, ViewStyle> = {
-    primary: { backgroundColor: COLORS.primary },
-    secondary: { backgroundColor: COLORS.surface },
-    outline: { backgroundColor: 'transparent', borderWidth: 1.5, borderColor: COLORS.primary },
+    primary: { backgroundColor: colors.primary },
+    secondary: { backgroundColor: colors.surface },
+    outline: { backgroundColor: 'transparent', borderWidth: 1.5, borderColor: colors.primary },
     ghost: { backgroundColor: 'transparent' },
   };
-  
+
   return {
     ...baseStyle,
     ...sizeStyles[size],
@@ -55,25 +57,25 @@ const getButtonStyles = (variant: ButtonVariant, size: ButtonSize, disabled: boo
   };
 };
 
-const getTextStyles = (variant: ButtonVariant, size: ButtonSize): TextStyle => {
+const getTextStyles = (variant: ButtonVariant, size: ButtonSize, colors: AppColors): TextStyle => {
   const baseFontSize: Record<ButtonSize, number> = {
     sm: FONT_SIZE.sm,
     md: FONT_SIZE.md,
     lg: FONT_SIZE.lg,
   };
-  
+
   const baseStyle: TextStyle = {
     fontWeight: '600',
     fontSize: baseFontSize[size],
   };
-  
+
   const variantTextColors: Record<ButtonVariant, string> = {
-    primary: COLORS.textInverse,
-    secondary: COLORS.textPrimary,
-    outline: COLORS.primary,
-    ghost: COLORS.primary,
+    primary: colors.textInverse,
+    secondary: colors.textPrimary,
+    outline: colors.primary,
+    ghost: colors.primary,
   };
-  
+
   return {
     ...baseStyle,
     color: variantTextColors[variant],
@@ -91,9 +93,12 @@ export const Button: React.FC<ButtonProps> = ({
   icon,
   style,
 }) => {
-  const buttonStyle = getButtonStyles(variant, size, disabled || loading);
-  const textStyle = getTextStyles(variant, size);
-  
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
+  const buttonStyle = getButtonStyles(variant, size, disabled || loading, colors);
+  const textStyle = getTextStyles(variant, size, colors);
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -107,7 +112,7 @@ export const Button: React.FC<ButtonProps> = ({
     >
       {loading ? (
         <ActivityIndicator
-          color={variant === 'primary' ? COLORS.textInverse : COLORS.primary}
+          color={variant === 'primary' ? colors.textInverse : colors.primary}
           size="small"
         />
       ) : (
@@ -120,7 +125,7 @@ export const Button: React.FC<ButtonProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   fullWidth: {
     width: '100%',
   },

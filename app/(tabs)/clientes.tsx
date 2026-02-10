@@ -16,24 +16,16 @@ import { Header } from '../../src/components/ui/Header';
 import { ClientCard } from '../../src/components/cliente/ClientCard';
 import { EmptyState } from '../../src/components/ui/EmptyState';
 import { useClientStore } from '../../src/stores/clientStore';
+import { useTheme } from '../../src/hooks/useTheme';
 import type { ClientTag, ClientSortBy, ClientFilters } from '../../src/types/client';
+import type { AppColors } from '../../src/constants/theme';
 import {
-  COLORS,
   SPACING,
   BORDER_RADIUS,
   FONT_SIZE,
   SHADOWS,
 } from '../../src/constants/theme';
 import { STRINGS } from '../../src/constants/strings';
-
-const TAG_LABELS: Record<ClientTag, { label: string; color: string }> = {
-  regular: { label: 'Regular', color: COLORS.primary },
-  vip: { label: 'VIP', color: '#8B5CF6' },
-  new: { label: 'New', color: '#10B981' },
-  inactive: { label: 'Inactive', color: '#6B7280' },
-  international: { label: 'International', color: '#3B82F6' },
-  domestic: { label: 'Domestic', color: '#F59E0B' },
-};
 
 const SORT_OPTIONS: Array<{ value: ClientSortBy; label: string }> = [
   { value: 'name', label: 'Name (A-Z)' },
@@ -43,10 +35,21 @@ const SORT_OPTIONS: Array<{ value: ClientSortBy; label: string }> = [
 
 export default function ClientesScreen() {
   const router = useRouter();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTags, setSelectedTags] = useState<ClientTag[]>([]);
   const [sortBy, setSortBy] = useState<ClientSortBy>('name');
   const [showFilters, setShowFilters] = useState(false);
+
+  const TAG_LABELS: Record<ClientTag, { label: string; color: string }> = useMemo(() => ({
+    regular: { label: 'Regular', color: colors.primary },
+    vip: { label: 'VIP', color: '#8B5CF6' },
+    new: { label: 'New', color: '#10B981' },
+    inactive: { label: 'Inactive', color: '#6B7280' },
+    international: { label: 'International', color: '#3B82F6' },
+    domestic: { label: 'Domestic', color: '#F59E0B' },
+  }), [colors]);
 
   const clients = useClientStore((state) => state.clients);
   const deleteClient = useClientStore((state) => state.deleteClient);
@@ -120,17 +123,17 @@ export default function ClientesScreen() {
       {/* Search Bar */}
       <View style={styles.searchContainer}>
         <View style={styles.searchBar}>
-          <Ionicons name="search" size={20} color={COLORS.textMuted} />
+          <Ionicons name="search" size={20} color={colors.textMuted} />
           <TextInput
             value={searchQuery}
             onChangeText={setSearchQuery}
             placeholder="Buscar cliente..."
-            placeholderTextColor={COLORS.textMuted}
+            placeholderTextColor={colors.textMuted}
             style={styles.searchInput}
           />
           {searchQuery.length > 0 && (
             <TouchableOpacity onPress={() => setSearchQuery('')}>
-              <Ionicons name="close-circle" size={20} color={COLORS.textMuted} />
+              <Ionicons name="close-circle" size={20} color={colors.textMuted} />
             </TouchableOpacity>
           )}
         </View>
@@ -147,7 +150,7 @@ export default function ClientesScreen() {
             <Ionicons
               name="filter"
               size={18}
-              color={showFilters ? COLORS.primary : COLORS.textSecondary}
+              color={showFilters ? colors.primary : colors.textSecondary}
             />
             <Text style={[
               styles.filterButtonText,
@@ -163,7 +166,7 @@ export default function ClientesScreen() {
           </TouchableOpacity>
 
           <View style={styles.sortContainer}>
-            <Ionicons name="swap-vertical" size={18} color={COLORS.textSecondary} />
+            <Ionicons name="swap-vertical" size={18} color={colors.textSecondary} />
             <Text style={styles.sortLabel}>Sort:</Text>
             {SORT_OPTIONS.map((option) => (
               <TouchableOpacity
@@ -291,16 +294,16 @@ export default function ClientesScreen() {
         onPress={handleNewClient}
         activeOpacity={0.8}
       >
-        <Ionicons name="add" size={28} color={COLORS.textInverse} />
+        <Ionicons name="add" size={28} color={colors.textInverse} />
       </TouchableOpacity>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   searchContainer: {
     paddingHorizontal: SPACING.md,
@@ -310,7 +313,7 @@ const styles = StyleSheet.create({
   searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.md,
     paddingHorizontal: SPACING.sm,
     paddingVertical: SPACING.xs,
@@ -319,7 +322,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     paddingVertical: SPACING.xs,
   },
   controlsRow: {
@@ -334,22 +337,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.sm,
     paddingVertical: SPACING.xs,
     borderRadius: BORDER_RADIUS.sm,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     gap: SPACING.xs,
   },
   filterButtonActive: {
-    backgroundColor: COLORS.primary + '15',
+    backgroundColor: colors.primary + '15',
   },
   filterButtonText: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     fontWeight: '500',
   },
   filterButtonTextActive: {
-    color: COLORS.primary,
+    color: colors.primary,
   },
   filterBadge: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: colors.primary,
     borderRadius: 10,
     width: 18,
     height: 18,
@@ -360,7 +363,7 @@ const styles = StyleSheet.create({
   filterBadgeText: {
     fontSize: 10,
     fontWeight: '700',
-    color: COLORS.textInverse,
+    color: colors.textInverse,
   },
   sortContainer: {
     flex: 1,
@@ -370,7 +373,7 @@ const styles = StyleSheet.create({
   },
   sortLabel: {
     fontSize: FONT_SIZE.xs,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     fontWeight: '500',
   },
   sortOption: {
@@ -378,21 +381,21 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
   },
   sortOptionActive: {
-    backgroundColor: COLORS.primary + '15',
+    backgroundColor: colors.primary + '15',
     borderRadius: BORDER_RADIUS.sm,
   },
   sortOptionText: {
     fontSize: FONT_SIZE.xs,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   sortOptionTextActive: {
-    color: COLORS.primary,
+    color: colors.primary,
     fontWeight: '600',
   },
   filterPanel: {
     marginTop: SPACING.sm,
     padding: SPACING.sm,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.md,
   },
   filterPanelHeader: {
@@ -404,11 +407,11 @@ const styles = StyleSheet.create({
   filterPanelTitle: {
     fontSize: FONT_SIZE.sm,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
   },
   clearFiltersText: {
     fontSize: FONT_SIZE.xs,
-    color: COLORS.primary,
+    color: colors.primary,
     fontWeight: '600',
   },
   tagsScrollContent: {
@@ -421,24 +424,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.sm,
     paddingVertical: SPACING.xs,
     borderRadius: BORDER_RADIUS.full,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
     borderWidth: 1.5,
-    borderColor: COLORS.border,
+    borderColor: colors.border,
     gap: SPACING.xs,
   },
   tagChipText: {
     fontSize: FONT_SIZE.xs,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     fontWeight: '500',
   },
   resultsBar: {
     paddingHorizontal: SPACING.md,
     paddingVertical: SPACING.xs,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
   },
   resultsText: {
     fontSize: FONT_SIZE.xs,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     fontWeight: '500',
   },
   listContent: {
@@ -453,7 +456,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: COLORS.primary,
+    backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
     ...SHADOWS.lg,

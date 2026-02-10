@@ -1,17 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { SafeAreaView, StyleSheet, Alert } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Loading } from '../../src/components/ui/Loading';
 import { useDocumentStore } from '../../src/stores/documentStore';
 import { getPDFPath, sharePDF, doesPDFExist } from '../../src/services/fileService';
-import { COLORS } from '../../src/constants/theme';
+import { useTheme } from '../../src/hooks/useTheme';
+import type { AppColors } from '../../src/constants/theme';
 
 export default function DocumentoDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
-  
+
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const getDocumentById = useDocumentStore((state) => state.getDocumentById);
-  
+
   useEffect(() => {
     const openDocument = async () => {
       if (!id) {
@@ -19,25 +23,25 @@ export default function DocumentoDetailScreen() {
         router.back();
         return;
       }
-      
+
       const document = getDocumentById(id);
-      
+
       if (!document) {
         Alert.alert('Error', 'Documento no encontrado');
         router.back();
         return;
       }
-      
+
       try {
         const pdfPath = getPDFPath(document.pdfFileName);
         const exists = await doesPDFExist(pdfPath);
-        
+
         if (!exists) {
           Alert.alert('Error', 'El archivo PDF no existe');
           router.back();
           return;
         }
-        
+
         await sharePDF(pdfPath);
         router.back();
       } catch (error) {
@@ -46,10 +50,10 @@ export default function DocumentoDetailScreen() {
         router.back();
       }
     };
-    
+
     openDocument();
   }, [id]);
-  
+
   return (
     <SafeAreaView style={styles.container}>
       <Loading />
@@ -57,9 +61,10 @@ export default function DocumentoDetailScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.background,
-  },
-});
+const createStyles = (colors: AppColors) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+  });

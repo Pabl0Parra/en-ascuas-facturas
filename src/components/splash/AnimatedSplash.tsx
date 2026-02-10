@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { Text, StyleSheet, Animated, Dimensions } from 'react-native';
-import { COLORS, FONT_SIZE, SPACING } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
+import { FONT_SIZE, SPACING } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
 
 const { width, height } = Dimensions.get('window');
@@ -14,6 +16,8 @@ export const AnimatedSplash: React.FC<AnimatedSplashProps> = ({
 }) => {
   const fadeIn = useRef(new Animated.Value(0)).current;
   const fadeOut = useRef(new Animated.Value(1)).current;
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   useEffect(() => {
     // Fade in
@@ -55,7 +59,7 @@ export const AnimatedSplash: React.FC<AnimatedSplashProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
@@ -79,7 +83,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     fontWeight: '900',
-    color: COLORS.background,
+    color: colors.background,
     letterSpacing: 6,
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
     textShadowOffset: { width: 2, height: 2 },
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
   tagline: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '400',
-    color: COLORS.background,
+    color: colors.background,
     letterSpacing: 3,
     marginTop: SPACING.xs,
     textShadowColor: 'rgba(0, 0, 0, 0.5)',

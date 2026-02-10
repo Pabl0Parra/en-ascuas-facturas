@@ -1,10 +1,11 @@
 // src/components/dashboard/OverdueAlert.tsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import {
-  COLORS,
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
@@ -16,6 +17,8 @@ interface OverdueAlertProps {
 
 export const OverdueAlert: React.FC<OverdueAlertProps> = ({ count }) => {
   const router = useRouter();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   if (count === 0) {
     return null;
@@ -42,12 +45,12 @@ export const OverdueAlert: React.FC<OverdueAlertProps> = ({ count }) => {
         <Text style={styles.badgeText}>{count}</Text>
       </View>
 
-      <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
+      <Ionicons name="chevron-forward" size={20} color={colors.textMuted} />
     </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: BORDER_RADIUS.md,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: SPACING.md,
@@ -73,12 +76,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: 4,
   },
   description: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   badge: {
     backgroundColor: '#EF4444',
@@ -92,6 +95,6 @@ const styles = StyleSheet.create({
   badgeText: {
     fontSize: FONT_SIZE.sm,
     fontWeight: '700',
-    color: COLORS.textInverse,
+    color: colors.textInverse,
   },
 });

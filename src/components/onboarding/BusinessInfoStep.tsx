@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
-import { COLORS, SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import { getSupportedCountries, getCountryDefaults } from '../../config/countryDefaults';
 
 interface BusinessInfoData {
@@ -29,6 +31,9 @@ export const BusinessInfoStep: React.FC<BusinessInfoStepProps> = ({
   onNext,
   onBack,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [formData, setFormData] = useState<BusinessInfoData>({
     companyName: initialData?.companyName || '',
     address: initialData?.address || '',
@@ -183,7 +188,7 @@ export const BusinessInfoStep: React.FC<BusinessInfoStepProps> = ({
         />
 
         <Text style={styles.hint}>
-          💡 Tax ID label auto-updates based on your selected country
+          Tax ID label auto-updates based on your selected country
         </Text>
       </View>
 
@@ -207,10 +212,10 @@ export const BusinessInfoStep: React.FC<BusinessInfoStepProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,
@@ -225,12 +230,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: 'bold',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   subtitle: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   form: {
     marginBottom: SPACING.xl,
@@ -244,7 +249,7 @@ const styles = StyleSheet.create({
   },
   hint: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginTop: SPACING.sm,
     fontStyle: 'italic',
   },
@@ -260,7 +265,7 @@ const styles = StyleSheet.create({
   },
   progress: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     textAlign: 'center',
     marginTop: SPACING.md,
   },

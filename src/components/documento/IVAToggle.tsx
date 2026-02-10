@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import { Toggle } from '../ui/Toggle';
 import { Card } from '../ui/Card';
-import { COLORS, SPACING } from '../../constants/theme';
+import { SPACING } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
 import type { IVARate } from '../../types/document';
 
@@ -15,6 +17,9 @@ export const IVAToggle: React.FC<IVAToggleProps> = ({
   tipoIVA,
   onChangeTipoIVA,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const isInversionSujetoPasivo = tipoIVA === 0;
 
   const handleToggle = (value: boolean) => {
@@ -33,9 +38,9 @@ export const IVAToggle: React.FC<IVAToggleProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     marginBottom: SPACING.lg,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
   },
 });

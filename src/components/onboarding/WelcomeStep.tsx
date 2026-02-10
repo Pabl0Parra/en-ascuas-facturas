@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/Button';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import { LANGUAGES, changeLanguage, type SupportedLanguage } from '../../i18n';
 
 interface WelcomeStepProps {
@@ -12,6 +14,8 @@ interface WelcomeStepProps {
 
 export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext }) => {
   const { t, i18n } = useTranslation();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const [selectedLanguage, setSelectedLanguage] = useState<SupportedLanguage>(
     (i18n.language || 'es') as SupportedLanguage
   );
@@ -47,6 +51,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext }) => {
                 name={lang.name}
                 selected={selectedLanguage === code}
                 onSelect={() => handleLanguageSelect(code)}
+                colors={colors}
               />
             ))}
           </View>
@@ -68,6 +73,7 @@ interface LanguageOptionProps {
   name: string;
   selected: boolean;
   onSelect: () => void;
+  colors: AppColors;
 }
 
 const LanguageOption: React.FC<LanguageOptionProps> = ({
@@ -75,25 +81,30 @@ const LanguageOption: React.FC<LanguageOptionProps> = ({
   name,
   selected,
   onSelect,
-}) => (
-  <Button
-    onPress={onSelect}
-    variant={selected ? 'primary' : 'outline'}
-    style={styles.languageButton}
-  >
-    <View style={styles.languageCodeBadge}>
-      <Text style={styles.languageCode}>{languageCode}</Text>
-    </View>
-    <Text style={selected ? styles.languageNameSelected : styles.languageName}>
-      {name}
-    </Text>
-  </Button>
-);
+  colors,
+}) => {
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
-const styles = StyleSheet.create({
+  return (
+    <Button
+      onPress={onSelect}
+      variant={selected ? 'primary' : 'outline'}
+      style={styles.languageButton}
+    >
+      <View style={styles.languageCodeBadge}>
+        <Text style={styles.languageCode}>{languageCode}</Text>
+      </View>
+      <Text style={selected ? styles.languageNameSelected : styles.languageName}>
+        {name}
+      </Text>
+    </Button>
+  );
+};
+
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   content: {
     flex: 1,
@@ -107,13 +118,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZE.xxxl,
     fontWeight: 'bold',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.sm,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     textAlign: 'center',
     paddingHorizontal: SPACING.md,
   },
@@ -124,7 +135,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
   languageGrid: {
@@ -140,7 +151,7 @@ const styles = StyleSheet.create({
   languageCodeBadge: {
     paddingHorizontal: SPACING.sm,
     paddingVertical: 4,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderRadius: BORDER_RADIUS.sm,
     marginRight: SPACING.md,
     minWidth: 44,
@@ -149,15 +160,15 @@ const styles = StyleSheet.create({
   languageCode: {
     fontSize: FONT_SIZE.sm,
     fontWeight: '700',
-    color: COLORS.primary,
+    color: colors.primary,
   },
   languageName: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.primary,
+    color: colors.primary,
   },
   languageNameSelected: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textInverse,
+    color: colors.textInverse,
   },
   footer: {
     paddingBottom: SPACING.md,

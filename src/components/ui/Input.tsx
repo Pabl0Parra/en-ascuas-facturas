@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -8,11 +8,12 @@ import {
   ViewStyle,
 } from 'react-native';
 import {
-  COLORS,
   SPACING,
   BORDER_RADIUS,
   FONT_SIZE,
 } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 
 interface InputProps {
   label: string;
@@ -42,11 +43,13 @@ export const Input: React.FC<InputProps> = ({
   style,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   const getBorderColor = (): string => {
-    if (error) return COLORS.error;
-    if (isFocused) return COLORS.primary;
-    return COLORS.border;
+    if (error) return colors.error;
+    if (isFocused) return colors.primary;
+    return colors.border;
   };
 
   return (
@@ -57,7 +60,7 @@ export const Input: React.FC<InputProps> = ({
           styles.inputContainer,
           {
             borderColor: getBorderColor(),
-            backgroundColor: disabled ? COLORS.surface : COLORS.background,
+            backgroundColor: disabled ? colors.surface : colors.background,
           },
         ]}
       >
@@ -65,7 +68,7 @@ export const Input: React.FC<InputProps> = ({
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          placeholderTextColor={COLORS.textMuted}
+          placeholderTextColor={colors.textMuted}
           keyboardType={keyboardType}
           multiline={multiline}
           numberOfLines={numberOfLines}
@@ -85,14 +88,14 @@ export const Input: React.FC<InputProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     marginBottom: SPACING.md,
   },
   label: {
     fontSize: FONT_SIZE.sm,
     fontWeight: '700',
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: SPACING.xs,
   },
   inputContainer: {
@@ -105,7 +108,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: FONT_SIZE.md,
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     paddingVertical: SPACING.sm,
   },
   multilineInput: {
@@ -113,14 +116,14 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
   disabledInput: {
-    color: COLORS.textMuted,
+    color: colors.textMuted,
   },
   rightIcon: {
     marginLeft: SPACING.xs,
   },
   errorText: {
     fontSize: FONT_SIZE.xs,
-    color: COLORS.error,
+    color: colors.error,
     marginTop: SPACING.xs,
   },
 });

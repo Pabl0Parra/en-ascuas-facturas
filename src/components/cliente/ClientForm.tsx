@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -14,7 +14,9 @@ import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
 import { Header } from '../ui/Header';
 import { useClientStore } from '../../stores/clientStore';
-import { COLORS, SPACING, FONT_SIZE } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
+import { SPACING, FONT_SIZE } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
 import {
   isNotEmpty,
@@ -23,15 +25,6 @@ import {
   isValidNIF,
 } from '../../utils/validators';
 import type { Client, ClientFormData, ClientTag } from '../../types/client';
-
-const TAG_LABELS: Record<ClientTag, { label: string; color: string }> = {
-  regular: { label: 'Regular', color: COLORS.primary },
-  vip: { label: 'VIP', color: '#8B5CF6' },
-  new: { label: 'Nuevo', color: '#10B981' },
-  inactive: { label: 'Inactivo', color: '#6B7280' },
-  international: { label: 'Internacional', color: '#3B82F6' },
-  domestic: { label: 'Nacional', color: '#F59E0B' },
-};
 
 interface ClientFormProps {
   client?: Client;
@@ -55,6 +48,17 @@ export const ClientForm: React.FC<ClientFormProps> = ({
   const router = useRouter();
   const addClient = useClientStore((state) => state.addClient);
   const updateClient = useClientStore((state) => state.updateClient);
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
+  const TAG_LABELS: Record<ClientTag, { label: string; color: string }> = {
+    regular: { label: 'Regular', color: colors.primary },
+    vip: { label: 'VIP', color: '#8B5CF6' },
+    new: { label: 'Nuevo', color: '#10B981' },
+    inactive: { label: 'Inactivo', color: '#6B7280' },
+    international: { label: 'Internacional', color: '#3B82F6' },
+    domestic: { label: 'Nacional', color: '#F59E0B' },
+  };
 
   const [formData, setFormData] = useState<ClientFormData>({
     nombre: client?.nombre || '',
@@ -300,10 +304,10 @@ export const ClientForm: React.FC<ClientFormProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   keyboardView: {
     flex: 1,
@@ -334,12 +338,12 @@ const styles = StyleSheet.create({
   tagsLabel: {
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   tagsSubtitle: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: SPACING.sm,
   },
   tagsContainer: {
@@ -351,16 +355,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.md,
     paddingVertical: SPACING.xs,
     borderRadius: 16,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     borderWidth: 1,
-    borderColor: COLORS.border,
+    borderColor: colors.border,
   },
   tagChipText: {
     fontSize: FONT_SIZE.sm,
     fontWeight: '500',
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   tagChipTextSelected: {
-    color: COLORS.textInverse,
+    color: colors.textInverse,
   },
 });

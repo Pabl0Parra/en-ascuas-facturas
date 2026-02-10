@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 
 interface NumberingData {
   invoicePrefix: string;
@@ -23,6 +25,9 @@ export const NumberingStep: React.FC<NumberingStepProps> = ({
   onNext,
   onBack,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   const [formData, setFormData] = useState<NumberingData>({
     invoicePrefix: initialData?.invoicePrefix || 'INV-',
     quotePrefix: initialData?.quotePrefix || 'QUO-',
@@ -160,15 +165,15 @@ export const NumberingStep: React.FC<NumberingStepProps> = ({
         </View>
 
         <View style={styles.infoBox}>
-          <Text style={styles.infoTitle}>💡 Tips:</Text>
+          <Text style={styles.infoTitle}>Tips:</Text>
           <Text style={styles.infoText}>
-            • Use prefixes that make sense for your business (e.g., "FACT-" for Spanish invoices)
+            Use prefixes that make sense for your business (e.g., "FACT-" for Spanish invoices)
           </Text>
           <Text style={styles.infoText}>
-            • Numbers will auto-increment with each new invoice or quote
+            Numbers will auto-increment with each new invoice or quote
           </Text>
           <Text style={styles.infoText}>
-            • You can change these settings later in the app
+            You can change these settings later in the app
           </Text>
         </View>
       </View>
@@ -193,10 +198,10 @@ export const NumberingStep: React.FC<NumberingStepProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   scrollView: {
     flex: 1,
@@ -211,12 +216,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZE.xxl,
     fontWeight: 'bold',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   subtitle: {
     fontSize: FONT_SIZE.md,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
   },
   form: {
     marginBottom: SPACING.xl,
@@ -227,11 +232,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
   previewBox: {
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     padding: SPACING.lg,
     borderRadius: BORDER_RADIUS.md,
     alignItems: 'center',
@@ -239,36 +244,36 @@ const styles = StyleSheet.create({
   },
   previewLabel: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: SPACING.xs,
   },
   previewText: {
     fontSize: FONT_SIZE.xxxl,
     fontWeight: 'bold',
-    color: COLORS.primary,
+    color: colors.primary,
     marginBottom: SPACING.xs,
   },
   previewSub: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     fontStyle: 'italic',
   },
   infoBox: {
-    backgroundColor: COLORS.primaryLight + '10',
+    backgroundColor: colors.primaryLight + '10',
     padding: SPACING.md,
     borderRadius: BORDER_RADIUS.md,
     borderLeftWidth: 3,
-    borderLeftColor: COLORS.primary,
+    borderLeftColor: colors.primary,
   },
   infoTitle: {
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   infoText: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: SPACING.xs,
     lineHeight: 20,
   },
@@ -284,7 +289,7 @@ const styles = StyleSheet.create({
   },
   progress: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     textAlign: 'center',
     marginTop: SPACING.md,
   },

@@ -1,10 +1,12 @@
 // src/components/documento/LineItemsList.tsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { LineItemRow } from './LineItemRow';
 import { Button } from '../ui/Button';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS, SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
 import type { LineItem } from '../../types/document';
 
@@ -28,6 +30,9 @@ export const LineItemsList: React.FC<LineItemsListProps> = ({
   error,
   lineItemErrors,
 }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>LÍNEAS DE DETALLE</Text>
@@ -47,7 +52,7 @@ export const LineItemsList: React.FC<LineItemsListProps> = ({
         variant="outline"
         size="sm"
         onPress={onAddLinea}
-        icon={<Ionicons name="add" size={18} color={COLORS.primary} />}
+        icon={<Ionicons name="add" size={18} color={colors.primary} />}
         style={styles.addButton}
       >
         {STRINGS.form.añadirLinea}
@@ -58,14 +63,14 @@ export const LineItemsList: React.FC<LineItemsListProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     marginBottom: SPACING.lg,
   },
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
     fontWeight: '700',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
   addButton: {
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.error,
+    color: colors.error,
     marginTop: SPACING.sm,
   },
 });

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, Modal, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/Button';
-import { COLORS, SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { useTheme } from '../../hooks/useTheme';
+import type { AppColors } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
 
 interface WhatsNewScreenProps {
   visible: boolean;
@@ -11,6 +13,8 @@ interface WhatsNewScreenProps {
 
 export const WhatsNewScreen: React.FC<WhatsNewScreenProps> = ({ visible, onClose }) => {
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
   return (
     <Modal
@@ -53,22 +57,27 @@ interface FeatureItemProps {
   description: string;
 }
 
-const FeatureItem: React.FC<FeatureItemProps> = ({ icon, title, description }) => (
-  <View style={styles.featureItem}>
-    <View style={styles.featureIcon}>
-      <Text style={styles.featureIconText}>{icon}</Text>
-    </View>
-    <View style={styles.featureContent}>
-      <Text style={styles.featureTitle}>{title}</Text>
-      <Text style={styles.featureDescription}>{description}</Text>
-    </View>
-  </View>
-);
+const FeatureItem: React.FC<FeatureItemProps> = ({ icon, title, description }) => {
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
-const styles = StyleSheet.create({
+  return (
+    <View style={styles.featureItem}>
+      <View style={styles.featureIcon}>
+        <Text style={styles.featureIconText}>{icon}</Text>
+      </View>
+      <View style={styles.featureContent}>
+        <Text style={styles.featureTitle}>{title}</Text>
+        <Text style={styles.featureDescription}>{description}</Text>
+      </View>
+    </View>
+  );
+};
+
+const createStyles = (colors: AppColors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: colors.background,
   },
   content: {
     padding: SPACING.lg,
@@ -86,13 +95,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZE.xxxl,
     fontWeight: 'bold',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: FONT_SIZE.lg,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     textAlign: 'center',
     paddingHorizontal: SPACING.md,
   },
@@ -102,13 +111,13 @@ const styles = StyleSheet.create({
   featuresTitle: {
     fontSize: FONT_SIZE.xl,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
   featureItem: {
     flexDirection: 'row',
     marginBottom: SPACING.md,
-    backgroundColor: COLORS.surface,
+    backgroundColor: colors.surface,
     padding: SPACING.md,
     borderRadius: BORDER_RADIUS.md,
   },
@@ -116,7 +125,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: BORDER_RADIUS.md,
-    backgroundColor: COLORS.primaryLight + '20',
+    backgroundColor: colors.primaryLight + '20',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: SPACING.md,
@@ -130,31 +139,31 @@ const styles = StyleSheet.create({
   featureTitle: {
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: 2,
   },
   featureDescription: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     lineHeight: 18,
   },
   migration: {
-    backgroundColor: COLORS.primaryLight + '10',
+    backgroundColor: colors.primaryLight + '10',
     padding: SPACING.md,
     borderRadius: BORDER_RADIUS.md,
     borderLeftWidth: 3,
-    borderLeftColor: COLORS.primary,
+    borderLeftColor: colors.primary,
     marginBottom: SPACING.xl,
   },
   migrationTitle: {
     fontSize: FONT_SIZE.md,
     fontWeight: '600',
-    color: COLORS.textPrimary,
+    color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
   migrationText: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textSecondary,
+    color: colors.textSecondary,
     marginBottom: SPACING.xs,
     lineHeight: 20,
   },
@@ -163,7 +172,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: FONT_SIZE.sm,
-    color: COLORS.textMuted,
+    color: colors.textMuted,
     textAlign: 'center',
     marginTop: SPACING.md,
   },

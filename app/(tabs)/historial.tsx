@@ -64,6 +64,7 @@ export default function HistorialScreen() {
         params: {
           filePath: doc.pdfFileName,
           title: `${doc.tipo === 'factura' ? t('historial.Invoice') : t('historial.Quote')} ${doc.numeroDocumento}`,
+          documentId: doc.id,
         },
       });
     } catch (error) {

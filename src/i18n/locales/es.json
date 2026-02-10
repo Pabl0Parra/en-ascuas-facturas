@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "InvoiceForge",
+    "name": "Bilio",
     "tagline": "Facturación Profesional Simplificada"
   },
   "navigation": {
@@ -16,7 +16,13 @@
     "numeroDocumento": "Nº Documento",
     "fechaDocumento": "Fecha",
     "datosEmpresa": "DATOS",
-    "datosFacturacion": "DATOS DE FACTURACIÓN"
+    "datosFacturacion": "DATOS DE FACTURACIÓN",
+    "document": "Documento",
+    "shareDocument": "Compartir Documento",
+    "openDocument": "Abrir Documento",
+    "loadingDocument": "Cargando documento...",
+    "page": "Página",
+    "of": "de"
   },
   "form": {
     "descripcion": "Descripción",
@@ -54,7 +60,9 @@
     "continuar": "Continuar",
     "anterior": "Anterior",
     "empezar": "Empezar",
-    "completar": "Completar"
+    "completar": "Completar",
+    "volver": "Volver",
+    "openExternal": "Abrir Externo"
   },
   "client": {
     "nombre": "Nombre / Razón Social",
@@ -77,7 +85,14 @@
     "seleccionaCliente": "Selecciona un cliente",
     "añadeLinea": "Añade al menos una línea",
     "cantidadInvalida": "Cantidad debe ser mayor a 0",
-    "precioInvalido": "Precio debe ser mayor a 0"
+    "precioInvalido": "Precio debe ser mayor a 0",
+    "error": "Error",
+    "sharingNotAvailable": "No se puede compartir en este dispositivo",
+    "errorSharingDocument": "No se pudo compartir el documento. Inténtalo de nuevo.",
+    "openExternalNotAvailable": "No se pueden abrir aplicaciones externas en este dispositivo",
+    "errorOpeningDocument": "No se pudo abrir el documento. Inténtalo de nuevo.",
+    "errorLoadingDocument": "No se pudo cargar el documento. El archivo puede estar corrupto o no existir.",
+    "fileNotFound": "Archivo no encontrado"
   },
   "success": {
     "clienteGuardado": "Cliente guardado",
@@ -277,31 +292,31 @@
     "title": "Política de Privacidad",
     "lastUpdated": "Última Actualización",
     "dataCollection": "Recopilación de Datos",
-    "dataCollectionText": "InvoiceForge está diseñado con tu privacidad en mente. NO recopilamos, transmitimos ni almacenamos ninguno de tus datos personales o empresariales en servidores externos.",
+    "dataCollectionText": "Bilio está diseñado con tu privacidad en mente. NO recopilamos, transmitimos ni almacenamos ninguno de tus datos personales o empresariales en servidores externos.",
     "offlineFirst": "Arquitectura Offline-First",
     "offlineFirstText": "Todos los datos que creas (perfiles empresariales, clientes, facturas, presupuestos) se almacenan exclusivamente en tu dispositivo usando almacenamiento local seguro. Tus datos nunca salen de tu dispositivo a menos que elijas explícitamente exportarlos o compartirlos.",
     "dataStorage": "Almacenamiento de Datos",
-    "dataStorageText": "Utilizamos AsyncStorage (almacenamiento en el dispositivo) para persistir tu información empresarial, registros de clientes y documentos. Estos datos se almacenan en formato cifrado en tu dispositivo y solo son accesibles por la aplicación InvoiceForge.",
+    "dataStorageText": "Utilizamos AsyncStorage (almacenamiento en el dispositivo) para persistir tu información empresarial, registros de clientes y documentos. Estos datos se almacenan en formato cifrado en tu dispositivo y solo son accesibles por la aplicación Bilio.",
     "permissions": "Permisos de la Aplicación",
-    "permissionsIntro": "InvoiceForge solicita los siguientes permisos:",
+    "permissionsIntro": "Bilio solicita los siguientes permisos:",
     "cameraPermission": "Para subir el logo de tu empresa o imágenes de clientes",
     "filePermission": "Para guardar y compartir facturas y presupuestos en PDF",
     "permissionsNote": "Estos permisos solo se usan para sus propósitos declarados y nunca para recopilación de datos.",
     "dataSharing": "Compartir Datos",
     "dataSharingText": "No compartimos, vendemos ni transmitimos tus datos a terceros. Cuando compartes una factura o exportas tus datos, tú controlas exactamente qué se comparte y con quién.",
     "analytics": "Analíticas y Rastreo",
-    "analyticsText": "InvoiceForge NO usa ningún servicio de analíticas, rastreo o telemetría. No tenemos forma de monitorear tu uso ni acceder a tus datos.",
+    "analyticsText": "Bilio NO usa ningún servicio de analíticas, rastreo o telemetría. No tenemos forma de monitorear tu uso ni acceder a tus datos.",
     "security": "Seguridad",
     "securityText": "La seguridad de tus datos se ve mejorada por nuestro enfoque offline-first. Como los datos nunca salen de tu dispositivo (excepto cuando los exportas explícitamente), no hay riesgo de brechas de datos o acceso no autorizado al servidor.",
     "dataRetention": "Retención y Eliminación de Datos",
     "dataRetentionText": "Tienes control completo sobre tus datos. Puedes exportar todos tus datos en cualquier momento desde la pantalla de Ajustes. Para eliminar todos los datos, simplemente desinstala la aplicación o usa la opción \"Borrar Todos los Datos\" en Ajustes.",
     "children": "Privacidad de Menores",
-    "childrenText": "InvoiceForge está destinado para uso empresarial por adultos. No recopilamos intencionadamente datos de menores de 13 años.",
+    "childrenText": "Bilio está destinado para uso empresarial por adultos. No recopilamos intencionadamente datos de menores de 13 años.",
     "changes": "Cambios en la Política de Privacidad",
     "changesText": "Podemos actualizar esta política de privacidad de vez en cuando. Cualquier cambio se reflejará en la aplicación con una fecha de \"Última Actualización\" actualizada.",
     "contact": "Contacto",
     "contactText": "Si tienes preguntas sobre esta política de privacidad, por favor contáctanos a través de la lista de la tienda de aplicaciones.",
-    "summary": "En Resumen: InvoiceForge es 100% privado. Tus datos nunca salen de tu dispositivo. Sin cuentas, sin servidores, sin rastreo."
+    "summary": "En Resumen: Bilio es 100% privado. Tus datos nunca salen de tu dispositivo. Sin cuentas, sin servidores, sin rastreo."
   },
   "about": {
     "version": "Versión",
@@ -310,7 +325,7 @@
     "privacy": "Tu Privacidad",
     "privacyMessage": "Esta aplicación es 100% offline. Todos tus datos permanecen en tu dispositivo. Sin sincronización en la nube, sin servidores, sin rastreo. Eres dueño completo de tus datos.",
     "support": "Contactar Soporte",
-    "rate": "Calificar InvoiceForge",
+    "rate": "Calificar Bilio",
     "rights": "Todos los derechos reservados.",
     "featuresTitle": "Características Principales",
     "feature1": "100% Privado - Los datos nunca salen de tu dispositivo",

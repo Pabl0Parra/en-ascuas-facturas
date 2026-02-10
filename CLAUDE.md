@@ -309,7 +309,7 @@ type DocumentStatus =
 
 ### 4.1 App Identity & Branding
 
-- New app name (drop "Bilio" — it's business-specific). Suggestions: **"InvoiceForge"**, **"BillCraft"**, **"QuickBill Pro"**, **"Factura"**
+- New app name (drop "Bilio" — it's business-specific). Suggestions: **"Bilio"**, **"BillCraft"**, **"QuickBill Pro"**, **"Factura"**
 - App icon and splash screen designed for the new brand
 - App Store screenshots showing the onboarding flow, PDF generation, and multi-language support
 - Privacy policy (no data collection — strong selling point)

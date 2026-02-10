@@ -23,14 +23,14 @@ export const AboutSection: React.FC = () => {
 
   const handleSupportPress = () => {
     // Open support email or link
-    Linking.openURL('mailto:support@invoiceforge.app?subject=InvoiceForge Support');
+    Linking.openURL('mailto:support@Bilio.app?subject=Bilio Support');
   };
 
   const handleRatePress = () => {
     // Open app store rating (will need to be updated with actual store links)
     const storeUrl = Constants.platform?.ios
-      ? 'https://apps.apple.com/app/invoiceforge'
-      : 'https://play.google.com/store/apps/details?id=com.invoiceforge.app';
+      ? 'https://apps.apple.com/app/Bilio'
+      : 'https://play.google.com/store/apps/details?id=com.Bilio.app';
     Linking.openURL(storeUrl);
   };
 
@@ -40,7 +40,7 @@ export const AboutSection: React.FC = () => {
         <View style={styles.iconContainer}>
           <Ionicons name="document-text" size={40} color={COLORS.primary} />
         </View>
-        <Text style={styles.appName}>InvoiceForge</Text>
+        <Text style={styles.appName}>Bilio</Text>
         <Text style={styles.version}>
           {t('about.version', 'Version')} {appVersion}
         </Text>
@@ -69,7 +69,7 @@ export const AboutSection: React.FC = () => {
         <TouchableOpacity style={styles.listItem} onPress={handleRatePress}>
           <Ionicons name="star" size={24} color={COLORS.primary} />
           <Text style={styles.listItemText}>
-            {t('about.rate', 'Rate InvoiceForge')}
+            {t('about.rate', 'Rate Bilio')}
           </Text>
           <Ionicons name="chevron-forward" size={20} color={COLORS.textMuted} />
         </TouchableOpacity>
@@ -118,7 +118,7 @@ export const AboutSection: React.FC = () => {
       </View>
 
       <Text style={styles.copyright}>
-        © 2026 InvoiceForge. {t('about.rights', 'All rights reserved.')}
+        © 2026 Bilio. {t('about.rights', 'All rights reserved.')}
       </Text>
     </View>
   );

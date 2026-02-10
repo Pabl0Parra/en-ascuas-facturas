@@ -1,4 +1,4 @@
-# 📱 InvoiceForge - Professional Invoicing App
+# 📱 Bilio - Professional Invoicing App
 
 <div align="center">
 
@@ -38,9 +38,9 @@
 
 ## 📖 Description
 
-**InvoiceForge** is a modern, privacy-first mobile application designed for freelancers, small businesses, and entrepreneurs who need to create professional invoices and quotes quickly, elegantly, and without complications.
+**Bilio** is a modern, privacy-first mobile application designed for freelancers, small businesses, and entrepreneurs who need to create professional invoices and quotes quickly, elegantly, and without complications.
 
-### What Makes InvoiceForge Different?
+### What Makes Bilio Different?
 
 - 🔒 **100% Private** - Your data NEVER leaves your device
 - 📴 **Offline-First** - Works perfectly without internet
@@ -117,7 +117,7 @@
 
 ## 🔒 Privacy First
 
-InvoiceForge is built with privacy as a core principle, not an afterthought.
+Bilio is built with privacy as a core principle, not an afterthought.
 
 ### What We DON'T Do
 
@@ -210,8 +210,8 @@ InvoiceForge is built with privacy as a core principle, not an afterthought.
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/invoiceforge-app.git
-cd invoiceforge-app
+git clone https://github.com/yourusername/Bilio-app.git
+cd Bilio-app
 ```
 
 2. **Install dependencies**
@@ -313,7 +313,7 @@ On first launch, you'll be guided through a 6-step onboarding process:
 ## 📁 Project Structure
 
 ```
-invoiceforge-app/
+Bilio-app/
 ├── app/                          # Screens and navigation (Expo Router)
 │   ├── (tabs)/                   # Tab navigation
 │   │   ├── index.tsx            # Home dashboard
@@ -439,7 +439,7 @@ npx prettier --write .     # Format code
 
 ## 🚀 Development Phases
 
-InvoiceForge was built in 4 major phases over 14 weeks:
+Bilio was built in 4 major phases over 14 weeks:
 
 ### Phase 1: Core Genericization (Weeks 1-7)
 
@@ -517,7 +517,7 @@ npm run test:coverage
 
 MIT License - See [LICENSE](./LICENSE) file for details
 
-Copyright © 2026 InvoiceForge
+Copyright © 2026 Bilio
 
 ---
 
@@ -527,14 +527,14 @@ Copyright © 2026 InvoiceForge
 
 - GitHub: [@Pabl0Parra](https://github.com/Pabl0Parra)
 - Original Project: Bilio (private business tool)
-- InvoiceForge: Generic public release
+- Bilio: Generic public release
 
 ---
 
 ## 📞 Support
 
-- **Email**: support@invoiceforge.app
-- **GitHub Issues**: [Report a bug](https://github.com/yourusername/invoiceforge-app/issues)
+- **Email**: support@Bilio.app
+- **GitHub Issues**: [Report a bug](https://github.com/yourusername/Bilio-app/issues)
 - **Privacy Policy**: Available in-app under About → Privacy Policy
 
 ---
@@ -552,7 +552,7 @@ Copyright © 2026 InvoiceForge
 
 **Made with ❤️ and privacy in mind**
 
-[⬆ Back to top](#-invoiceforge---professional-invoicing-app)
+[⬆ Back to top](#-Bilio---professional-invoicing-app)
 
 </div>
 
@@ -581,9 +581,9 @@ Copyright © 2026 InvoiceForge
 
 ## 📖 Descripción
 
-**InvoiceForge** es una aplicación móvil moderna y orientada a la privacidad, diseñada para autónomos, pequeñas empresas y emprendedores que necesitan crear facturas y presupuestos profesionales de forma rápida, elegante y sin complicaciones.
+**Bilio** es una aplicación móvil moderna y orientada a la privacidad, diseñada para autónomos, pequeñas empresas y emprendedores que necesitan crear facturas y presupuestos profesionales de forma rápida, elegante y sin complicaciones.
 
-### ¿Qué Hace Diferente a InvoiceForge?
+### ¿Qué Hace Diferente a Bilio?
 
 - 🔒 **100% Privado** - Tus datos NUNCA salen de tu dispositivo
 - 📴 **Offline-First** - Funciona perfectamente sin internet
@@ -660,7 +660,7 @@ Copyright © 2026 InvoiceForge
 
 ## 🔒 Privacidad Primero
 
-InvoiceForge está construido con la privacidad como principio fundamental, no como una idea tardía.
+Bilio está construido con la privacidad como principio fundamental, no como una idea tardía.
 
 ### Lo Que NO Hacemos
 
@@ -761,7 +761,7 @@ npm run test:coverage
 
 Licencia MIT - Ver archivo [LICENSE](./LICENSE) para detalles
 
-Copyright © 2026 InvoiceForge
+Copyright © 2026 Bilio
 
 ---
 
@@ -771,14 +771,14 @@ Copyright © 2026 InvoiceForge
 
 - GitHub: [@Pabl0Parra](https://github.com/Pabl0Parra)
 - Proyecto Original: Bilio (herramienta empresarial privada)
-- InvoiceForge: Lanzamiento público genérico
+- Bilio: Lanzamiento público genérico
 
 ---
 
 ## 📞 Soporte
 
-- **Email**: support@invoiceforge.app
-- **GitHub Issues**: [Reportar un error](https://github.com/yourusername/invoiceforge-app/issues)
+- **Email**: support@Bilio.app
+- **GitHub Issues**: [Reportar un error](https://github.com/yourusername/Bilio-app/issues)
 - **Política de Privacidad**: Disponible en la app en Acerca de → Política de Privacidad
 
 ---
@@ -796,6 +796,6 @@ Copyright © 2026 InvoiceForge
 
 **Hecho con ❤️ y privacidad en mente**
 
-[⬆ Volver arriba](#-invoiceforge---professional-invoicing-app)
+[⬆ Volver arriba](#-Bilio---professional-invoicing-app)
 
 </div>

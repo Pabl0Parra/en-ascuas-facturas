@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "InvoiceForge",
-    "slug": "invoiceforge-app",
+    "name": "Bilio",
+    "slug": "Bilio-app",
     "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "invoiceforge",
+    "scheme": "Bilio",
     "userInterfaceStyle": "light",
     "description": "Professional invoicing and quote management made simple. Create, manage, and share beautiful invoices and quotes on the go.",
     "splash": {
@@ -15,7 +15,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.invoiceforge.app",
+      "bundleIdentifier": "com.Bilio.app",
       "buildNumber": "1"
     },
     "android": {
@@ -23,7 +23,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#3B82F6"
       },
-      "package": "com.invoiceforge.app",
+      "package": "com.Bilio.app",
       "versionCode": 1,
       "permissions": [
         "android.permission.READ_EXTERNAL_STORAGE",

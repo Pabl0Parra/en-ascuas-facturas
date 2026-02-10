@@ -136,7 +136,7 @@ describe('Phase 1 Integration Tests', () => {
       await changeLanguage('es');
 
       const translations = getTranslations(['app.name', 'document.factura']);
-      expect(translations['app.name']).toBe('InvoiceForge');
+      expect(translations['app.name']).toBe('Bilio');
       expect(translations['document.factura']).toBe('FACTURA'); // Uppercase in Spanish
     });
   });

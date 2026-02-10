@@ -16,7 +16,13 @@
     "numeroDocumento": "Dokumentnr.",
     "fechaDocumento": "Datum",
     "datosEmpresa": "DATEN",
-    "datosFacturacion": "RECHNUNGSDATEN"
+    "datosFacturacion": "RECHNUNGSDATEN",
+    "document": "Dokument",
+    "shareDocument": "Dokument teilen",
+    "openDocument": "Dokument öffnen",
+    "loadingDocument": "Dokument wird geladen...",
+    "page": "Seite",
+    "of": "von"
   },
   "form": {
     "descripcion": "Beschreibung",
@@ -54,7 +60,9 @@
     "continuar": "Weiter",
     "anterior": "Zurück",
     "empezar": "Beginnen",
-    "completar": "Abschließen"
+    "completar": "Abschließen",
+    "volver": "Zurück",
+    "openExternal": "Extern öffnen"
   },
   "client": {
     "nombre": "Name / Firmenname",
@@ -77,7 +85,14 @@
     "seleccionaCliente": "Wählen Sie einen Kunden aus",
     "añadeLinea": "Mindestens eine Zeile hinzufügen",
     "cantidadInvalida": "Menge muss größer als 0 sein",
-    "precioInvalido": "Preis muss größer als 0 sein"
+    "precioInvalido": "Preis muss größer als 0 sein",
+    "error": "Fehler",
+    "sharingNotAvailable": "Das Teilen ist auf diesem Gerät nicht verfügbar",
+    "errorSharingDocument": "Dokument konnte nicht geteilt werden. Bitte versuchen Sie es erneut.",
+    "openExternalNotAvailable": "Externe Apps können auf diesem Gerät nicht geöffnet werden",
+    "errorOpeningDocument": "Dokument konnte nicht geöffnet werden. Bitte versuchen Sie es erneut.",
+    "errorLoadingDocument": "Dokument konnte nicht geladen werden. Die Datei ist möglicherweise beschädigt oder fehlt.",
+    "fileNotFound": "Datei nicht gefunden"
   },
   "success": {
     "clienteGuardado": "Kunde gespeichert",

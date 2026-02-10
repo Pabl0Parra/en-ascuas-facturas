@@ -16,7 +16,13 @@
     "numeroDocumento": "N.º do documento",
     "fechaDocumento": "Data",
     "datosEmpresa": "DADOS",
-    "datosFacturacion": "DADOS DE FATURAÇÃO"
+    "datosFacturacion": "DADOS DE FATURAÇÃO",
+    "document": "Documento",
+    "shareDocument": "Partilhar documento",
+    "openDocument": "Abrir documento",
+    "loadingDocument": "A carregar documento...",
+    "page": "Página",
+    "of": "de"
   },
   "form": {
     "descripcion": "Descrição",
@@ -54,7 +60,9 @@
     "continuar": "Continuar",
     "anterior": "Voltar",
     "empezar": "Começar",
-    "completar": "Concluir"
+    "completar": "Concluir",
+    "volver": "Voltar",
+    "openExternal": "Abrir externamente"
   },
   "client": {
     "nombre": "Nome / Denominação social",
@@ -77,7 +85,14 @@
     "seleccionaCliente": "Selecione um cliente",
     "añadeLinea": "Adicione pelo menos uma linha",
     "cantidadInvalida": "A quantidade deve ser maior que 0",
-    "precioInvalido": "O preço deve ser maior que 0"
+    "precioInvalido": "O preço deve ser maior que 0",
+    "error": "Erro",
+    "sharingNotAvailable": "A partilha não está disponível neste dispositivo",
+    "errorSharingDocument": "Não foi possível partilhar o documento. Por favor, tente novamente.",
+    "openExternalNotAvailable": "Não é possível abrir aplicações externas neste dispositivo",
+    "errorOpeningDocument": "Não foi possível abrir o documento. Por favor, tente novamente.",
+    "errorLoadingDocument": "Não foi possível carregar o documento. O ficheiro pode estar corrompido ou em falta.",
+    "fileNotFound": "Ficheiro não encontrado"
   },
   "success": {
     "clienteGuardado": "Cliente guardado",

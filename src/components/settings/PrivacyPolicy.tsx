@@ -26,7 +26,7 @@ export const PrivacyPolicy: React.FC = () => {
         <Text style={styles.paragraph}>
           {t(
             'privacy.dataCollectionText',
-            'InvoiceForge is designed with your privacy in mind. We do NOT collect, transmit, or store any of your personal or business data on external servers.',
+            'Bilio is designed with your privacy in mind. We do NOT collect, transmit, or store any of your personal or business data on external servers.',
           )}
         </Text>
       </View>
@@ -50,7 +50,7 @@ export const PrivacyPolicy: React.FC = () => {
         <Text style={styles.paragraph}>
           {t(
             'privacy.dataStorageText',
-            'We use AsyncStorage (on-device storage) to persist your business information, client records, and documents. This data is stored in encrypted format on your device and is only accessible by the InvoiceForge app.',
+            'We use AsyncStorage (on-device storage) to persist your business information, client records, and documents. This data is stored in encrypted format on your device and is only accessible by the Bilio app.',
           )}
         </Text>
       </View>
@@ -60,7 +60,7 @@ export const PrivacyPolicy: React.FC = () => {
           {t('privacy.permissions', 'App Permissions')}
         </Text>
         <Text style={styles.paragraph}>
-          {t('privacy.permissionsIntro', 'InvoiceForge requests the following permissions:')}
+          {t('privacy.permissionsIntro', 'Bilio requests the following permissions:')}
         </Text>
         <View style={styles.bulletList}>
           <Text style={styles.bullet}>
@@ -105,7 +105,7 @@ export const PrivacyPolicy: React.FC = () => {
         <Text style={styles.paragraph}>
           {t(
             'privacy.analyticsText',
-            'InvoiceForge does NOT use any analytics, tracking, or telemetry services. We have no way to monitor your usage or access your data.',
+            'Bilio does NOT use any analytics, tracking, or telemetry services. We have no way to monitor your usage or access your data.',
           )}
         </Text>
       </View>
@@ -141,7 +141,7 @@ export const PrivacyPolicy: React.FC = () => {
         <Text style={styles.paragraph}>
           {t(
             'privacy.childrenText',
-            'InvoiceForge is intended for business use by adults. We do not knowingly collect data from children under 13.',
+            'Bilio is intended for business use by adults. We do not knowingly collect data from children under 13.',
           )}
         </Text>
       </View>
@@ -174,7 +174,7 @@ export const PrivacyPolicy: React.FC = () => {
         <Text style={styles.highlightText}>
           {t(
             'privacy.summary',
-            'Bottom Line: InvoiceForge is 100% private. Your data never leaves your device. No accounts, no servers, no tracking.',
+            'Bottom Line: Bilio is 100% private. Your data never leaves your device. No accounts, no servers, no tracking.',
           )}
         </Text>
       </View>

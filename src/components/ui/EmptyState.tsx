@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Button } from './Button';
-import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 
@@ -52,7 +52,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.xl,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     textAlign: 'center',
     marginBottom: SPACING.xs,

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card } from '../ui/Card';
-import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
@@ -64,7 +64,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   value: {
     fontSize: FONT_SIZE.md,
     color: colors.textPrimary,
-    fontWeight: '500',
+    fontFamily: FONTS.medium,
   },
   divider: {
     height: 1,
@@ -78,12 +78,12 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   totalLabel: {
     fontSize: FONT_SIZE.xl,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
   },
   totalValue: {
     fontSize: FONT_SIZE.xxl,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.primary,
   },
 });

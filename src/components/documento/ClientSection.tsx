@@ -4,7 +4,7 @@ import { Select } from '../ui/Select';
 import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
 import { useClientStore } from '../../stores/clientStore';
-import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
@@ -103,7 +103,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
@@ -125,7 +125,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
     fontSize: FONT_SIZE.sm,
     color: colors.textSecondary,
     width: 90,
-    fontWeight: '500',
+    fontFamily: FONTS.medium,
   },
   detailValue: {
     flex: 1,

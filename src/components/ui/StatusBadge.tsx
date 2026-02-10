@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { DocumentStatus } from '../../types/document';
-import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 
@@ -109,10 +109,10 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   label: {
     fontSize: FONT_SIZE.xs,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
   },
   labelSmall: {
     fontSize: 10,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
   },
 });

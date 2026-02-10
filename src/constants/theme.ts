@@ -105,6 +105,14 @@ export const BORDER_RADIUS = {
   full: 9999,
 } as const;
 
+export const FONTS = {
+  light: 'Inter_300Light',
+  regular: 'Inter_400Regular',
+  medium: 'Inter_500Medium',
+  semibold: 'Inter_600SemiBold',
+  bold: 'Inter_700Bold',
+} as const;
+
 export const FONT_SIZE = {
   xs: 10,
   sm: 12,
@@ -113,6 +121,16 @@ export const FONT_SIZE = {
   xl: 18,
   xxl: 24,
   xxxl: 32,
+} as const;
+
+export const LINE_HEIGHT = {
+  xs: 14,
+  sm: 16,
+  md: 20,
+  lg: 24,
+  xl: 22,
+  xxl: 34,
+  xxxl: 41,
 } as const;
 
 export const SHADOWS = {

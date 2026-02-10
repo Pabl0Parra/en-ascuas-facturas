@@ -9,6 +9,7 @@ import {
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
+  FONTS,
 } from '../../constants/theme';
 
 interface RecurringAlertProps {
@@ -75,7 +76,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: 4,
   },
@@ -94,7 +95,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   badgeText: {
     fontSize: FONT_SIZE.sm,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textInverse,
   },
 });

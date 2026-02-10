@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Alert, Platform, Keybo
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as ImagePicker from 'expo-image-picker';
 import { Button } from '../ui/Button';
-import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 
@@ -248,7 +248,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.xxl,
-    fontWeight: 'bold',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
@@ -261,7 +261,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
@@ -296,7 +296,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   removeLogoText: {
     color: colors.textInverse,
     fontSize: FONT_SIZE.lg,
-    fontWeight: 'bold',
+    fontFamily: FONTS.bold,
   },
   logoPlaceholder: {
     width: 150,
@@ -351,7 +351,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   checkmark: {
     fontSize: FONT_SIZE.xl,
     color: colors.success,
-    fontWeight: 'bold',
+    fontFamily: FONTS.bold,
   },
   colorPreview: {
     padding: SPACING.lg,
@@ -361,7 +361,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   colorPreviewText: {
     fontSize: FONT_SIZE.md,
     color: colors.textInverse,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
   },
   footer: {
     marginTop: SPACING.xl,

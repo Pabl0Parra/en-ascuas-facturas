@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/Button';
-import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 import { LANGUAGES, changeLanguage, type SupportedLanguage } from '../../i18n';
@@ -117,7 +117,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.xxxl,
-    fontWeight: 'bold',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.sm,
     textAlign: 'center',
@@ -134,7 +134,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
@@ -159,7 +159,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   languageCode: {
     fontSize: FONT_SIZE.sm,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.primary,
   },
   languageName: {

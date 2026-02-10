@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { LineItemRow } from './LineItemRow';
 import { Button } from '../ui/Button';
 import { Ionicons } from '@expo/vector-icons';
-import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
@@ -69,7 +69,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.md,
   },

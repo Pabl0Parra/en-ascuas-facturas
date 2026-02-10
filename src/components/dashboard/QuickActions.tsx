@@ -10,6 +10,7 @@ import {
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
+  FONTS,
 } from '../../constants/theme';
 
 interface QuickActionButton {
@@ -90,7 +91,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.sm,
     paddingHorizontal: SPACING.xs,
@@ -120,7 +121,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   actionTitle: {
     fontSize: FONT_SIZE.sm,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     textAlign: 'center',
   },

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Platform, KeyboardAvoidingView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from '../ui/Button';
-import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 import type { BusinessProfile } from '../../types/businessProfile';
@@ -221,7 +221,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.xxl,
-    fontWeight: 'bold',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
@@ -249,7 +249,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
   },
   editButton: {
@@ -259,7 +259,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   editButtonText: {
     fontSize: FONT_SIZE.md,
     color: colors.primary,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
   },
   sectionContent: {
     gap: SPACING.sm,
@@ -278,7 +278,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   reviewValue: {
     fontSize: FONT_SIZE.md,
     color: colors.textPrimary,
-    fontWeight: '500',
+    fontFamily: FONTS.medium,
   },
   reviewValueMuted: {
     color: colors.textMuted,

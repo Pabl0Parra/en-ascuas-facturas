@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
-import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 import { getSupportedCountries, getCountryDefaults } from '../../config/countryDefaults';
@@ -229,7 +229,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.xxl,
-    fontWeight: 'bold',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },

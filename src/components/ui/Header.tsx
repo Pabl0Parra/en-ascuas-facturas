@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 
@@ -79,7 +79,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   title: {
     flex: 1,
     fontSize: FONT_SIZE.xl,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     textAlign: 'center',
   },

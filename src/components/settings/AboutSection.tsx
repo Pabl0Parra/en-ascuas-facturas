@@ -11,6 +11,7 @@ import {
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
+  FONTS,
 } from '../../constants/theme';
 
 export const AboutSection: React.FC = () => {
@@ -149,7 +150,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   appName: {
     fontSize: FONT_SIZE.xxl,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
@@ -187,7 +188,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   featuresTitle: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: SPACING.md,
   },

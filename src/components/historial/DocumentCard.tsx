@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Card } from '../ui/Card';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
-import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE, FONTS } from '../../constants/theme';
 import { formatDate, formatCurrency } from '../../utils/formatters';
 import type { DocumentMetadata } from '../../types/document';
 
@@ -110,7 +110,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   typeText: {
     fontSize: FONT_SIZE.xs,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.primary,
   },
   facturaText: {
@@ -123,7 +123,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   numero: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     maxWidth: 120,
   },
@@ -135,7 +135,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   cliente: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '500',
+    fontFamily: FONTS.medium,
     color: colors.textPrimary,
   },
   nifCif: {
@@ -156,7 +156,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   total: {
     fontSize: FONT_SIZE.xl,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.primary,
   },
 });

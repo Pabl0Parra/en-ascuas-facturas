@@ -41,13 +41,13 @@ export default function HomeScreen() {
         <View style={styles.header}>
           <View style={styles.headerTop}>
             <Image
-              source={require('../../assets/images/icon.png')}
+              source={require('../../assets/images/bilio-text-light.png')}
               style={styles.icon}
               resizeMode="contain"
             />
+            <Text style={styles.greeting}>{t('dashboard.welcomeBack')}</Text>
             <ThemeToggle />
           </View>
-          <Text style={styles.greeting}>{t('dashboard.welcomeBack')}</Text>
           <Text style={styles.subtitle}>
             {businessProfile?.companyName || t('dashboard.yourBusiness')}
           </Text>
@@ -186,17 +186,17 @@ const createStyles = (colors: AppColors) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: SPACING.sm,
     },
     icon: {
       width: 60,
-      height: 60,
+      height: 36,
     },
     greeting: {
+      flex: 1,
       fontSize: FONT_SIZE.xxl,
       fontWeight: '700',
       color: colors.textPrimary,
-      marginBottom: SPACING.xs,
+      marginLeft: SPACING.sm,
     },
     subtitle: {
       fontSize: FONT_SIZE.md,

@@ -14,6 +14,7 @@ import {
   SPACING,
   BORDER_RADIUS,
   FONT_SIZE,
+  FONTS,
 } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
@@ -153,7 +154,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   label: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
@@ -197,7 +198,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   modalTitle: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
   },
   closeButton: {
@@ -229,7 +230,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   selectedOptionText: {
     color: colors.primary,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
   },
   emptyText: {
     padding: SPACING.lg,

@@ -7,6 +7,7 @@ import {
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
+  FONTS,
 } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
@@ -173,7 +174,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   label: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textSecondary,
     marginBottom: SPACING.xs,
   },
@@ -217,7 +218,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   importeText: {
     fontSize: FONT_SIZE.sm,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
   },
 });

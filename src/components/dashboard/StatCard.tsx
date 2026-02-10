@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
-import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS, FONTS } from '../../constants/theme';
 
 interface StatCardProps {
   title: string;
@@ -67,7 +67,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   value: {
     fontSize: FONT_SIZE.xl,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
   },
   subtitle: {

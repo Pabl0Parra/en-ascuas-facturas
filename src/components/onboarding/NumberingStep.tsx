@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-na
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
-import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 
@@ -215,7 +215,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.xxl,
-    fontWeight: 'bold',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
@@ -231,7 +231,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
@@ -249,7 +249,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   previewText: {
     fontSize: FONT_SIZE.xxxl,
-    fontWeight: 'bold',
+    fontFamily: FONTS.bold,
     color: colors.primary,
     marginBottom: SPACING.xs,
   },
@@ -267,7 +267,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   infoTitle: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },

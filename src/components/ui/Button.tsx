@@ -7,7 +7,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import { SPACING, BORDER_RADIUS, FONT_SIZE } from '../../constants/theme';
+import { SPACING, BORDER_RADIUS, FONT_SIZE, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 
@@ -65,7 +65,7 @@ const getTextStyles = (variant: ButtonVariant, size: ButtonSize, colors: AppColo
   };
 
   const baseStyle: TextStyle = {
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     fontSize: baseFontSize[size],
   };
 

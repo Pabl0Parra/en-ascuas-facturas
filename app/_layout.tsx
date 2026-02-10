@@ -1,13 +1,24 @@
 import { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  useFonts,
+  Inter_300Light,
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+} from '@expo-google-fonts/inter';
+import * as SplashScreen from 'expo-splash-screen';
 import { MigrationService } from '../src/services/migrationService';
 import { useBusinessProfileStore } from '../src/stores/businessProfileStore';
 import { WhatsNewScreen } from '../src/components/migration/WhatsNewScreen';
 import { ErrorBoundary } from '../src/components/ErrorBoundary';
 import { initI18n } from '../src/i18n';
+
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const router = useRouter();
@@ -15,6 +26,14 @@ export default function RootLayout() {
   const { migration } = useBusinessProfileStore();
   const [isReady, setIsReady] = useState(false);
   const [showWhatsNew, setShowWhatsNew] = useState(false);
+
+  const [fontsLoaded] = useFonts({
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+  });
 
   useEffect(() => {
     async function initializeApp() {
@@ -58,17 +77,19 @@ export default function RootLayout() {
     initializeApp();
   }, []);
 
+  useEffect(() => {
+    if (fontsLoaded && isReady) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, isReady]);
+
   const handleWhatsNewClose = () => {
     setShowWhatsNew(false);
     MigrationService.markWhatsNewSeen();
   };
 
-  if (!isReady) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
-        <Text style={{ fontSize: 18, color: '#333' }}>Loading...</Text>
-      </View>
-    );
+  if (!fontsLoaded || !isReady) {
+    return null;
   }
 
   return (

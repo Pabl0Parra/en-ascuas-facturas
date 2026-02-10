@@ -16,7 +16,7 @@ import { Header } from '../ui/Header';
 import { useClientStore } from '../../stores/clientStore';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
-import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE, FONTS } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
 import {
   isNotEmpty,
@@ -337,7 +337,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   tagsLabel: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
@@ -361,7 +361,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   tagChipText: {
     fontSize: FONT_SIZE.sm,
-    fontWeight: '500',
+    fontFamily: FONTS.medium,
     color: colors.textSecondary,
   },
   tagChipTextSelected: {

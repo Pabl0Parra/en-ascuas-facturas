@@ -14,6 +14,7 @@ import {
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
+  FONTS,
 } from '../../constants/theme';
 
 interface RecentDocumentsProps {
@@ -136,13 +137,13 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
   },
   viewAllText: {
     fontSize: FONT_SIZE.sm,
     color: colors.primary,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
   },
   list: {
     gap: SPACING.xs,
@@ -179,7 +180,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   documentNumber: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
   },
   documentClient: {
@@ -198,7 +199,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   documentTotal: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
   },
   emptyState: {
@@ -207,7 +208,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   emptyText: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textSecondary,
     marginTop: SPACING.sm,
   },

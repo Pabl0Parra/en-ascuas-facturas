@@ -8,6 +8,7 @@ import {
   SPACING,
   FONT_SIZE,
   BORDER_RADIUS,
+  FONTS,
 } from '../../constants/theme';
 
 export const PrivacyPolicy: React.FC = () => {
@@ -195,7 +196,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   heading: {
     fontSize: FONT_SIZE.xxl,
-    fontWeight: '700',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },
@@ -209,7 +210,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   sectionTitle: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: SPACING.sm,
   },
@@ -230,7 +231,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
     marginBottom: SPACING.xs,
   },
   bulletBold: {
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
   },
   highlight: {
@@ -243,7 +244,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   highlightText: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.primary,
     textAlign: 'center',
     lineHeight: FONT_SIZE.md * 1.4,

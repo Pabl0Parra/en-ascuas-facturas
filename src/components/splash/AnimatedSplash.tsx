@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useMemo } from 'react';
 import { Text, StyleSheet, Animated, Dimensions } from 'react-native';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
-import { FONT_SIZE, SPACING } from '../../constants/theme';
+import { FONT_SIZE, SPACING, FONTS } from '../../constants/theme';
 import { STRINGS } from '../../constants/strings';
 
 const { width, height } = Dimensions.get('window');
@@ -82,7 +82,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   title: {
     fontSize: 36,
-    fontWeight: '900',
+    fontFamily: FONTS.bold,
     color: colors.background,
     letterSpacing: 6,
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
@@ -91,7 +91,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   tagline: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '400',
+    fontFamily: FONTS.regular,
     color: colors.background,
     letterSpacing: 3,
     marginTop: SPACING.xs,

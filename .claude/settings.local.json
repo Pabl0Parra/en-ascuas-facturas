@@ -6,7 +6,10 @@
       "Bash(npm test:*)",
       "Bash(npx react-native start:*)",
       "Bash(clear-app-data.js << 'EOF'\n// Development utility to clear all app data\n// Run with: node clear-app-data.js\n\nconst AsyncStorage = require\\('@react-native-async-storage/async-storage'\\);\n\nasync function clearAllData\\(\\) {\n  try {\n    console.log\\('Clearing all AsyncStorage data...'\\);\n    await AsyncStorage.clear\\(\\);\n    console.log\\('✅ All data cleared successfully!'\\);\n    console.log\\('Restart your app to see the onboarding flow.'\\);\n  } catch \\(error\\) {\n    console.error\\('❌ Error clearing data:', error\\);\n  }\n}\n\nclearAllData\\(\\);\nEOF)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(npx expo install:*)",
+      "Bash(node -e:*)"
     ]
   }
 }

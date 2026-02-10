@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Card } from '../ui/Card';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
-import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE, FONTS } from '../../constants/theme';
 import type { Client } from '../../types/client';
 
 interface ClientCardProps {
@@ -83,14 +83,14 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   nombre: {
     fontSize: FONT_SIZE.lg,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: 2,
   },
   nifCif: {
     fontSize: FONT_SIZE.sm,
     color: colors.primary,
-    fontWeight: '500',
+    fontFamily: FONTS.medium,
     marginBottom: SPACING.xs,
   },
   direccion: {

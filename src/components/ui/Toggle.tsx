@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { View, Text, Switch, StyleSheet } from 'react-native';
-import { SPACING, FONT_SIZE } from '../../constants/theme';
+import { SPACING, FONT_SIZE, FONTS } from '../../constants/theme';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
 
@@ -49,7 +49,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   label: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '500',
+    fontFamily: FONTS.medium,
     color: colors.textPrimary,
   },
   description: {

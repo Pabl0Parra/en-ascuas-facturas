@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/Button';
 import { useTheme } from '../../hooks/useTheme';
 import type { AppColors } from '../../constants/theme';
-import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../constants/theme';
+import { SPACING, FONT_SIZE, BORDER_RADIUS, FONTS } from '../../constants/theme';
 
 interface WhatsNewScreenProps {
   visible: boolean;
@@ -94,7 +94,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZE.xxxl,
-    fontWeight: 'bold',
+    fontFamily: FONTS.bold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
     textAlign: 'center',
@@ -110,7 +110,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   featuresTitle: {
     fontSize: FONT_SIZE.xl,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: SPACING.md,
   },
@@ -138,7 +138,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   featureTitle: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: 2,
   },
@@ -157,7 +157,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   migrationTitle: {
     fontSize: FONT_SIZE.md,
-    fontWeight: '600',
+    fontFamily: FONTS.semibold,
     color: colors.textPrimary,
     marginBottom: SPACING.xs,
   },

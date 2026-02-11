@@ -16,6 +16,7 @@ import { Card } from '../../src/components/ui/Card';
 import { useTheme } from '../../src/hooks/useTheme';
 import type { AppColors } from '../../src/constants/theme';
 import { SPACING, FONT_SIZE, BORDER_RADIUS } from '../../src/constants/theme';
+import { SwipeableTabScreen } from '../../src/components/ui/SwipeableTabScreen';
 
 type SettingsSection = {
   id: string;
@@ -80,6 +81,7 @@ export default function SettingsScreen() {
   };
 
   return (
+    <SwipeableTabScreen>
     <SafeAreaView style={styles.container} edges={['top']}>
       <Header title={t('settings.title')} />
 
@@ -129,6 +131,7 @@ export default function SettingsScreen() {
         </View>
       </ScrollView>
     </SafeAreaView>
+    </SwipeableTabScreen>
   );
 }
 

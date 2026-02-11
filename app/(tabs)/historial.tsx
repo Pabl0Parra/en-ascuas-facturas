@@ -22,6 +22,7 @@ import { useTheme } from '../../src/hooks/useTheme';
 import type { AppColors } from '../../src/constants/theme';
 import { SPACING, BORDER_RADIUS } from '../../src/constants/theme';
 import type { DocumentMetadata } from '../../src/types/document';
+import { SwipeableTabScreen } from '../../src/components/ui/SwipeableTabScreen';
 
 type FilterType = 'todos' | 'factura' | 'presupuesto';
 
@@ -108,6 +109,7 @@ export default function HistorialScreen() {
   ];
 
   return (
+    <SwipeableTabScreen>
     <SafeAreaView style={styles.container} edges={['top']}>
       <Header title={t('navigation.historial')} />
 
@@ -156,6 +158,7 @@ export default function HistorialScreen() {
         }
       />
     </SafeAreaView>
+    </SwipeableTabScreen>
   );
 }
 

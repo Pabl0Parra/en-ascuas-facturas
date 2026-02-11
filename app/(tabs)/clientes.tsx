@@ -26,6 +26,7 @@ import {
   SHADOWS,
 } from '../../src/constants/theme';
 import { STRINGS } from '../../src/constants/strings';
+import { SwipeableTabScreen } from '../../src/components/ui/SwipeableTabScreen';
 
 const SORT_OPTIONS: Array<{ value: ClientSortBy; label: string }> = [
   { value: 'name', label: 'Name (A-Z)' },
@@ -117,6 +118,7 @@ export default function ClientesScreen() {
   const activeFilterCount = selectedTags.length + (searchQuery ? 1 : 0);
 
   return (
+    <SwipeableTabScreen>
     <SafeAreaView style={styles.container} edges={['top']}>
       <Header title={STRINGS.navigation.clientes} />
 
@@ -297,6 +299,7 @@ export default function ClientesScreen() {
         <Ionicons name="add" size={28} color={colors.textInverse} />
       </TouchableOpacity>
     </SafeAreaView>
+    </SwipeableTabScreen>
   );
 }
 

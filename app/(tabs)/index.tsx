@@ -9,6 +9,7 @@ import { RecentDocuments } from '../../src/components/dashboard/RecentDocuments'
 import { RecurringAlert } from '../../src/components/dashboard/RecurringAlert';
 import { OverdueAlert } from '../../src/components/dashboard/OverdueAlert';
 import { ThemeToggle } from '../../src/components/ui/ThemeToggle';
+import { SwipeableTabScreen } from '../../src/components/ui/SwipeableTabScreen';
 import { calculateDashboardStats } from '../../src/services/dashboardService';
 import { formatCurrencyByCode } from '../../src/utils/currencyFormatter';
 import { useBusinessProfileStore } from '../../src/stores/businessProfileStore';
@@ -31,6 +32,7 @@ export default function HomeScreen() {
   const styles = useMemo(() => createStyles(colors), [colors]);
 
   return (
+    <SwipeableTabScreen>
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScrollView
         style={styles.scrollView}
@@ -167,6 +169,7 @@ export default function HomeScreen() {
         </View>
       </ScrollView>
     </SafeAreaView>
+    </SwipeableTabScreen>
   );
 }
 

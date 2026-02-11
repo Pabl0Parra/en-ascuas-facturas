@@ -95,7 +95,7 @@ const LanguageOption: React.FC<LanguageOptionProps> = ({
         <Text style={styles.languageCode}>{languageCode}</Text>
       </View>
       <Text style={selected ? styles.languageNameSelected : styles.languageName}>
-        {name}
+        {'   '}{name}
       </Text>
     </Button>
   );
@@ -113,7 +113,6 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    paddingTop: SPACING.xl,
   },
   title: {
     fontSize: FONT_SIZE.xxxl,
@@ -126,7 +125,7 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
     fontSize: FONT_SIZE.md,
     color: colors.textSecondary,
     textAlign: 'center',
-    paddingHorizontal: SPACING.md,
+    paddingHorizontal: SPACING.lg,
   },
   languageSection: {
     flex: 1,
@@ -165,10 +164,12 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   languageName: {
     fontSize: FONT_SIZE.md,
     color: colors.primary,
+    marginLeft: SPACING.sm,
   },
   languageNameSelected: {
     fontSize: FONT_SIZE.md,
     color: colors.textInverse,
+    marginLeft: SPACING.sm,
   },
   footer: {
     paddingBottom: SPACING.md,

@@ -222,16 +222,16 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   content: {
     padding: SPACING.lg,
-    paddingBottom: Platform.OS === 'ios' ? 180 : 150,
+    paddingBottom: SPACING.lg,
   },
   header: {
-    marginBottom: SPACING.xl,
+    marginTop: SPACING.md,
+    marginBottom: SPACING.md,
   },
   title: {
     fontSize: FONT_SIZE.xxl,
     fontFamily: FONTS.bold,
     color: colors.textPrimary,
-    marginBottom: SPACING.xs,
   },
   subtitle: {
     fontSize: FONT_SIZE.md,

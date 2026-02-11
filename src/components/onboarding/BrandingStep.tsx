@@ -60,7 +60,6 @@ export const BrandingStep: React.FC<BrandingStepProps> = ({
     if (!hasPermission) return;
 
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaType.Images,
       allowsEditing: true,
       aspect: [1, 1],
       quality: 0.8,
@@ -241,10 +240,11 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
   },
   content: {
     padding: SPACING.lg,
-    paddingBottom: Platform.OS === 'ios' ? 180 : 150,
+    paddingBottom: SPACING.lg,
   },
   header: {
-    marginBottom: SPACING.xl,
+    marginTop: SPACING.md,
+    marginBottom: SPACING.md,
   },
   title: {
     fontSize: FONT_SIZE.xxl,

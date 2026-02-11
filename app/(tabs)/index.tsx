@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
@@ -23,7 +23,7 @@ import type { AppColors } from '../../src/constants/theme';
 export default function HomeScreen() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { colors } = useTheme();
+  const { colors, isDark } = useTheme();
   const businessProfile = useBusinessProfileStore((state) => state.profile);
   const currency = businessProfile?.currency || 'EUR';
 
@@ -41,16 +41,39 @@ export default function HomeScreen() {
         <View style={styles.header}>
           <View style={styles.headerTop}>
             <Image
-              source={require('../../assets/images/bilio-text-light.png')}
+              source={isDark
+                ? require('../../assets/images/bilio-text-dark.png')
+                : require('../../assets/images/bilio-text-light.png')
+              }
               style={styles.icon}
               resizeMode="contain"
             />
-            <Text style={styles.greeting}>{t('dashboard.welcomeBack')}</Text>
             <ThemeToggle />
           </View>
+          <Text style={styles.greeting}>{t('dashboard.welcomeBack')}</Text>
           <Text style={styles.subtitle}>
             {businessProfile?.companyName || t('dashboard.yourBusiness')}
           </Text>
+        </View>
+
+        {/* Secondary Quick Actions */}
+        <View style={styles.secondaryActions}>
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            onPress={() => router.push('/(tabs)/clientes')}
+            activeOpacity={0.7}
+          >
+            <Ionicons name="people" size={20} color={colors.primary} />
+            <Text style={styles.secondaryButtonText}>{t('dashboard.clients')}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.secondaryButton}
+            onPress={() => router.push('/(tabs)/historial')}
+            activeOpacity={0.7}
+          >
+            <Ionicons name="time" size={20} color={colors.primary} />
+            <Text style={styles.secondaryButtonText}>{t('dashboard.history')}</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Hero Actions - Primary CTA Buttons */}
@@ -115,26 +138,6 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* Secondary Quick Actions */}
-        <View style={styles.secondaryActions}>
-          <TouchableOpacity
-            style={styles.secondaryButton}
-            onPress={() => router.push('/(tabs)/clientes')}
-            activeOpacity={0.7}
-          >
-            <Ionicons name="people" size={20} color={colors.primary} />
-            <Text style={styles.secondaryButtonText}>{t('dashboard.clients')}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.secondaryButton}
-            onPress={() => router.push('/(tabs)/historial')}
-            activeOpacity={0.7}
-          >
-            <Ionicons name="time" size={20} color={colors.primary} />
-            <Text style={styles.secondaryButtonText}>{t('dashboard.history')}</Text>
-          </TouchableOpacity>
-        </View>
-
         {/* Recent Documents */}
         <View style={styles.section}>
           <RecentDocuments
@@ -188,19 +191,19 @@ const createStyles = (colors: AppColors) =>
       alignItems: 'center',
     },
     icon: {
-      width: 60,
+      width: 80,
       height: 36,
     },
     greeting: {
-      flex: 1,
       fontSize: FONT_SIZE.xxl,
       fontWeight: '700',
       color: colors.textPrimary,
-      marginLeft: SPACING.sm,
+      textAlign: 'center',
     },
     subtitle: {
       fontSize: FONT_SIZE.md,
       color: colors.textSecondary,
+      textAlign: 'center',
     },
     heroActions: {
       gap: SPACING.md,

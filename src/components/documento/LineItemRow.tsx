@@ -182,11 +182,11 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: BORDER_RADIUS.sm,
-    padding: SPACING.xs,
+    padding: SPACING.sm,
     fontSize: FONT_SIZE.sm,
     color: colors.textPrimary,
     minHeight: 40,
-    textAlignVertical: 'top',
+    textAlignVertical: 'center',
   },
   numbersRow: {
     flexDirection: 'row',

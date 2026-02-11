@@ -192,7 +192,8 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
     backgroundColor: colors.background,
   },
   content: {
-    padding: SPACING.lg,
+    paddingVertical: SPACING.lg,
+    paddingHorizontal: SPACING.xl,
   },
   heading: {
     fontSize: FONT_SIZE.xxl,

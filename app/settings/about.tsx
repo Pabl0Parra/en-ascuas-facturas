@@ -19,17 +19,17 @@ import type { AppColors } from '../../src/constants/theme';
 import { SPACING, FONT_SIZE } from '../../src/constants/theme';
 
 const APP_VERSION = '2.0.0';
-const BUILD_NUMBER = '2024020800';
+
 
 export default function AboutScreen() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { colors } = useTheme();
+  const { colors, isDark } = useTheme();
   const styles = useMemo(() => createStyles(colors), [colors]);
 
   const handleSupport = () => {
     // Open support email
-    Linking.openURL('mailto:frontend?subject=App Support');
+    Linking.openURL('mailto:frontend.bcn.dev@gmail.com?subject=Bilio App Support');
   };
 
   return (
@@ -48,11 +48,13 @@ export default function AboutScreen() {
         {/* App Info */}
         <View style={styles.logoSection}>
           <Image
-            source={require('../../assets/images/logo.png')}
+            source={isDark
+              ? require('../../assets/images/bilio-text-dark.png')
+              : require('../../assets/images/bilio-text-light.png')
+            }
             style={styles.logo}
             resizeMode="contain"
           />
-          <Text style={styles.appName}> Bilio</Text>
           <Text style={styles.tagline}>Invoicing & Quotes</Text>
         </View>
 
@@ -63,18 +65,6 @@ export default function AboutScreen() {
               {t('settings.about.version')}
             </Text>
             <Text style={styles.infoValue}>{APP_VERSION}</Text>
-          </View>
-
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>
-              {t('settings.about.buildNumber')}
-            </Text>
-            <Text style={styles.infoValue}>{BUILD_NUMBER}</Text>
-          </View>
-
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Phase</Text>
-            <Text style={styles.infoValue}>3.1 - Settings UI</Text>
           </View>
         </Card>
 
@@ -157,11 +147,7 @@ export default function AboutScreen() {
             <Ionicons name="open-outline" size={20} color={colors.textSecondary} />
           </TouchableOpacity>
         </Card>
-
-        {/* Credits */}
-        <Text style={styles.credits}>
-          Made by Pabl0Parra with ❤️ using React Native + Expo{'\n'}
-        </Text>
+       
       </ScrollView>
     </SafeAreaView>
   );
@@ -184,16 +170,10 @@ const createStyles = (colors: AppColors) => StyleSheet.create({
     paddingVertical: SPACING.xl,
   },
   logo: {
-    width: 100,
+    width: 200,
     height: 100,
-    marginBottom: SPACING.md,
   },
-  appName: {
-    fontSize: FONT_SIZE.xxl,
-    fontWeight: '900',
-    color: colors.black,
-    letterSpacing: 2,
-  },
+  
   tagline: {
     fontSize: FONT_SIZE.md,
     color: colors.primary,

@@ -27,7 +27,7 @@ export const AboutSection: React.FC = () => {
 
   const handleSupportPress = () => {
     // Open support email or link
-    Linking.openURL('mailto:support@Bilio.app?subject=Bilio Support');
+    Linking.openURL('mailto:frontend.bcn.dev@gmail.com?subject=Bilio App Support');
   };
 
   const handleRatePress = () => {

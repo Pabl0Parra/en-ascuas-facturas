@@ -1,5 +1,5 @@
 // app/index.tsx
-import React, { useMemo } from 'react';
+import  { useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { AnimatedSplash } from '../src/components/splash/AnimatedSplash';
